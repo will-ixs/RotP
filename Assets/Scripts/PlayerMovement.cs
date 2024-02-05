@@ -15,6 +15,6 @@ public class PlayerMovement : MonoBehaviour
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
-        _rb.velocity = Vector2.SmoothDamp(_rb.velocity, input.normalized * moveSpeed, ref velocity, 0.1f);
+        _rb.velocity = Vector2.SmoothDamp(_rb.velocity, input.normalized * moveSpeed, ref velocity, 0.05f);
     }
 }
