@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
 
-    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Rigidbody2D rb;
     private Vector2 input;
     private Vector2 velocity;
 
@@ -15,6 +15,6 @@ public class PlayerMovement : MonoBehaviour
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
-        _rb.velocity = Vector2.SmoothDamp(_rb.velocity, input.normalized * moveSpeed, ref velocity, 0.05f);
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, input.normalized * moveSpeed, ref velocity, 0.05f);
     }
 }
