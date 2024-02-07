@@ -6,13 +6,23 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public Slider healthBar;
+    public Text healthText;
     public float maxHealth;
     private float curHealth;
+    public GameObject indicator;
 
     public void updatePlayerHealth(float amount)
     {
         curHealth += amount;
+
+        if (curHealth < 0)
+        {
+            curHealth = 0;
+        }
+
+        // Update UI to reflect health
         healthBar.value = curHealth;
+        healthText.text = curHealth + "/" + maxHealth;
     }
 
     // Start is called before the first frame update
@@ -21,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
         curHealth = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
+        healthText.text = curHealth + "/" + maxHealth;
     }
 
     // Update is called once per frame
