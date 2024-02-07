@@ -6,6 +6,12 @@ public abstract class Enemy : MonoBehaviour
 {
     public float health;
     public float moveSpeed;
+
+    public GameObject player;
+    public float speed;
+    public float distanceBW;
+
+    private float distance;
         
     [SerializeField] private float damage;
     private float maxHealth;
@@ -16,9 +22,8 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
-        //Move towards player
-        //Attack when in range
-        //Check health and enter death state if below 1
-        //  In death state: Spawn Soul, Change animator state to dead, wait X seconds before fading away, desotry self and soul, if soul collected also destroy self
+        
+
+
     }
 }
