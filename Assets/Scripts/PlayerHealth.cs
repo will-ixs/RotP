@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public Slider healthBar;
     public Text healthText;
     public float maxHealth;
-    private float curHealth;
+    public float curHealth;
     public GameObject indicator;
 
     private Transform canvasTransform;
@@ -70,6 +70,17 @@ public class PlayerHealth : MonoBehaviour
         {
             elapsed = elapsed % 1f;
             updatePlayerHealth(-1);
+        }
+    }
+
+    public void TakeDamage(int damage) 
+    {
+        curHealth -= damage;
+
+        if(curHealth <= 0)
+        {
+            Debug.Log(curHealth);
+            //Dead = true;
         }
     }
 }

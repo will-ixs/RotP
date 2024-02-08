@@ -2,22 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public float health;
-    public float moveSpeed;
-
-    public GameObject player;
-    public float speed;
-    public float distanceBW;
-
-    private float distance;
+    public bool Dead;
         
     [SerializeField] private float damage;
     private float maxHealth;
     void Start()
     {
         health = maxHealth;
+        Dead = false;
     }
 
     void Update()
@@ -25,5 +20,15 @@ public abstract class Enemy : MonoBehaviour
         
 
 
+    }
+
+    public void TakeDamage(int damage) 
+    {
+        health -= damage;
+
+        if(health <= 0)
+        {
+            Dead = true;
+        }
     }
 }
