@@ -387,6 +387,7 @@ MonoBehaviour:
   healthBar: {fileID: 810834017}
   healthText: {fileID: 2127482867}
   maxHealth: 5
+  indicator: {fileID: 0}
 --- !u!1 &706104168
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -867.3, y: 330}
+  m_AnchoredPosition: {x: -426.7, y: 223.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810834017
@@ -1167,7 +1168,7 @@ RectTransform:
   m_GameObject: {fileID: 2127482865}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 3.1875, z: 1}
+  m_LocalScale: {x: 0.10681013, y: 0.49487248, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 810834016}
@@ -1199,16 +1200,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 200
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 200
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: ?/?
 --- !u!222 &2127482868
