@@ -65,12 +65,7 @@ public class PlayerHealth : MonoBehaviour
     float elapsed = 0f;
     void Update()
     {
-        elapsed += Time.deltaTime;
-        if (elapsed >= 1f) 
-        {
-            elapsed = elapsed % 1f;
-            updatePlayerHealth(-1);
-        }
+        
     }
 
     public void TakeDamage(int damage) 

@@ -56,7 +56,7 @@ public class EnemyAI : MonoBehaviour
         if(dmgCD <= 0) {
             if(playerhealth != null)
             {
-                playerhealth.TakeDamage(dmg);
+                playerhealth.updatePlayerHealth(-dmg);
             }
         }
         dmgCD = 1f;

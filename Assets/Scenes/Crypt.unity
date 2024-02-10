@@ -388,7 +388,7 @@ MonoBehaviour:
   healthText: {fileID: 2127482867}
   maxHealth: 100
   curHealth: 100
-  indicator: {fileID: 0}
+  indicator: {fileID: 7272617064204375701, guid: c397973cd2a3563448174a9c7fe3c7be, type: 3}
 --- !u!1 &706104168
 GameObject:
   m_ObjectHideFlags: 0
