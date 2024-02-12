@@ -41,9 +41,9 @@ public class Enemy : MonoBehaviour
         //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHT
         dir = player.transform.position - transform.position ;
         dir.Normalize();
-        Vector2 mag = dir.Abs();
+        Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
 
-        if(mag.y > mag.x)
+        if (mag.y > mag.x)
         {
             //LookUp/Down
             if(dir.y > 0.0f)
