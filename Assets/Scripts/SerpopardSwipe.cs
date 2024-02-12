@@ -26,23 +26,27 @@ public class SerpopardSwipe : MonoBehaviour
     {
         //SR on and play animation
         //Activate hitbox
-        hitboxActive = true;
+        hitboxActive = false;
         anim.SetBool("Swipe", true);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Hit()
+    {
+        hitboxActive = true;
+    }
+    private void OnTriggerStay2D(Collider2D collision)
     {
         //If player enters hitbox, and has not already been hit by this swipe.
-        if (other.CompareTag("Player") && !playerHit && hitboxActive)
+        if (collision.CompareTag("Player") && !playerHit && hitboxActive)
         {
             //Take away player HP
-            PlayerHealth playerhealth = other.gameObject.GetComponent<PlayerHealth>();
+            PlayerHealth playerhealth = collision.gameObject.GetComponent<PlayerHealth>();
             if (playerhealth != null)
             {
                 playerhealth.updatePlayerHealth(-dmg);
             }
             //Mark player as hit for this iteration.
-            playerHit =true;
+            playerHit = true;
         }
     }
 }

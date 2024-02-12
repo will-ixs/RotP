@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SerpopardBehavior : MonoBehaviour
 {
+    private BossHealth bossHealth;
     private float stateChangeTimer;
     private GameObject player;
     [SerializeField] private SerpopardSwipe serpSwipe;
@@ -22,10 +23,15 @@ public class SerpopardBehavior : MonoBehaviour
     {
         stateChangeTimer = 0.0f;
         player = GameObject.FindGameObjectWithTag("Player");
+        bossHealth = GetComponent<BossHealth>();
     }
 
     void Update()
     {
+        if (bossHealth.Dead)
+        {
+            Die();
+        }
         CheckSpriteFlip();
 
         //End attacks, choose new state that is not the same as the previous.
@@ -92,16 +98,20 @@ public class SerpopardBehavior : MonoBehaviour
 
         rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
         serpSwipe.Enable();
+        if(stateChangeTimer < 2.0f)
+        {
+            serpSwipe.Hit();
+        }
     }
 
     private void SpitAttack()
     {
         rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
     }
-    
+
     private void CheckSpriteFlip()
     {
-        if(transform.position.x < player.transform.position.x)
+        if (transform.position.x < player.transform.position.x)
         {
             transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
         }
@@ -109,5 +119,11 @@ public class SerpopardBehavior : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
+    }
+
+    private void Die()
+    {
+        //Death animation / fade to white & screen shake or something
+        Destroy(gameObject, 1.0f);
     }
 }
