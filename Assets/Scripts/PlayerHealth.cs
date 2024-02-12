@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Updates player health and UI by amount
-    public void updatePlayerHealth(float amount)
+    public void updatePlayerHealth(float amount, bool popup = true)
     {
         curHealth += amount;
 
@@ -40,32 +40,35 @@ public class PlayerHealth : MonoBehaviour
 
         // Update UI to reflect health
         healthBar.value = curHealth;
-        healthText.text = curHealth + "/" + maxHealth;
+        healthText.text = Mathf.Round(curHealth) + "/" + maxHealth;
 
-        GameObject healthIndicator = Instantiate(indicator);
-
-        // Set text to display above player
-        Text healthIndicatorText = healthIndicator.GetComponent<Text>();
-
-        healthIndicatorText.text = amount.ToString();
-        if (amount > 0)
+        if (popup)
         {
-            healthIndicatorText.text = "+" + amount.ToString();
-        } else
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-            damage_color_cooldown = 0.5f;
+            GameObject healthIndicator = Instantiate(indicator);
 
+            // Set text to display above player
+            Text healthIndicatorText = healthIndicator.GetComponent<Text>();
+
+            healthIndicatorText.text = amount.ToString();
+            if (amount > 0)
+            {
+                healthIndicatorText.text = "+" + amount.ToString();
+            }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                damage_color_cooldown = 0.5f;
+
+            }
+
+            // Display text above player
+            healthIndicator.transform.SetParent(canvasTransform, false);
+            healthIndicator.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+            healthIndicator.transform.position = new Vector3(healthIndicator.transform.position.x + 15f + Random.Range(-25f, 25f), healthIndicator.transform.position.y + 100f + Random.Range(-20f, 10f), healthIndicator.transform.position.z);
+
+            // Remove text after delay
+            Destroy(healthIndicator, 1.0f);
         }
-
-        // Display text above player
-        healthIndicator.transform.SetParent(canvasTransform, false);
-        healthIndicator.transform.position = Camera.main.WorldToScreenPoint(transform.position);
-        healthIndicator.transform.position = new Vector3(healthIndicator.transform.position.x + 15f + Random.Range(-25f, 25f), healthIndicator.transform.position.y + 100f + Random.Range(-20f, 10f), healthIndicator.transform.position.z);
-
-        // Remove text after delay
-        Destroy(healthIndicator, 1.0f);
-
     }
 
     // Update is called once per frame
@@ -77,6 +80,8 @@ public class PlayerHealth : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(179, 245, 227);
         }
+        updatePlayerHealth(-Time.deltaTime, false);
+        
     }
 
     public void TakeDamage(int damage) 
