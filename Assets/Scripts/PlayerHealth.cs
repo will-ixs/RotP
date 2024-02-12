@@ -72,7 +72,6 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Update is called once per frame
-    float elapsed = 0f;
     void Update()
     {
         damage_color_cooldown -= Time.deltaTime;

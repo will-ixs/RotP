@@ -13,9 +13,11 @@ public class EnemySpawner : MonoBehaviour
 
     public List<GameObject> activeEnemies;
     private bool spawningEnabled = true;
+    public GameObject enemyHealthBar;
+    private Transform canvasTransform;
     void Start()
     {
-        
+        canvasTransform = GameObject.Find("Canvas").transform;
     }
 
     void Update()
@@ -43,6 +45,9 @@ public class EnemySpawner : MonoBehaviour
 
                     //Instantiate that gameobject at spawnLocation
                     GameObject spawnedEnemy = Instantiate(enemyPrefabs[index], spawnLocation.position, spawnLocation.rotation);   
+                    GameObject enemyHealth = Instantiate(enemyHealthBar, spawnLocation.position, spawnLocation.rotation);
+                    enemyHealth.transform.SetParent(canvasTransform);
+                    enemyHealth.GetComponent<EnemyHealth>().target = spawnedEnemy;
                     
                     //save reference to gameObject in activeEnemies list
                     activeEnemies.Add(spawnedEnemy);

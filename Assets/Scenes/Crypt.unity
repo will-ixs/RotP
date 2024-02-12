@@ -6837,6 +6837,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 9113701457174135535, guid: f4168cf752a89cc4c8945fb613775245, type: 3}
   activeEnemies: []
+  enemyHealthBar: {fileID: 6488209704262677998, guid: a462d3786a14b1a489ccf6e403f956c1, type: 3}
 --- !u!1 &1857612557
 GameObject:
   m_ObjectHideFlags: 0
