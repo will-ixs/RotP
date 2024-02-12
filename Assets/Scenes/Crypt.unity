@@ -374,6 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  curhealth: 0
   rb: {fileID: 387964943}
 --- !u!58 &387964942
 CircleCollider2D:
@@ -6832,10 +6833,10 @@ MonoBehaviour:
   spawnLocations:
   - {fileID: 968409633}
   - {fileID: 1857612558}
-  spawningCountdown: 10
-  enemyCap: 4
+  spawningCountdown: 5
+  enemyCap: 15
   enemyPrefabs:
-  - {fileID: 9113701457174135535, guid: f4168cf752a89cc4c8945fb613775245, type: 3}
+  - {fileID: 9113701457174135535, guid: bc47b654860b781488903f9305ac3de3, type: 3}
   activeEnemies: []
   enemyHealthBar: {fileID: 6488209704262677998, guid: a462d3786a14b1a489ccf6e403f956c1, type: 3}
 --- !u!1 &1857612557
