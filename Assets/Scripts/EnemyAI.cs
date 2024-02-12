@@ -10,16 +10,19 @@ public class EnemyAI : MonoBehaviour
     public float distanceBW;
     public Enemy enemy;
 
+
     public int dmg;
     public float dmgCD;
 
     private float distance;
+    private Rigidbody2D rb;
     
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -40,14 +43,17 @@ public class EnemyAI : MonoBehaviour
     private void FixedUpdate()
     {
         if (!enemy.Dead) { 
-            distance = Vector2.Distance(transform.position, player.transform.position);
-            Vector2 direction = player.transform.position - transform.position;
+
+            distance = Vector3.Distance(transform.position, player.transform.position);
+
+            Vector3 direction = player.transform.position - transform.position;
             direction.Normalize();
+
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             if (distance < distanceBW)
             {
 
-                transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+                rb.MovePosition(transform.position + (direction * speed * Time.deltaTime));
                 //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
             }
         }
