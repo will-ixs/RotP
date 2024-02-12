@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  distanceBW: 4
+  distanceBW: 100
   enemy: {fileID: 233687714835127910}
   dmg: 10
   dmgCD: 1
