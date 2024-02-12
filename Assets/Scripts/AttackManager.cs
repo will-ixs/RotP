@@ -10,20 +10,24 @@ public class AttackManager : MonoBehaviour
     public float distanceFromPlayer;
 
     public int basicDamage;
-    private float basicCooldown;
+    public float basicAttackCooldown;
+    private float timeUntilBasicAttackAvailable;
     [SerializeField] ContactList basicAttack;
 
     public int lungeDamage;
-    private float lungeCooldown;
+    public float lungeCooldown;
+    private float timeUntilLungeAvailable;
     [SerializeField] ContactList lungeAttack;
 
     [SerializeField] private Transform _camera_transform;
     [SerializeField] private Transform _weapon_transform;
 
+    [SerializeField] private SpriteRenderer _weapon_sprite;
+
     private void Start()
     {
-        lungeCooldown = 0.0f;
-        basicCooldown = 0.0f;
+        timeUntilBasicAttackAvailable = 0.0f;
+        timeUntilLungeAvailable = 0.0f;
     }
     void Update()
     {
@@ -36,9 +40,9 @@ public class AttackManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0)) //Basic Attack / Spear
         {
-            if (basicCooldown <= 0.0f)
+            if (timeUntilBasicAttackAvailable <= 0.0f)
             {
-                basicCooldown = 1.0f;
+                timeUntilBasicAttackAvailable = basicAttackCooldown;
                 for(int i = 0; i < basicAttack.contactList.Count; i++)
                 {
                     if (basicAttack.contactList[i].CompareTag("Boss"))
@@ -67,7 +71,7 @@ public class AttackManager : MonoBehaviour
         {
             if(lungeCooldown <= 0.0f)
             {
-                lungeCooldown = 5.0f;
+                timeUntilLungeAvailable = lungeCooldown;
                 foreach(GameObject enemy in lungeAttack.contactList)
                 {
 
@@ -90,11 +94,22 @@ public class AttackManager : MonoBehaviour
         weaponPos.y += distanceFromPlayer * Mathf.Sin(angle);
         _weapon_transform.position = weaponPos;
         _weapon_transform.rotation = Quaternion.Euler(0, 0, 270.0f + angle * Mathf.Rad2Deg);
+
+        if (basicAttackCooldown - timeUntilBasicAttackAvailable < 0.25f)
+        {
+            _weapon_sprite.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+        } else if (timeUntilBasicAttackAvailable > 0.0f)
+        {
+            _weapon_sprite.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+        } else
+        {
+            _weapon_sprite.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+        }
     }
 
     private void ReduceWeaponCooldown()
     {
-        basicCooldown -= Time.deltaTime;
-        lungeCooldown -= Time.deltaTime;
+        timeUntilBasicAttackAvailable -= Time.deltaTime;
+        timeUntilLungeAvailable -= Time.deltaTime;
     }
 }

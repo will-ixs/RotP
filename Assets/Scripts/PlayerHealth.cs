@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     public float curHealth;
     public GameObject indicator;
 
+    private float damage_color_cooldown;
+
     private Transform canvasTransform;
 
     // Start is called before the first frame update
@@ -49,6 +51,11 @@ public class PlayerHealth : MonoBehaviour
         if (amount > 0)
         {
             healthIndicatorText.text = "+" + amount.ToString();
+        } else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            damage_color_cooldown = 0.5f;
+
         }
 
         // Display text above player
@@ -65,7 +72,11 @@ public class PlayerHealth : MonoBehaviour
     float elapsed = 0f;
     void Update()
     {
-        
+        damage_color_cooldown -= Time.deltaTime;
+        if (damage_color_cooldown <= 0.0f)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(179, 245, 227);
+        }
     }
 
     public void TakeDamage(int damage) 

@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 387964942}
   - component: {fileID: 387964944}
   - component: {fileID: 387964945}
+  - component: {fileID: 387964946}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -467,11 +468,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceFromPlayer: 0.5
   basicDamage: 3
+  basicAttackCooldown: 1
   basicAttack: {fileID: 383058308}
   lungeDamage: 0
+  lungeCooldown: 0
   lungeAttack: {fileID: 0}
   _camera_transform: {fileID: 880390574}
   _weapon_transform: {fileID: 383058305}
+  _weapon_sprite: {fileID: 383058306}
+--- !u!114 &387964946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387964938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57b18d7b64524446906115e0dd36d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementCooldown: 0
+  nearby_ka_fragments: []
 --- !u!1 &706104168
 GameObject:
   m_ObjectHideFlags: 0

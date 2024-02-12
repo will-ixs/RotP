@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Boss
+  - KaFragment
   layers:
   - Default
   - TransparentFX
