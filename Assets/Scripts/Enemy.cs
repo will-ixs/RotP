@@ -8,9 +8,11 @@ public class Enemy : MonoBehaviour
 {
     public float health;
     public bool Dead;
-    private GameObject player;
+    [SerializeField] private GameObject player;
     private float maxHealth;
     private Animator anim;
+
+    private EnemySpawner spawner;
 
     private float damage_color_cooldown;
 
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float damage;
     void Start()
     {
+        spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>();
         player = GameObject.FindGameObjectWithTag("Player");
         maxHealth = health;
         Dead = false;
@@ -55,7 +58,7 @@ public class Enemy : MonoBehaviour
     private void SetDirection()
     {
         //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHT
-        dir = player.transform.position - transform.position ;
+        dir = player.transform.position - transform.position;
         dir.Normalize();
         Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
 
@@ -83,5 +86,9 @@ public class Enemy : MonoBehaviour
                 anim.SetInteger("Direction", 3);
             }
         }
+    }
+
+    private void OnDestroy(){
+        spawner.activeEnemies.Remove(gameObject);
     }
 }

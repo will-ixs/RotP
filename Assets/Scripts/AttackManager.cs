@@ -93,7 +93,7 @@ public class AttackManager : MonoBehaviour
         weaponPos.x += distanceFromPlayer * Mathf.Cos(angle);
         weaponPos.y += distanceFromPlayer * Mathf.Sin(angle);
         _weapon_transform.position = weaponPos;
-        _weapon_transform.rotation = Quaternion.Euler(0, 0, 270.0f + angle * Mathf.Rad2Deg);
+        _weapon_transform.rotation = Quaternion.Euler(0, 0, 90.0f + angle * Mathf.Rad2Deg);
 
         if (basicAttackCooldown - timeUntilBasicAttackAvailable < 0.25f)
         {
