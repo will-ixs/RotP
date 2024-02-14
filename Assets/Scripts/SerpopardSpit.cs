@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SerpopardSpit : MonoBehaviour
 {
     private GameObject player;
     private bool spitting = false;
-    private float spitAngleDelta;
-    [SerializeField] private float spitCooldown;
+    public float spitAngleDelta;
+    public int spitCounter;
     private float useCooldown;
-    private float dmg = 12.0f;
+    public float angleToPlayer;
+
+
     [SerializeField] private Animator anim;
     [SerializeField] private int iterations;
-    private float angleToPlayer;
+    [SerializeField] private float spitCooldown;
     [SerializeField] GameObject spitPrefab;
     void Start()
     {
+        spitCounter = 0;
         player = GameObject.FindGameObjectWithTag("Player");
     }
     public void Disable()
@@ -25,10 +30,14 @@ public class SerpopardSpit : MonoBehaviour
 
     public void Enable()
     {
-        spitting = true;
         //Find angle to player
-        Vector3 vectorToPlayer = player.transform.position - transform.position;
-        float angleToPlayer = Mathf.Atan2(vectorToPlayer.y, vectorToPlayer.x) * Mathf.Rad2Deg;
+        if (!spitting)
+        {
+            spitCounter = 0;
+            Vector3 vectorToPlayer = player.transform.position - transform.position;
+            angleToPlayer = 90.0f + (Mathf.Atan2(vectorToPlayer.y, vectorToPlayer.x) * Mathf.Rad2Deg);
+            spitting = true;
+        }
     }
 
     void Update()
@@ -45,11 +54,11 @@ public class SerpopardSpit : MonoBehaviour
 
     private void Spit()
     {
-        /*
-        for(int i = 0; i < iterations; i++){
-            Instantiate(spitPrefab, transform.position + ve, Quaternion.Euler());
-Declaration
-        }*/
+        float startingAngle = angleToPlayer - 35.0f;
+        float endingAngle = angleToPlayer + 35.0f;
+        spitAngleDelta = (endingAngle - startingAngle) / (float)iterations;
+        Instantiate(spitPrefab, transform.position, Quaternion.Euler(0, 0, startingAngle + (spitAngleDelta * spitCounter)));
+        Instantiate(spitPrefab, transform.position, Quaternion.Euler(0, 0, endingAngle - (spitAngleDelta * spitCounter)));
+        spitCounter++;
     }
-
 }
