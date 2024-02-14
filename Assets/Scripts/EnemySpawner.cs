@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawningCountdown;
     [SerializeField] private int enemyCap;
     [SerializeField] private List<GameObject> enemyPrefabs;
+    [SerializeField] private List<float> enemySpawnWeights;
+    private float spawnWeightTotal;
 
     public List<GameObject> activeEnemies;
     private bool spawningEnabled = true;
@@ -18,6 +20,25 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         canvasTransform = GameObject.Find("Canvas").transform;
+        spawnWeightTotal = 0.0f;
+        for (int i = 0; i < enemySpawnWeights.Count; i++)
+        {
+            spawnWeightTotal += enemySpawnWeights[i];
+        }
+    }
+
+    GameObject SelectEnemyToSpawn()
+    {
+        float rng = Random.Range(0.0f, spawnWeightTotal);
+        for (int i = 0; i < enemySpawnWeights.Count; i++)
+        {
+            if (rng <= enemySpawnWeights[i])
+            {
+                return enemyPrefabs[i];
+            }
+            rng -= enemySpawnWeights[i];
+        }
+        return enemyPrefabs[0];
     }
 
     void Update()
@@ -44,7 +65,7 @@ public class EnemySpawner : MonoBehaviour
                     int index = Random.Range(0, enemyPrefabs.Count);
 
                     //Instantiate that gameobject at spawnLocation
-                    GameObject spawnedEnemy = Instantiate(enemyPrefabs[index], spawnLocation.position, spawnLocation.rotation);   
+                    GameObject spawnedEnemy = Instantiate(SelectEnemyToSpawn(), spawnLocation.position, spawnLocation.rotation);   
                     GameObject enemyHealth = Instantiate(enemyHealthBar, spawnLocation.position, spawnLocation.rotation);
                     enemyHealth.transform.SetParent(canvasTransform);
                     enemyHealth.GetComponent<EnemyHealth>().target = spawnedEnemy;
