@@ -31,8 +31,6 @@ public class SerpopardBehavior : MonoBehaviour
         {
             Die();
         }
-        CheckSpriteFlip();
-
         //End attacks, choose new state that is not the same as the previous.
         stateChangeTimer -= Time.deltaTime;
         if (stateChangeTimer <= 0.0f) {
@@ -42,12 +40,12 @@ public class SerpopardBehavior : MonoBehaviour
                     serpSwipe.Disable();
                     break;
                 case SerpopardState.SpitAttack: //Spit Attack
-                    //serpSpit.Disable();
+                    serpSpit.Disable();
                     break;
             }
             SerpopardState currState = state;
             while (currState == state) { 
-                int selection = Random.Range(0, 3); //CHANGE TO (0, 4) when Spit attack done.
+                int selection = Random.Range(0, 4); //CHANGE TO (0, 4) when Spit attack done.
                 switch (selection)
                 {
                     case 1:
@@ -56,7 +54,7 @@ public class SerpopardBehavior : MonoBehaviour
                         break;
                     case 2:
                         state = SerpopardState.SwipeAttack;
-                        stateChangeTimer = 2.5f;
+                        stateChangeTimer = 1.5f;
                         break;
                     case 3:
                         state = SerpopardState.SpitAttack;
@@ -69,9 +67,11 @@ public class SerpopardBehavior : MonoBehaviour
         //Activate new state.
         switch (state) {
             case SerpopardState.Idle:
+                CheckSpriteFlip();
                 ActIdle();
                 break;
             case SerpopardState.MoveAtPlayer:
+                CheckSpriteFlip();
                 MoveAtPlayer();
                 break;
             case SerpopardState.SwipeAttack: //Swipe Attack
@@ -97,7 +97,7 @@ public class SerpopardBehavior : MonoBehaviour
 
         rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
         serpSwipe.Enable();
-        if(stateChangeTimer < 2.0f)
+        if(stateChangeTimer < 1.0f)
         {
             serpSwipe.Hit();
         }
@@ -106,6 +106,7 @@ public class SerpopardBehavior : MonoBehaviour
     private void SpitAttack()
     {
         rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
+        serpSpit.Enable();
     }
 
     private void CheckSpriteFlip()
