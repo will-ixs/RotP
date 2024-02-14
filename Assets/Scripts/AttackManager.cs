@@ -16,11 +16,6 @@ public class AttackManager : MonoBehaviour
     private float timeUntilBasicAttackAvailable;
     [SerializeField] ContactList basicAttack;
 
-    public int lungeDamage;
-    public float lungeCooldown;
-    private float timeUntilLungeAvailable;
-    [SerializeField] ContactList lungeAttack;
-
     [SerializeField] private Transform _camera_transform;
     [SerializeField] private Transform _weapon_transform;
 
@@ -29,7 +24,6 @@ public class AttackManager : MonoBehaviour
     private void Start()
     {
         timeUntilBasicAttackAvailable = 0.0f;
-        timeUntilLungeAvailable = 0.0f;
     }
     void Update()
     {
@@ -71,17 +65,6 @@ public class AttackManager : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.E)) //Lunge temp
-        {
-            if(lungeCooldown <= 0.0f)
-            {
-                timeUntilLungeAvailable = lungeCooldown;
-                foreach(GameObject enemy in lungeAttack.contactList)
-                {
-
-                }
-            }
-        }
     }
 
     private void SetWeaponAngleAndPosition()
@@ -114,6 +97,5 @@ public class AttackManager : MonoBehaviour
     private void ReduceWeaponCooldown()
     {
         timeUntilBasicAttackAvailable -= Time.deltaTime;
-        timeUntilLungeAvailable -= Time.deltaTime;
     }
 }
