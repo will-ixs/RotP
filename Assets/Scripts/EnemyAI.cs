@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour
 
         if (enemy.Dead)
         {
+            GetComponent<BoxCollider2D>().enabled = false;
             Destroy(gameObject, 1.0f);
         }
         //Move towards player
