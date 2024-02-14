@@ -7,6 +7,7 @@ public class SerpopardBehavior : MonoBehaviour
     private BossHealth bossHealth;
     private float stateChangeTimer;
     private GameObject player;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private SerpopardSwipe serpSwipe;
     [SerializeField] private SerpopardSpit serpSpit;
     [SerializeField] private Rigidbody2D rb;
@@ -50,7 +51,7 @@ public class SerpopardBehavior : MonoBehaviour
                 {
                     case 1:
                         state = SerpopardState.MoveAtPlayer;
-                        stateChangeTimer = 5.0f;
+                        stateChangeTimer = 3.75f;
                         break;
                     case 2:
                         state = SerpopardState.SwipeAttack;
@@ -90,7 +91,7 @@ public class SerpopardBehavior : MonoBehaviour
     }
     private void MoveAtPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.5f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
     }
     private void SwipeAttack()
     {
