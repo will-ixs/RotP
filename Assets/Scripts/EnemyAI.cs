@@ -59,7 +59,12 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!enemy.Dead) {
+        if (enemy.Dead)
+        {
+            rb.velocity = new Vector2(0.0f, 0.0f);
+        }
+        else
+        {
             Vector3 vToPlayer = player.transform.position - transform.position;
             distance = vToPlayer.magnitude;
             Vector3 directionToPlayer = vToPlayer.normalized;
