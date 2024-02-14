@@ -14,7 +14,6 @@ public class ServantAI : MonoBehaviour
     private int moveDirection;  // 0 -> right, 1 -> down, 2 -> left, 3 -> up
     private float moveDuration;
 
-    bool seenPlayer;
     public float anxietyTime;
     float anxietyLevel;
 
@@ -43,10 +42,13 @@ public class ServantAI : MonoBehaviour
             anxietyLevel = anxietyTime;
         }
 
+        float moveSpeed = Mathf.Lerp(walkSpeed, runSpeed, anxietyLevel / anxietyTime);
+
         Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-        Vector2 targetVelocity = new Vector2(0.0f, 0.0f);
+        Vector2 targetDirection = new Vector2(0.0f, 0.0f);
         if (anxietyLevel <= 0.0f)
         {
+            moveDuration -= Time.deltaTime;
             if (moveDuration <= 0.0f)
             {
                 ChooseRandomDestination();
@@ -54,27 +56,26 @@ public class ServantAI : MonoBehaviour
             switch (moveDirection)
             {
                 case 0:
-                    targetVelocity = new Vector2(1.0f, 0.0f);
+                    targetDirection = new Vector2(1.0f, 0.0f);
                     break;
                 case 1:
-                    targetVelocity = new Vector2(0.0f, 1.0f);
+                    targetDirection = new Vector2(0.0f, 1.0f);
                     break;
                 case 2:
-                    targetVelocity = new Vector2(-1.0f, 0.0f);
+                    targetDirection = new Vector2(-1.0f, 0.0f);
                     break;
                 case 3:
-                    targetVelocity = new Vector2(0.0f, -1.0f);
+                    targetDirection = new Vector2(0.0f, -1.0f);
                     break;
                 case 4:
-                    targetVelocity = new Vector2(0.0f, 0.0f);
+                    targetDirection = new Vector2(0.0f, 0.0f);
                     break;
             }
-            targetVelocity *= walkSpeed;
         } 
         else
         {
-            targetVelocity = runSpeed * -vecToPlayer.normalized;
+            targetDirection = -vecToPlayer.normalized;
         }
-        rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, 0.05f);
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, moveSpeed * targetDirection, ref velocity, 0.05f);
     }
 }

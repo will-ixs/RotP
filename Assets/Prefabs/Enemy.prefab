@@ -174,9 +174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  distanceBW: 100
+  detectionRadius: 3
   enemy: {fileID: 233687714835127910}
-  dmg: 10
+  dmg: 5
   dmgCD: 1
 --- !u!114 &233687714835127910
 MonoBehaviour:

@@ -10,6 +10,7 @@ public class AttackManager : MonoBehaviour
     public float distanceFromPlayer;
 
     public int basicDamage;
+    public float basicAttackStaggerTime;
     public float basicAttackCooldown;
     private float timeUntilBasicAttackAvailable;
     [SerializeField] ContactList basicAttack;
@@ -57,7 +58,9 @@ public class AttackManager : MonoBehaviour
                     }
                     else //gameobject should have enemy tag & component
                     {
-                        Enemy hp = basicAttack.contactList[i].GetComponent<Enemy>();
+                        GameObject e = basicAttack.contactList[i];
+                        Enemy hp = e.GetComponent<Enemy>();
+                        e.GetComponent<EnemyAI>().Stagger(basicAttackStaggerTime);
                         hp.TakeDamage(basicDamage);
                         if(hp.Dead)
                         {

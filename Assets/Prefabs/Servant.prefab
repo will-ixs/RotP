@@ -101,10 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0ea713edcbc4a42a9363af659d1dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 5
+  detectionRadius: 2.5
   walkSpeed: 1
-  runSpeed: 5
-  anxietyTime: 5
+  runSpeed: 2.5
+  anxietyTime: 2.5
 --- !u!50 &8066391551849377181
 Rigidbody2D:
   serializedVersion: 4

@@ -469,6 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceFromPlayer: 0.5
   basicDamage: 3
+  basicAttackStaggerTime: 0.5
   basicAttackCooldown: 1
   basicAttack: {fileID: 383058308}
   lungeDamage: 0
@@ -6885,10 +6886,12 @@ MonoBehaviour:
   spawnLocations:
   - {fileID: 968409633}
   - {fileID: 1857612558}
-  spawningCountdown: 5
+  spawningCountdown: 1
   enemyCap: 15
   enemyPrefabs:
-  - {fileID: 9113701457174135535, guid: bc47b654860b781488903f9305ac3de3, type: 3}
+  - {fileID: 9113701457174135535, guid: bf5cc4cf5728198419bec2d2245e03d9, type: 3}
+  enemySpawnWeights:
+  - 1
   activeEnemies: []
   enemyHealthBar: {fileID: 6488209704262677998, guid: a462d3786a14b1a489ccf6e403f956c1, type: 3}
 --- !u!1 &1857612557
