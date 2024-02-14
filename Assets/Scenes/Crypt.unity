@@ -469,6 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceFromPlayer: 1.3
   basicDamage: 7
+  basicAttackKnockbackSpeed: 5
   basicAttackStaggerTime: 0.5
   basicAttackCooldown: 0.3333333
   basicAttack: {fileID: 383058308}

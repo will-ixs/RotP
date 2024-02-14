@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  detectionRadius: 3
+  detectionRadius: 10
   enemy: {fileID: 233687714835127910}
   dmg: 5
   dmgCD: 1
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   Dead: 0
+  player: {fileID: 0}
   _prefab_ka_fragment: {fileID: 2558748664004486826, guid: c09988c745373f24cbf4d9b8afaae72c, type: 3}
   dir: {x: 0, y: 0}
   damage: 10

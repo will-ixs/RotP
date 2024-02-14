@@ -10,6 +10,7 @@ public class AttackManager : MonoBehaviour
     public float distanceFromPlayer;
 
     public int basicDamage;
+    public float basicAttackKnockbackSpeed;
     public float basicAttackStaggerTime;
     public float basicAttackCooldown;
     private float timeUntilBasicAttackAvailable;
@@ -60,7 +61,7 @@ public class AttackManager : MonoBehaviour
                     {
                         GameObject e = basicAttack.contactList[i];
                         Enemy hp = e.GetComponent<Enemy>();
-                        e.GetComponent<EnemyAI>().Stagger(basicAttackStaggerTime);
+                        e.GetComponent<EnemyAI>().Knockback(basicAttackKnockbackSpeed, basicAttackStaggerTime);
                         hp.TakeDamage(basicDamage);
                         if(hp.Dead)
                         {
