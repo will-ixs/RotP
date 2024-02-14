@@ -27,17 +27,14 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         curhealth = gameObject.GetComponent<PlayerHealth>().curHealth;
-        switch(Mathf.Floor(curhealth / 34f)) {
-            case 1:
-                moveSpeed = 6.0f;
-                break;
-            case 2:
-                moveSpeed = 10.0f;
-                break;
-            default:
-                moveSpeed = 3.0f;
-                break;
-        }
+        
+        if(curhealth / 34f >= 2)
+            moveSpeed = 10.0f;
+        else if(curhealth / 34f >= 1)
+            moveSpeed = 6.0f;
+        else
+            moveSpeed = 3.0f;
+
         timeUntilMovementAvailable -= Time.deltaTime;
         if (timeUntilMovementAvailable <= 0.0f)
         {
