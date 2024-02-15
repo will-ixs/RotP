@@ -61,9 +61,6 @@ public class EnemySpawner : MonoBehaviour
                 //Spawn Enemies
                 foreach (Transform spawnLocation in spawnLocations)
                 {
-                    //Randomly select index from enemyPrefabs list
-                    int index = Random.Range(0, enemyPrefabs.Count);
-
                     //Instantiate that gameobject at spawnLocation
                     GameObject spawnedEnemy = Instantiate(SelectEnemyToSpawn(), spawnLocation.position, spawnLocation.rotation);   
                     GameObject enemyHealth = Instantiate(enemyHealthBar, spawnLocation.position, spawnLocation.rotation);
@@ -72,7 +69,6 @@ public class EnemySpawner : MonoBehaviour
                     
                     //save reference to gameObject in activeEnemies list
                     activeEnemies.Add(spawnedEnemy);
-                
                 }
 
                 //Reset Timer
