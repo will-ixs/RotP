@@ -17,7 +17,6 @@ public class BossHealthUI : MonoBehaviour
 
         scrollContentTransform = GameObject.Find("Boss Health Content").transform;
         gameObject.transform.SetParent(scrollContentTransform);
-        // gameObject.transform.position = new Vector3(scrollContentTransform.position.x, scrollContentTransform.position.y - 55.0f, scrollContentTransform.position.z);
 
         health = target.GetComponent<BossHealth>().health;
         slider.maxValue = health;
