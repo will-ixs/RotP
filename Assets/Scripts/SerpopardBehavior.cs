@@ -7,6 +7,8 @@ public class SerpopardBehavior : MonoBehaviour
     private BossHealth bossHealth;
     private float stateChangeTimer;
     private GameObject player;
+    private Animator anim;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private SerpopardSwipe serpSwipe;
     [SerializeField] private SerpopardSpit serpSpit;
     [SerializeField] private Rigidbody2D rb;
@@ -23,6 +25,7 @@ public class SerpopardBehavior : MonoBehaviour
         stateChangeTimer = 0.0f;
         player = GameObject.FindGameObjectWithTag("Player");
         bossHealth = GetComponent<BossHealth>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -50,7 +53,7 @@ public class SerpopardBehavior : MonoBehaviour
                 {
                     case 1:
                         state = SerpopardState.MoveAtPlayer;
-                        stateChangeTimer = 5.0f;
+                        stateChangeTimer = 3.75f;
                         break;
                     case 2:
                         state = SerpopardState.SwipeAttack;
@@ -65,19 +68,24 @@ public class SerpopardBehavior : MonoBehaviour
         }
 
         //Activate new state.
+        //Idle = 0, Move = 1, Swipe = 2, Spit = 3
         switch (state) {
             case SerpopardState.Idle:
+                anim.SetInteger("State", 0);
                 CheckSpriteFlip();
                 ActIdle();
                 break;
             case SerpopardState.MoveAtPlayer:
+                anim.SetInteger("State", 1);
                 CheckSpriteFlip();
                 MoveAtPlayer();
                 break;
             case SerpopardState.SwipeAttack: //Swipe Attack
+                anim.SetInteger("State", 2);
                 SwipeAttack();
                 break;
             case SerpopardState.SpitAttack: //Spit Attack
+                anim.SetInteger("State", 3);
                 SpitAttack();
                 break;
 
@@ -90,7 +98,7 @@ public class SerpopardBehavior : MonoBehaviour
     }
     private void MoveAtPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.5f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
     }
     private void SwipeAttack()
     {
@@ -123,7 +131,8 @@ public class SerpopardBehavior : MonoBehaviour
 
     private void Die()
     {
+        anim.SetTrigger("Dead");
         //Death animation / fade to white & screen shake or something
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject, 1.5f);
     }
 }

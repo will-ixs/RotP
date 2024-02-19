@@ -9,9 +9,11 @@ public class PlayerMovement : MonoBehaviour
 
     private float timeUntilMovementAvailable;
 
+    [SerializeField] private Animator anim;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 input;
     private Vector2 velocity;
+    public Vector2 dir;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetDirection();
         curhealth = gameObject.GetComponent<PlayerHealth>().curHealth;
         
         if(curhealth / 34f >= 2)
@@ -41,6 +44,40 @@ public class PlayerMovement : MonoBehaviour
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
             rb.velocity = Vector2.SmoothDamp(rb.velocity, input.normalized * moveSpeed, ref velocity, 0.05f);
+        }
+    }
+
+    private void SetDirection()
+    {
+        //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHT
+        dir = rb.velocity;
+        dir.Normalize();
+        Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
+
+        if (mag.y < mag.x)
+        {
+            //LookRight/Left
+            if (dir.x < 0.0f)
+            {
+                anim.SetInteger("Direction", 1);
+            }
+            else
+            {
+                anim.SetInteger("Direction", 3);
+            }
+        }
+        else
+        {
+            //LookUp/Down
+            if (dir.y < 0.0f)
+            {
+                anim.SetInteger("Direction", 2);
+            }
+            else
+            {
+                anim.SetInteger("Direction", 0);
+            }
+
         }
     }
 }

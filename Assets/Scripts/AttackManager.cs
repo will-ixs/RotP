@@ -10,14 +10,11 @@ public class AttackManager : MonoBehaviour
     public float distanceFromPlayer;
 
     public int basicDamage;
+    public float basicAttackKnockbackSpeed;
+    public float basicAttackStaggerTime;
     public float basicAttackCooldown;
     private float timeUntilBasicAttackAvailable;
     [SerializeField] ContactList basicAttack;
-
-    public int lungeDamage;
-    public float lungeCooldown;
-    private float timeUntilLungeAvailable;
-    [SerializeField] ContactList lungeAttack;
 
     [SerializeField] private Transform _camera_transform;
     [SerializeField] private Transform _weapon_transform;
@@ -27,7 +24,6 @@ public class AttackManager : MonoBehaviour
     private void Start()
     {
         timeUntilBasicAttackAvailable = 0.0f;
-        timeUntilLungeAvailable = 0.0f;
     }
     void Update()
     {
@@ -57,24 +53,15 @@ public class AttackManager : MonoBehaviour
                     }
                     else //gameobject should have enemy tag & component
                     {
-                        Enemy hp = basicAttack.contactList[i].GetComponent<Enemy>();
+                        GameObject e = basicAttack.contactList[i];
+                        Enemy hp = e.GetComponent<Enemy>();
+                        e.GetComponent<EnemyAI>().Knockback(basicAttackKnockbackSpeed, basicAttackStaggerTime);
                         hp.TakeDamage(basicDamage);
                         if(hp.Dead)
                         {
                             basicAttack.contactList.Remove(basicAttack.contactList[i]);
                         }
                     }
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.E)) //Lunge temp
-        {
-            if(lungeCooldown <= 0.0f)
-            {
-                timeUntilLungeAvailable = lungeCooldown;
-                foreach(GameObject enemy in lungeAttack.contactList)
-                {
-
                 }
             }
         }
@@ -93,7 +80,7 @@ public class AttackManager : MonoBehaviour
         weaponPos.x += distanceFromPlayer * Mathf.Cos(angle);
         weaponPos.y += distanceFromPlayer * Mathf.Sin(angle);
         _weapon_transform.position = weaponPos;
-        _weapon_transform.rotation = Quaternion.Euler(0, 0, 270.0f + angle * Mathf.Rad2Deg);
+        _weapon_transform.rotation = Quaternion.Euler(0, 0, 90.0f + angle * Mathf.Rad2Deg);
 
         if (basicAttackCooldown - timeUntilBasicAttackAvailable < 0.25f)
         {
@@ -110,6 +97,5 @@ public class AttackManager : MonoBehaviour
     private void ReduceWeaponCooldown()
     {
         timeUntilBasicAttackAvailable -= Time.deltaTime;
-        timeUntilLungeAvailable -= Time.deltaTime;
     }
 }

@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &8066391551849377181
@@ -174,10 +174,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  distanceBW: 100
+  detectionRadius: 10
   enemy: {fileID: 233687714835127910}
-  dmg: 10
+  dmg: 5
   dmgCD: 1
+  knockbackSpeed: 3
+  moveDirection: 0
 --- !u!114 &233687714835127910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   Dead: 0
+  player: {fileID: 0}
   _prefab_ka_fragment: {fileID: 2558748664004486826, guid: c09988c745373f24cbf4d9b8afaae72c, type: 3}
   dir: {x: 0, y: 0}
   damage: 10
