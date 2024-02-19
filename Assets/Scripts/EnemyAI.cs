@@ -14,13 +14,13 @@ public class EnemyAI : MonoBehaviour
     public int dmg;
     public float dmgCD;
 
-    private float knockbackSpeed;
+    public float knockbackSpeed;
     private float staggeredTime;
 
     private float distance;
     private Rigidbody2D rb;
 
-    private int moveDirection;  // 0 -> right, 1 -> down, 2 -> left, 3 -> up
+    public int moveDirection;  // 0 -> right, 1 -> down, 2 -> left, 3 -> up
     private float moveDuration;
 
     // Start is called before the first frame update
@@ -49,7 +49,7 @@ public class EnemyAI : MonoBehaviour
         if (enemy.Dead)
         {
             GetComponent<BoxCollider2D>().enabled = false;
-            Destroy(gameObject, 1.0f);
+            Destroy(gameObject, 1.0f / 3.0f);
         }
         //Move towards player
         //Attack when in range

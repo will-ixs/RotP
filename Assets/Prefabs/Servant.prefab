@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6718282977848781098, guid: 8811501d0d8896d47b6c884cca507629, type: 3}
+  m_Sprite: {fileID: -343819060, guid: 9035202486e38b54c9ab3ada955bb390, type: 3}
   m_Color: {r: 0.8113208, g: 0.75333244, b: 0.6697223, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,7 +168,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.875}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -191,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   Dead: 0
+  player: {fileID: 0}
   _prefab_ka_fragment: {fileID: 2558748664004486826, guid: c09988c745373f24cbf4d9b8afaae72c, type: 3}
   dir: {x: 0, y: 0}
   damage: 10

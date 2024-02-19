@@ -54,19 +54,7 @@ public class PlayerMovement : MonoBehaviour
         dir.Normalize();
         Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
 
-        if (mag.y > mag.x)
-        {
-            //LookUp/Down
-            if(dir.y > 0.0f)
-            {
-                anim.SetInteger("Direction", 0);
-            }
-            else
-            {
-                anim.SetInteger("Direction", 2);
-            }
-        }
-        else
+        if (mag.y < mag.x)
         {
             //LookRight/Left
             if (dir.x < 0.0f)
@@ -77,6 +65,19 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.SetInteger("Direction", 3);
             }
+        }
+        else
+        {
+            //LookUp/Down
+            if (dir.y < 0.0f)
+            {
+                anim.SetInteger("Direction", 2);
+            }
+            else
+            {
+                anim.SetInteger("Direction", 0);
+            }
+
         }
     }
 }

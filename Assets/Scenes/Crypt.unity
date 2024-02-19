@@ -472,8 +472,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceFromPlayer: 1.3
   basicDamage: 7
-  basicAttackKnockbackSpeed: 5
-  basicAttackStaggerTime: 0.25
+  basicAttackKnockbackSpeed: 0
+  basicAttackStaggerTime: 0
   basicAttackCooldown: 0.3333333
   basicAttack: {fileID: 383058308}
   _camera_transform: {fileID: 880390574}
@@ -6059,7 +6059,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   iterations: 5
   spitCooldown: 1
-  spitPrefab: {fileID: 1826851548256498500, guid: c4a3ffffc7bcc2a439d94ec7841fddd1, type: 3}
+  spitPrefab: {fileID: 4102277215991244392, guid: bce493550f817764d9ee73c5b32f85a5, type: 3}
 --- !u!4 &1054059765
 Transform:
   m_ObjectHideFlags: 0
@@ -6302,7 +6302,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   iterations: 10
   spitCooldown: 0.6666667
-  spitPrefab: {fileID: 1826851548256498500, guid: c4a3ffffc7bcc2a439d94ec7841fddd1, type: 3}
+  spitPrefab: {fileID: 4102277215991244392, guid: bce493550f817764d9ee73c5b32f85a5, type: 3}
 --- !u!1 &1249066282
 GameObject:
   m_ObjectHideFlags: 0
@@ -6317,6 +6317,7 @@ GameObject:
   - component: {fileID: 1249066287}
   - component: {fileID: 1249066286}
   - component: {fileID: 1249066288}
+  - component: {fileID: 1249066289}
   m_Layer: 0
   m_Name: Serpopard
   m_TagString: Boss
@@ -6425,7 +6426,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -6463,7 +6464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c355e71438e674186ac552d31172fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 2
   serpSwipe: {fileID: 1790957716}
   serpSpit: {fileID: 1205150113}
   rb: {fileID: 1249066287}
@@ -6507,8 +6508,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6b72d32859e8b4ba1be047cf734685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 66
   Dead: 0
+--- !u!95 &1249066289
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249066282}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f9851ae13e21114cbb56e42075421b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1405859249
 GameObject:
   m_ObjectHideFlags: 0
@@ -6591,6 +6613,7 @@ GameObject:
   - component: {fileID: 1532421042}
   - component: {fileID: 1532421041}
   - component: {fileID: 1532421040}
+  - component: {fileID: 1532421046}
   m_Layer: 0
   m_Name: Serpopard (1)
   m_TagString: Boss
@@ -6610,7 +6633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6b72d32859e8b4ba1be047cf734685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 100
   Dead: 0
 --- !u!114 &1532421041
 MonoBehaviour:
@@ -6624,7 +6647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c355e71438e674186ac552d31172fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 4
   serpSwipe: {fileID: 2065450056}
   serpSpit: {fileID: 1054059764}
   rb: {fileID: 1532421042}
@@ -6783,6 +6806,27 @@ Transform:
   - {fileID: 1054059765}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1532421046
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532421039}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f9851ae13e21114cbb56e42075421b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1790957713
 GameObject:
   m_ObjectHideFlags: 0
@@ -7002,8 +7046,9 @@ MonoBehaviour:
   enemyCap: 20
   enemyPrefabs:
   - {fileID: 9113701457174135535, guid: bf5cc4cf5728198419bec2d2245e03d9, type: 3}
-  enemySpawnWeights:
-  - 1
+  - {fileID: 9113701457174135535, guid: bc47b654860b781488903f9305ac3de3, type: 3}
+  enemySpawnWeights: []
+  activeFragments: []
   activeEnemies: []
   enemyHealthBar: {fileID: 6488209704262677998, guid: a462d3786a14b1a489ccf6e403f956c1, type: 3}
 --- !u!1 &1857612557
