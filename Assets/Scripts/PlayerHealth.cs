@@ -72,6 +72,9 @@ public class PlayerHealth : MonoBehaviour
             Destroy(healthIndicator, 1.0f);
         }
         int sprite_index = (int)Mathf.Ceil(curHealth/maxHealth * portraitSprites.Count) - 1;
+
+        if (sprite_index < 0) {sprite_index = 0;}
+
         portrait.sprite = portraitSprites[sprite_index];
     }
 
