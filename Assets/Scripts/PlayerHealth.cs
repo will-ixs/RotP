@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;
     public float curHealth;
     public GameObject indicator;
+    public Image portrait;
+    public List<Sprite> portraitSprites;
 
     private float damage_color_cooldown;
 
@@ -69,6 +71,9 @@ public class PlayerHealth : MonoBehaviour
             // Remove text after delay
             Destroy(healthIndicator, 1.0f);
         }
+        int sprite_index = (int)Mathf.Ceil(curHealth/maxHealth * portraitSprites.Count) - 1;
+        Debug.Log(sprite_index);
+        portrait.sprite = portraitSprites[sprite_index];
     }
 
     // Update is called once per frame
