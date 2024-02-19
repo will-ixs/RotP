@@ -16,6 +16,8 @@ public class AttackManager : MonoBehaviour
     private float timeUntilBasicAttackAvailable;
     [SerializeField] ContactList basicAttack;
 
+    private float weaponAngle;
+
     [SerializeField] private Transform _camera_transform;
     [SerializeField] private Transform _weapon_transform;
 
@@ -55,7 +57,7 @@ public class AttackManager : MonoBehaviour
                     {
                         GameObject e = basicAttack.contactList[i];
                         Enemy hp = e.GetComponent<Enemy>();
-                        e.GetComponent<EnemyAI>().Knockback(basicAttackKnockbackSpeed, basicAttackStaggerTime);
+                        e.GetComponent<EnemyAI>().Knockback(new Vector3(Mathf.Cos(weaponAngle), Mathf.Sin(weaponAngle), 0.0f), basicAttackKnockbackSpeed, basicAttackStaggerTime);
                         hp.TakeDamage(basicDamage);
                         if(hp.Dead)
                         {
@@ -73,14 +75,14 @@ public class AttackManager : MonoBehaviour
         Vector3 cameraPos = Camera.main.WorldToScreenPoint(_camera_transform.position);
         mousePos.x -= cameraPos.x;
         mousePos.y -= cameraPos.y;
-        float angle = Mathf.Atan2(mousePos.y, mousePos.x);
+        weaponAngle = Mathf.Atan2(mousePos.y, mousePos.x);
 
 
         Vector3 weaponPos = transform.position;
-        weaponPos.x += distanceFromPlayer * Mathf.Cos(angle);
-        weaponPos.y += distanceFromPlayer * Mathf.Sin(angle);
+        weaponPos.x += distanceFromPlayer * Mathf.Cos(weaponAngle);
+        weaponPos.y += distanceFromPlayer * Mathf.Sin(weaponAngle);
         _weapon_transform.position = weaponPos;
-        _weapon_transform.rotation = Quaternion.Euler(0, 0, 90.0f + angle * Mathf.Rad2Deg);
+        _weapon_transform.rotation = Quaternion.Euler(0, 0, 90.0f + weaponAngle * Mathf.Rad2Deg);
 
         if (basicAttackCooldown - timeUntilBasicAttackAvailable < 0.25f)
         {

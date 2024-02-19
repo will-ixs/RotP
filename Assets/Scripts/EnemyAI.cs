@@ -14,7 +14,8 @@ public class EnemyAI : MonoBehaviour
     public int dmg;
     public float dmgCD;
 
-    public float knockbackSpeed;
+    private Vector3 knockbackDirection;
+    private float knockbackSpeed;
     private float staggeredTime;
 
     private float distance;
@@ -35,8 +36,9 @@ public class EnemyAI : MonoBehaviour
         moveDuration = Random.Range(1, 10);
     }
 
-    public void Knockback(float speed, float time)
+    public void Knockback(Vector3 direction, float speed, float time)
     {
+        knockbackDirection = direction;
         knockbackSpeed = Mathf.Max(knockbackSpeed * Mathf.Exp(-staggeredTime), speed);
         staggeredTime = Mathf.Max(staggeredTime, time);
     }
@@ -109,7 +111,7 @@ public class EnemyAI : MonoBehaviour
                 }
                 else
                 {
-                    rb.velocity = Vector2.SmoothDamp(rb.velocity, -knockbackSpeed * targetDirection, ref velocity, 0.05f);
+                    rb.velocity = Vector2.SmoothDamp(rb.velocity, knockbackSpeed * knockbackDirection, ref velocity, 0.05f);
                 }
             }
         }

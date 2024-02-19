@@ -453,7 +453,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   curhealth: 0
-  anim: {fileID: 0}
   rb: {fileID: 387964943}
   dir: {x: 0, y: 0}
 --- !u!58 &387964942
@@ -554,8 +553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceFromPlayer: 1.3
   basicDamage: 7
-  basicAttackKnockbackSpeed: 0
-  basicAttackStaggerTime: 0
+  basicAttackKnockbackSpeed: 3
+  basicAttackStaggerTime: 0.25
   basicAttackCooldown: 0.3333333
   basicAttack: {fileID: 383058308}
   _camera_transform: {fileID: 880390574}
