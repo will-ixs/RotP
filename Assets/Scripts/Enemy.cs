@@ -15,13 +15,16 @@ public class Enemy : MonoBehaviour
     private EnemySpawner spawner;
 
     private float damage_color_cooldown;
+    private float deathSpawnTimer;
+    private bool kaSpawned;
 
     [SerializeField] private GameObject _prefab_ka_fragment;
-
     [SerializeField] private Vector2 dir;
     [SerializeField] private float damage;
     void Start()
     {
+        kaSpawned = false;
+        deathSpawnTimer = 0.3f;
         spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>();
         player = GameObject.FindGameObjectWithTag("Player");
         maxHealth = health;
@@ -30,12 +33,25 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-        damage_color_cooldown -= Time.deltaTime;
-        if (damage_color_cooldown <= 0.0f)
+        if (Dead)
         {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(207, 192, 171);
+            deathSpawnTimer -= Time.deltaTime;
+            if(deathSpawnTimer <= 0.0f && !kaSpawned)
+            {
+                KaFragment kaFragment = Instantiate(_prefab_ka_fragment, gameObject.transform.position, Quaternion.identity).GetComponent<KaFragment>();
+                kaFragment.initialAmount = maxHealth;
+                kaFragment.decayRate = 1.0f;
+                kaSpawned = true;
+            }
         }
-        SetDirection();
+        else { 
+            damage_color_cooldown -= Time.deltaTime;
+            if (damage_color_cooldown <= 0.0f)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(207, 192, 171);
+            }
+            SetDirection();
+        }
     }
 
     public void TakeDamage(int damage) 
@@ -44,10 +60,8 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            anim.SetTrigger("Dead");
             Dead = true;
-            KaFragment kaFragment = Instantiate(_prefab_ka_fragment, gameObject.transform.position, Quaternion.identity).GetComponent<KaFragment>();
-            kaFragment.initialAmount = maxHealth;
-            kaFragment.decayRate = 1.0f;
         } else
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;

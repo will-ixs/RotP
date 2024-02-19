@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &8066391551849377181
@@ -178,6 +178,8 @@ MonoBehaviour:
   enemy: {fileID: 233687714835127910}
   dmg: 5
   dmgCD: 1
+  knockbackSpeed: 3
+  moveDirection: 0
 --- !u!114 &233687714835127910
 MonoBehaviour:
   m_ObjectHideFlags: 0

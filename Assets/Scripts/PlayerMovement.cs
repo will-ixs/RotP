@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float timeUntilMovementAvailable;
 
-    [SerializeField] private Animator anim;
+    private Animator anim;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 input;
     private Vector2 velocity;
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
         timeUntilMovementAvailable = 0.0f;
     }
 
@@ -54,19 +55,7 @@ public class PlayerMovement : MonoBehaviour
         dir.Normalize();
         Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
 
-        if (mag.y > mag.x)
-        {
-            //LookUp/Down
-            if(dir.y > 0.0f)
-            {
-                anim.SetInteger("Direction", 0);
-            }
-            else
-            {
-                anim.SetInteger("Direction", 2);
-            }
-        }
-        else
+        if (mag.y < mag.x)
         {
             //LookRight/Left
             if (dir.x < 0.0f)
@@ -77,6 +66,19 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.SetInteger("Direction", 3);
             }
+        }
+        else
+        {
+            //LookUp/Down
+            if (dir.y < 0.0f)
+            {
+                anim.SetInteger("Direction", 2);
+            }
+            else
+            {
+                anim.SetInteger("Direction", 0);
+            }
+
         }
     }
 }
