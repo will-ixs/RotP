@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float timeUntilMovementAvailable;
 
-    [SerializeField] private Animator anim;
+    private Animator anim;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 input;
     private Vector2 velocity;
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
         timeUntilMovementAvailable = 0.0f;
     }
 
