@@ -6,9 +6,11 @@ public class OsirisAI : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private float damage;
-    [SerializeField] private Vector2 dir;
+    //[SerializeField] private Vector2 dir;
     [SerializeField] private float distance;
     [SerializeField] private float gravity = 100f;
+    [SerializeField] private float velocity = 1000f;
+
     private Rigidbody2D rb;
     
 
@@ -20,6 +22,7 @@ public class OsirisAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
+        InvokeRepeating("testt", 1f, 1f);
 
     }
 
@@ -31,11 +34,11 @@ public class OsirisAI : MonoBehaviour
         //rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
         //Debug.Log(rb.velocity);
-        Vector2 test = Vector2.zero;
+        //Vector2 test = Vector2.zero;
         if(rb.velocity == Vector2.zero) {
        
-        Physics2D.gravity = (test) * -gravity;
-        
+            rb.velocity = new Vector2(0, 0 * Time.deltaTime);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
  
         //rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         
@@ -61,7 +64,41 @@ public class OsirisAI : MonoBehaviour
             distance = Vector3.Distance(transform.position, player.transform.position);
 
             Vector3 direction = player.transform.position - transform.position;
+           // direction.Normalize();
+            float directedVelocity = velocity;
+            if(rb.velocity == Vector2.zero) 
+            {
+                if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                    if(direction.x < 0)
+                        directedVelocity = velocity * -1.0f;
+                    else
+                        directedVelocity = velocity;
+                    rb.velocity = new Vector2(directedVelocity * Time.deltaTime, 0);
+                }
+                else
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                    if(direction.y < 0)
+                        directedVelocity = velocity * -1.0f;
+                    else
+                        directedVelocity = velocity;
+                    rb.velocity = new Vector2(0, directedVelocity * Time.deltaTime);
+                }
+            }
+            
+
+           
+    }
+
+    private void testt()
+    {
+            distance = Vector3.Distance(transform.position, player.transform.position);
+
+            Vector3 direction = player.transform.position - transform.position;
             direction.Normalize();
+            Debug.Log(direction);
 
            
     }
