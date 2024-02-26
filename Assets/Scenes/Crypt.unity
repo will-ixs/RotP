@@ -4988,8 +4988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 32
-  m_RefResolutionX: 512
-  m_RefResolutionY: 270
+  m_RefResolutionX: 640
+  m_RefResolutionY: 360
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
@@ -6584,7 +6584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c355e71438e674186ac552d31172fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 2
   serpSwipe: {fileID: 1790957716}
   serpSpit: {fileID: 1205150113}
   rb: {fileID: 1249066287}
@@ -7003,7 +7003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c355e71438e674186ac552d31172fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 3
   serpSwipe: {fileID: 2065450056}
   serpSpit: {fileID: 1054059764}
   rb: {fileID: 1532421042}
