@@ -13,9 +13,11 @@ public class Acid : MonoBehaviour
     private Animator anim;
     private float useCooldown;
     private float lifeTime;
+    private int splat;
     // Start is called before the first frame update
     void Start()
     {
+        splat = 0;
         useCooldown = 0.0f;
         Destroy(gameObject, destroyTime);
         lifeTime = destroyTime;
@@ -27,7 +29,19 @@ public class Acid : MonoBehaviour
     {
         if (lifeTime < 0.5f)
         {
-            anim.SetTrigger("Splat");
+            switch (splat)
+            {
+                case 0:
+
+                    splat = Random.Range(1, 3);
+                    break;
+                case 1:
+                    anim.SetTrigger("Splat");
+                    break;
+                case 2:
+                    anim.SetTrigger("Splat2");
+                    break;
+            }
         }
         lifeTime -= Time.deltaTime;
         useCooldown -= Time.deltaTime;
@@ -44,7 +58,8 @@ public class Acid : MonoBehaviour
     {
         if (collision.CompareTag("Player") && useCooldown <= 0.0f)
         {
-            useCooldown = dmgCooldown;
+            lifeTime = 0.5f;
+            //useCooldown = dmgCooldown;
             collision.GetComponent<PlayerHealth>().updatePlayerHealth(-dmg);
         }
     }

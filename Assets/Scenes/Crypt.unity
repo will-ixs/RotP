@@ -413,7 +413,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -485838235, guid: 87c072be62717174f98736fdd54a4e45, type: 3}
-  m_Color: {r: 0.70354223, g: 0.9622642, b: 0.8911964, a: 1}
+  m_Color: {r: 1, g: 0.9622642, b: 0.8911964, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7488,7 +7488,7 @@ MonoBehaviour:
   spawnLocations:
   - {fileID: 968409633}
   - {fileID: 1857612558}
-  spawningCountdown: 7
+  spawningCountdown: 5
   enemyCap: 20
   enemyPrefabs:
   - {fileID: 9113701457174135535, guid: bf5cc4cf5728198419bec2d2245e03d9, type: 3}
