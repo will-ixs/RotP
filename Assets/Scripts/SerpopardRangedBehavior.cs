@@ -49,8 +49,8 @@ public class SerpopardRangedBehavior : MonoBehaviour
     }
     private void MoveAtPlayer()
     {
-        Vector3 vecToPlayer = transform.position - player.transform.position;
-        _movement_controller.changeVelocity(moveSpeed * vecToPlayer.normalized);
+        Vector3 vecFromPlayer = transform.position - player.transform.position;
+        _movement_controller.changeVelocity(moveSpeed * vecFromPlayer.normalized);
     }
     private void SwipeAttack()
     {

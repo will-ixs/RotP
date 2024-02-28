@@ -95,26 +95,30 @@ public class AttackController : MonoBehaviour
         for (int i = _hitbox_contact_list.contactList.Count - 1; i >= 0; i--)
         {
             GameObject target = _hitbox_contact_list.contactList[i];
-            MovementController movementController = target.GetComponent<MovementController>();
             bool dead;
+            float staggerTime;
             if (target.CompareTag("Boss"))
             {
                 BossHealth hp = target.GetComponent<BossHealth>();
                 hp.TakeDamage(damage);
-                movementController.knockback(_attack_direction, knockbackImpulse);
-                movementController.disableMovement(bossStaggerTime);
+                staggerTime = bossStaggerTime;
                 dead = hp.Dead;
             } else
             {
                 Enemy hp = target.GetComponent<Enemy>();
                 hp.TakeDamage(damage);
-                movementController.knockback(_attack_direction, knockbackImpulse);
-                movementController.disableMovement(normalStaggerTime);
+                staggerTime = normalStaggerTime;
                 dead = hp.Dead;
             }
             if (dead)
             {
                 _hitbox_contact_list.contactList.Remove(target);
+            }
+            else
+            {
+                MovementController movementController = target.GetComponent<MovementController>();
+                movementController.knockback(_attack_direction, knockbackImpulse);
+                movementController.disableMovement(staggerTime);
             }
         }
         _cooldown_timer.begin(cooldown);

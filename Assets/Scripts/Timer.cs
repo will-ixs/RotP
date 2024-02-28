@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private float timeRemaining;
+    [SerializeField] private float timeRemaining;
 
     // Start is called before the first frame update
     void Start()

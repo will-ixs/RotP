@@ -5,7 +5,6 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     [SerializeField] private float movementForce;
-    [SerializeField] private float dragForce;
 
     private Timer _t;
 
@@ -37,7 +36,6 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        _rb.AddForce(dragForce * -_rb.velocity.normalized, ForceMode2D.Impulse);
         if (_t.isReady())
         {
             Vector2 force_direction = (_target_velocity - _rb.velocity).normalized;
