@@ -22,8 +22,6 @@ public class OsirisSpawner : MonoBehaviour
     void Update()
     {
         PlayerHealth playerhealth = player.GetComponent<PlayerHealth>();
-<<<<<<< Updated upstream
-=======
         if(playerhealth != null)
         {
             if(playerhealth.curHealth <= 33)
@@ -37,7 +35,6 @@ public class OsirisSpawner : MonoBehaviour
 
             }
         }
->>>>>>> Stashed changes
         
     }
 }
