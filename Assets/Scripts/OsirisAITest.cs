@@ -44,6 +44,10 @@ public class OsirisAITest : MonoBehaviour
             while(distance < 1)
             {
                 playerPos.RemoveAt(0);
+                if (playerPos.Count < 1)
+                {
+                    playerPos.Add(player.transform.position);
+                }
                 vToPlayer = playerPos[0] - transform.position;
                 distance = vToPlayer.magnitude;
             }

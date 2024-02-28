@@ -8,7 +8,7 @@ public class SerpopardBehavior : MonoBehaviour
     private BossHealth bossHealth;
     private float stateChangeTimer;
     private GameObject player;
-    private Animator anim;
+    [SerializeField] private Animator anim;
     [SerializeField] private float moveSpeed;
     [SerializeField] private SerpopardSwipe serpSwipe;
     [SerializeField] private SerpopardSpit serpSpit;
@@ -26,7 +26,6 @@ public class SerpopardBehavior : MonoBehaviour
         stateChangeTimer = 0.0f;
         player = GameObject.FindGameObjectWithTag("Player");
         bossHealth = GetComponent<BossHealth>();
-        anim = GetComponent<Animator>();
         _movement_controller = GetComponent<MovementController>();
     }
 
