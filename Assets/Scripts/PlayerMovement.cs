@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHT
         dir = movementDirection;
         Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
-        anim.SetFloat("Speed", 1.0f);
+        anim.SetFloat("Speed", mag.magnitude);
         if(mag.magnitude > 0.1f)
         {
             anim.SetBool("Siphon", false);
