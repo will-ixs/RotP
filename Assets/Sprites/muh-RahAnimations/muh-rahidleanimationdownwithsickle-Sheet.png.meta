@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5a65fc3c285d9243b84e523e258c064
+guid: 4cbcaa2f339255449a7dd11b56e7b6a0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: muh-rahwalkingupanimation-Sheet_0
+      name: muh-rahidleanimationdownwithsickle-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c5d827e702c7294d9d524a2466cbecf
-      internalID: -719307344
+      spriteID: e5559459f7843a54ea5789476eb8bdde
+      internalID: 808791721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: muh-rahwalkingupanimation-Sheet_1
+      name: muh-rahidleanimationdownwithsickle-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b704cc1593a59bc4aaf87d581d4dd101
-      internalID: -440368187
+      spriteID: c9d788692062746469acf6d3aa9a7c07
+      internalID: -907450326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: muh-rahwalkingupanimation-Sheet_2
+      name: muh-rahidleanimationdownwithsickle-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 669d24251feeee846b41fcd2b27618e4
-      internalID: 1154063754
+      spriteID: 010d32229777eb842841aa52304456b8
+      internalID: 367302440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: muh-rahwalkingupanimation-Sheet_3
+      name: muh-rahidleanimationdownwithsickle-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -200,8 +200,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82108797b4f316945a9127e9174d417e
-      internalID: -1867332565
+      spriteID: 65f26c4a8737ed54a83523747e43a045
+      internalID: 901147123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muh-rahidleanimationdownwithsickle-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aa14bd172940064e8e967e0fe409f27
+      internalID: -1143905730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muh-rahidleanimationdownwithsickle-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af81417e50cb22b4489f6bad7b0f170c
+      internalID: 149507380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muh-rahidleanimationdownwithsickle-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f00ca8b62be73140a1c0faf05b59e0b
+      internalID: 226498955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muh-rahidleanimationdownwithsickle-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eceafd39585d67943b420cf69f18d0ce
+      internalID: 88245997
       vertices: []
       indices: 
       edges: []
@@ -217,10 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      muh-rahwalkingupanimation-Sheet_0: -719307344
-      muh-rahwalkingupanimation-Sheet_1: -440368187
-      muh-rahwalkingupanimation-Sheet_2: 1154063754
-      muh-rahwalkingupanimation-Sheet_3: -1867332565
+      muh-rahidleanimationdownwithsickle-Sheet_0: 808791721
+      muh-rahidleanimationdownwithsickle-Sheet_1: -907450326
+      muh-rahidleanimationdownwithsickle-Sheet_2: 367302440
+      muh-rahidleanimationdownwithsickle-Sheet_3: 901147123
+      muh-rahidleanimationdownwithsickle-Sheet_4: -1143905730
+      muh-rahidleanimationdownwithsickle-Sheet_5: 149507380
+      muh-rahidleanimationdownwithsickle-Sheet_6: 226498955
+      muh-rahidleanimationdownwithsickle-Sheet_7: 88245997
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

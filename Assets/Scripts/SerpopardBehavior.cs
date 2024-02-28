@@ -30,68 +30,18 @@ public class SerpopardBehavior : MonoBehaviour
 
     void Update()
     {
+        stateChangeTimer -= Time.deltaTime;
         if (bossHealth.Dead)
         {
             Die();
         }
-        //End attacks, choose new state that is not the same as the previous.
-        stateChangeTimer -= Time.deltaTime;
-        if (stateChangeTimer <= 0.0f) {
-            switch (state)
-            {
-                case SerpopardState.SwipeAttack: //Swipe Attack
-                    serpSwipe.Disable();
-                    break;
-                case SerpopardState.SpitAttack: //Spit Attack
-                    serpSpit.Disable();
-                    break;
-            }
-            SerpopardState currState = state;
-            while (currState == state) { 
-                int selection = Random.Range(0, 4); //CHANGE TO (0, 4) when Spit attack done.
-                switch (selection)
-                {
-                    case 1:
-                        state = SerpopardState.MoveAtPlayer;
-                        stateChangeTimer = 3.75f;
-                        break;
-                    case 2:
-                        state = SerpopardState.SwipeAttack;
-                        stateChangeTimer = 1.5f;
-                        break;
-                    case 3:
-                        state = SerpopardState.SpitAttack;
-                        stateChangeTimer = 5.0f;
-                        break;
-                }
-            }
+        else
+        {
+            ChooseNextState();
+            ActivateNextState();
         }
-
-        //Activate new state.
-        //Idle = 0, Move = 1, Swipe = 2, Spit = 3
-        switch (state) {
-            case SerpopardState.Idle:
-                anim.SetInteger("State", 0);
-                CheckSpriteFlip();
-                ActIdle();
-                break;
-            case SerpopardState.MoveAtPlayer:
-                anim.SetInteger("State", 1);
-                CheckSpriteFlip();
-                MoveAtPlayer();
-                break;
-            case SerpopardState.SwipeAttack: //Swipe Attack
-                anim.SetInteger("State", 2);
-                SwipeAttack();
-                break;
-            case SerpopardState.SpitAttack: //Spit Attack
-                anim.SetInteger("State", 3);
-                SpitAttack();
-                break;
-
-        }
-
     }
+
     private void ActIdle()
     {
         rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
@@ -129,8 +79,70 @@ public class SerpopardBehavior : MonoBehaviour
         }
     }
 
+    private void ChooseNextState()
+    {
+        //End attacks, choose new state that is not the same as the previous.
+        if (stateChangeTimer <= 0.0f) {
+            switch (state)
+            {
+                case SerpopardState.SwipeAttack: //Swipe Attack
+                    serpSwipe.Disable();
+                    break;
+                case SerpopardState.SpitAttack: //Spit Attack
+                    serpSpit.Disable();
+                    break;
+            }
+            SerpopardState currState = state;
+            while (currState == state) { 
+                int selection = Random.Range(0, 4); //CHANGE TO (0, 4) when Spit attack done.
+                switch (selection)
+                {
+                    case 1:
+                        state = SerpopardState.MoveAtPlayer;
+                        stateChangeTimer = 3.75f;
+                        break;
+                    case 2:
+                        state = SerpopardState.SwipeAttack;
+                        stateChangeTimer = 1.5f;
+                        break;
+                    case 3:
+                        state = SerpopardState.SpitAttack;
+                        stateChangeTimer = 5.0f;
+                        break;
+                }
+            }
+        }
+    }
+
+    private void ActivateNextState()
+    {
+        //Activate new state.
+        //Idle = 0, Move = 1, Swipe = 2, Spit = 3
+        switch (state) {
+            case SerpopardState.Idle:
+                anim.SetInteger("State", 0);
+                CheckSpriteFlip();
+                ActIdle();
+                break;
+            case SerpopardState.MoveAtPlayer:
+                anim.SetInteger("State", 1);
+                CheckSpriteFlip();
+                MoveAtPlayer();
+                break;
+            case SerpopardState.SwipeAttack: //Swipe Attack
+                anim.SetInteger("State", 2);
+                SwipeAttack();
+                break;
+            case SerpopardState.SpitAttack: //Spit Attack
+                anim.SetInteger("State", 3);
+                SpitAttack();
+                break;
+        }
+    }
+
     private void Die()
     {
+        state = SerpopardState.Idle;
         anim.SetTrigger("Dead");
         //Death animation / fade to white & screen shake or something
         Destroy(gameObject, 1.5f);
