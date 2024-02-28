@@ -590,7 +590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementForce: 5
-  dragForce: 1
 --- !u!114 &387964949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61caa40657f835459d373eabb1b67c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthThreshold: 50
+  healthThreshold: 33
   spawningCountdown: 5
   despawningCountdown: 5
   osirisPrefab: {fileID: 1750057259388390761, guid: a6966676cb79a7540ad91c7d258faba1, type: 3}
@@ -6894,7 +6893,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementForce: 15
-  dragForce: 1
 --- !u!1 &1256712220
 GameObject:
   m_ObjectHideFlags: 0
@@ -7439,7 +7437,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementForce: 15
-  dragForce: 1
 --- !u!1 &1567935460
 GameObject:
   m_ObjectHideFlags: 0
