@@ -11,7 +11,7 @@ public class SerpopardRangedBehavior : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private SerpopardSwipe serpSwipe;
     [SerializeField] private SerpopardSpit serpSpit;
-    [SerializeField] private Rigidbody2D rb;
+    private MovementController _movement_controller;
     public enum SerpopardState
     {
         Idle,
@@ -26,6 +26,7 @@ public class SerpopardRangedBehavior : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         bossHealth = GetComponent<BossHealth>();
         anim = GetComponent<Animator>();
+        _movement_controller = GetComponent<MovementController>();
     }
 
     void Update()
@@ -44,17 +45,16 @@ public class SerpopardRangedBehavior : MonoBehaviour
 
     private void ActIdle()
     {
-        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
+        _movement_controller.changeVelocity(Vector2.zero);
     }
     private void MoveAtPlayer()
     {
-        Vector3 offset = (transform.position - player.transform.position).normalized * 5;
-        transform.position = Vector3.MoveTowards(transform.position, offset, moveSpeed * Time.deltaTime);
+        Vector3 vecToPlayer = transform.position - player.transform.position;
+        _movement_controller.changeVelocity(moveSpeed * vecToPlayer.normalized);
     }
     private void SwipeAttack()
     {
-
-        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
+        _movement_controller.changeVelocity(Vector2.zero);
         serpSwipe.Enable();
         if(stateChangeTimer < 1.0f)
         {
@@ -64,7 +64,7 @@ public class SerpopardRangedBehavior : MonoBehaviour
 
     private void SpitAttack()
     {
-        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
+        _movement_controller.changeVelocity(Vector2.zero);
         serpSpit.Enable();
     }
 

@@ -51,7 +51,7 @@ public class SoulSteal : MonoBehaviour
                     gameObject.GetComponent<PlayerHealth>().updatePlayerHealth(nearby_ka_fragments[i].GetComponent<KaFragment>().amount);
                     Destroy(nearby_ka_fragments[i]);
                 }
-                gameObject.GetComponent<PlayerMovement>().DisableMovement(movementCooldown);
+                gameObject.GetComponent<MovementController>().disableMovement(movementCooldown);
             }
         }
     }

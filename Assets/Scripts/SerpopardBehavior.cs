@@ -12,7 +12,7 @@ public class SerpopardBehavior : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private SerpopardSwipe serpSwipe;
     [SerializeField] private SerpopardSpit serpSpit;
-    [SerializeField] private Rigidbody2D rb;
+    private MovementController _movement_controller;
     public enum SerpopardState
     {
         Idle,
@@ -27,6 +27,7 @@ public class SerpopardBehavior : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         bossHealth = GetComponent<BossHealth>();
         anim = GetComponent<Animator>();
+        _movement_controller = GetComponent<MovementController>();
     }
 
     void Update()
@@ -45,12 +46,13 @@ public class SerpopardBehavior : MonoBehaviour
 
     private void ActIdle()
     {
-        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
+        _movement_controller.changeVelocity(Vector2.zero);
     }
     private void MoveAtPlayer()
     {
-        if((player.transform.position - transform.position).magnitude > 2.8f) { 
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+        Vector2 vecToPlayer = player.transform.position - transform.position;
+        if (vecToPlayer.magnitude > 2.8f) {
+            _movement_controller.changeVelocity(moveSpeed * vecToPlayer.normalized);
         }
         else
         {
@@ -61,8 +63,7 @@ public class SerpopardBehavior : MonoBehaviour
     }
     private void SwipeAttack()
     {
-
-        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
+        _movement_controller.changeVelocity(Vector2.zero);
         serpSwipe.Enable();
         if(stateChangeTimer < 1.0f)
         {
@@ -72,7 +73,7 @@ public class SerpopardBehavior : MonoBehaviour
 
     private void SpitAttack()
     {
-        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
+        _movement_controller.changeVelocity(Vector2.zero);
         serpSpit.Enable();
     }
 

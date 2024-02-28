@@ -357,11 +357,12 @@ GameObject:
   m_Component:
   - component: {fileID: 387964940}
   - component: {fileID: 387964939}
+  - component: {fileID: 387964948}
   - component: {fileID: 387964941}
   - component: {fileID: 387964943}
   - component: {fileID: 387964942}
   - component: {fileID: 387964944}
-  - component: {fileID: 387964945}
+  - component: {fileID: 387964949}
   - component: {fileID: 387964946}
   - component: {fileID: 387964947}
   m_Layer: 0
@@ -453,7 +454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   curhealth: 0
-  rb: {fileID: 387964943}
   dir: {x: 0, y: 0}
 --- !u!58 &387964942
 CircleCollider2D:
@@ -540,27 +540,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1e12da59e40c7644f81ee75c832412fc, type: 3}
   - {fileID: 21300000, guid: 76034a3b5d3440d46a3da4bac0f644f8, type: 3}
   - {fileID: 21300000, guid: c26d41371231553469ae0ad816f5d24b, type: 3}
---- !u!114 &387964945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387964938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465a1f60cdef22740821489bc49cce92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceFromPlayer: 1.3
-  basicDamage: 7
-  basicAttackKnockbackSpeed: 3
-  basicAttackStaggerTime: 0.25
-  basicAttackCooldown: 0.3333333
-  basicAttack: {fileID: 383058308}
-  _camera_transform: {fileID: 880390574}
-  _weapon_transform: {fileID: 383058305}
-  _weapon_sprite: {fileID: 383058306}
 --- !u!114 &387964946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,6 +575,40 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &387964948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387964938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865b2ffc572dc504c8e2ef476126e3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementForce: 5
+  dragForce: 1
+--- !u!114 &387964949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387964938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35eb395c8ab75a4ea63d13c8189baf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyCode: 323
+  cooldown: 0.3
+  damage: 7
+  knockbackImpulse: 3
+  normalStaggerTime: 0.5
+  bossStaggerTime: 0.2
+  hitbox: {fileID: 383058304}
+  _cooldown_timer: {fileID: 0}
 --- !u!1 &686292090
 GameObject:
   m_ObjectHideFlags: 0
@@ -6434,6 +6447,7 @@ GameObject:
   - component: {fileID: 1249066284}
   - component: {fileID: 1249066283}
   - component: {fileID: 1249066285}
+  - component: {fileID: 1249066291}
   - component: {fileID: 1249066287}
   - component: {fileID: 1249066290}
   - component: {fileID: 1249066288}
@@ -6650,8 +6664,21 @@ MonoBehaviour:
   moveSpeed: 1.5
   serpSwipe: {fileID: 1790957716}
   serpSpit: {fileID: 1205150113}
-  rb: {fileID: 1249066287}
   state: 0
+--- !u!114 &1249066291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249066282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865b2ffc572dc504c8e2ef476126e3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementForce: 15
+  dragForce: 1
 --- !u!1 &1256712220
 GameObject:
   m_ObjectHideFlags: 0
@@ -6965,6 +6992,7 @@ GameObject:
   - component: {fileID: 1532421045}
   - component: {fileID: 1532421044}
   - component: {fileID: 1532421043}
+  - component: {fileID: 1532421047}
   - component: {fileID: 1532421042}
   - component: {fileID: 1532421041}
   - component: {fileID: 1532421040}
@@ -7006,7 +7034,6 @@ MonoBehaviour:
   moveSpeed: 3
   serpSwipe: {fileID: 2065450056}
   serpSpit: {fileID: 1054059764}
-  rb: {fileID: 1532421042}
   state: 0
 --- !u!50 &1532421042
 Rigidbody2D:
@@ -7183,6 +7210,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1532421047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532421039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865b2ffc572dc504c8e2ef476126e3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementForce: 15
+  dragForce: 1
 --- !u!1 &1567935460
 GameObject:
   m_ObjectHideFlags: 0
