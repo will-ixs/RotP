@@ -8,6 +8,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] private float cooldown;
 
     [SerializeField] private int damage;
+    [SerializeField] private int cost;
 
     [SerializeField] private float knockbackImpulse;
 
@@ -73,12 +74,24 @@ public class AttackController : MonoBehaviour
         }
         else
         {
-            hitbox.GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+            hitbox.GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
         }
     }
 
     private void performAttack()
     {
+        PlayerHealth health = GetComponent<PlayerHealth>();
+        if (health != null)
+        {
+            if (health.curHealth < cost)
+            {
+                return;
+            }
+            else
+            {
+                health.TakeDamage(cost);
+            }
+        }
         for (int i = _hitbox_contact_list.contactList.Count - 1; i >= 0; i--)
         {
             GameObject target = _hitbox_contact_list.contactList[i];
