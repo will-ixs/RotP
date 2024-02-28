@@ -5,11 +5,9 @@ using UnityEngine;
 public class OsirisAITest : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private float damage;
     public float speed;
+    private float distance;
     private Vector2 velocity;
-    //[SerializeField] private Vector2 dir;
-    [SerializeField] private float distance;
 
     private List<Vector3> playerPos;
 
@@ -25,7 +23,7 @@ public class OsirisAITest : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerPos = new List <Vector3>();
         playerPos.Add(player.transform.position);
-        InvokeRepeating("testt", 1f, 1f);
+        InvokeRepeating("playerPathing", 1f, 1f);
         //rb.velocity = Vector2.zero;
         
 
@@ -34,14 +32,7 @@ public class OsirisAITest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Physics2D.gravity = Vector2.up * gravity;
- 
-        //rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-
-        //Debug.Log(rb.velocity);
-        //Vector2 test = Vector2.zero;
-       
-        
+             
     }
 
     private void FixedUpdate()
@@ -71,11 +62,11 @@ public class OsirisAITest : MonoBehaviour
            
     }
 
-    private void testt()
+    private void playerPathing()
     {
         playerPos.Add(player.transform.position);
-        Debug.Log(playerPos.Count);
     }
+
     private void OnCollisionStay2D(Collision2D collision) 
     {
 
@@ -83,9 +74,8 @@ public class OsirisAITest : MonoBehaviour
 
         if(playerhealth != null)
         {
-            playerhealth.updatePlayerHealth(-100);
+            playerhealth.updatePlayerHealth(-1);
         }
-
 
 
     }

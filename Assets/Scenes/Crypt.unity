@@ -633,6 +633,54 @@ MonoBehaviour:
   bossStaggerTime: 0.2
   hitbox: {fileID: 383058304}
   _cooldown_timer: {fileID: 0}
+--- !u!1 &640583952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640583953}
+  - component: {fileID: 640583954}
+  m_Layer: 0
+  m_Name: OsirisSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &640583953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640583952}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.15, y: -1.1, z: -0.018600246}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &640583954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640583952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61caa40657f835459d373eabb1b67c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthThreshold: 50
+  spawningCountdown: 5
+  despawningCountdown: 5
+  osirisPrefab: {fileID: 1750057259388390761, guid: a6966676cb79a7540ad91c7d258faba1, type: 3}
 --- !u!1 &686292090
 GameObject:
   m_ObjectHideFlags: 0
@@ -8265,3 +8313,4 @@ SceneRoots:
   - {fileID: 1405859252}
   - {fileID: 1249066284}
   - {fileID: 1532421045}
+  - {fileID: 640583953}
