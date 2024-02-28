@@ -6435,11 +6435,11 @@ GameObject:
   - component: {fileID: 1249066283}
   - component: {fileID: 1249066285}
   - component: {fileID: 1249066287}
-  - component: {fileID: 1249066286}
+  - component: {fileID: 1249066290}
   - component: {fileID: 1249066288}
   - component: {fileID: 1249066289}
   m_Layer: 0
-  m_Name: Serpopard
+  m_Name: Purple Serpopard
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6572,23 +6572,6 @@ PolygonCollider2D:
       - {x: 1.1382645, y: 0.14968157}
       - {x: 0.40348446, y: 0.09953976}
   m_UseDelaunayMesh: 0
---- !u!114 &1249066286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1249066282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00c355e71438e674186ac552d31172fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  serpSwipe: {fileID: 1790957716}
-  serpSpit: {fileID: 1205150113}
-  rb: {fileID: 1249066287}
-  state: 0
 --- !u!50 &1249066287
 Rigidbody2D:
   serializedVersion: 4
@@ -6652,6 +6635,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1249066290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249066282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ec1ebdc92c81c48b9b727748be418e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1.5
+  serpSwipe: {fileID: 1790957716}
+  serpSpit: {fileID: 1205150113}
+  rb: {fileID: 1249066287}
+  state: 0
 --- !u!1 &1256712220
 GameObject:
   m_ObjectHideFlags: 0
@@ -6970,7 +6970,7 @@ GameObject:
   - component: {fileID: 1532421040}
   - component: {fileID: 1532421046}
   m_Layer: 0
-  m_Name: Serpopard (1)
+  m_Name: Yellow Serpopard
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7838,7 +7838,7 @@ Transform:
   m_GameObject: {fileID: 2065450055}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.13, y: -1.5, z: 0}
+  m_LocalPosition: {x: -0.3, y: -1.5, z: 0}
   m_LocalScale: {x: 4, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

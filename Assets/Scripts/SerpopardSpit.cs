@@ -57,8 +57,8 @@ public class SerpopardSpit : MonoBehaviour
         float startingAngle = angleToPlayer - 35.0f;
         float endingAngle = angleToPlayer + 35.0f;
         spitAngleDelta = (endingAngle - startingAngle) / (float)iterations;
-        Instantiate(spitPrefab, transform.position, Quaternion.Euler(0, 0, startingAngle + (spitAngleDelta * spitCounter)));
-        Instantiate(spitPrefab, transform.position, Quaternion.Euler(0, 0, endingAngle - (spitAngleDelta * spitCounter)));
+        Instantiate(spitPrefab, transform.position + new Vector3(0.0f, 0.75f, 0.0f), Quaternion.Euler(0, 0, startingAngle + (spitAngleDelta * spitCounter)));
+        Instantiate(spitPrefab, transform.position + new Vector3(0.0f, 0.75f, 0.0f), Quaternion.Euler(0, 0, endingAngle - (spitAngleDelta * spitCounter)));
         spitCounter++;
     }
 }

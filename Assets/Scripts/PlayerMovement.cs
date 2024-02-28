@@ -54,7 +54,11 @@ public class PlayerMovement : MonoBehaviour
         dir = rb.velocity;
         dir.Normalize();
         Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
-
+        anim.SetFloat("Speed", mag.magnitude);
+        if(mag.magnitude > 0.1f)
+        {
+            anim.SetBool("Siphon", false);
+        }
         if (mag.y < mag.x)
         {
             //LookRight/Left
