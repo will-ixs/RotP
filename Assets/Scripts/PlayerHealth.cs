@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public Slider healthBar;
-    public Text healthText;
     public float maxHealth;
     public float curHealth;
     public GameObject indicator;
     public Image portrait;
+    public Image hud;
     public List<Sprite> portraitSprites;
+    public List<Sprite> hudSprites;
 
     private float damage_color_cooldown;
 
@@ -22,12 +23,9 @@ public class PlayerHealth : MonoBehaviour
     {
         // Initialize default values
         curHealth = maxHealth;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = maxHealth;
-        healthText.text = curHealth + "/" + maxHealth;
 
         canvasTransform = GameObject.Find("Canvas").transform;
-    }
+}
 
     // Updates player health and UI by amount
     public void updatePlayerHealth(float amount, bool popup = true)
@@ -39,10 +37,6 @@ public class PlayerHealth : MonoBehaviour
         {
             curHealth = 0;
         }
-
-        // Update UI to reflect health
-        healthBar.value = curHealth;
-        healthText.text = Mathf.Round(curHealth) + "/" + maxHealth;
 
         if (popup)
         {
@@ -77,6 +71,15 @@ public class PlayerHealth : MonoBehaviour
         if (sprite_index >= portraitSprites.Count) {sprite_index = portraitSprites.Count-1;}
 
         portrait.sprite = portraitSprites[sprite_index];
+
+        int hud_index = (int)Mathf.Ceil(curHealth / maxHealth * hudSprites.Count) - 1;
+
+        if (hud_index < 0) { hud_index = 0; }
+        if (hud_index >= hudSprites.Count) { hud_index = hudSprites.Count - 1; }
+
+        hud.sprite = hudSprites[hud_index];
+
+
     }
 
     // Update is called once per frame
