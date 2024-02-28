@@ -76,5 +76,18 @@ public class OsirisAITest : MonoBehaviour
         playerPos.Add(player.transform.position);
         Debug.Log(playerPos.Count);
     }
+    private void OnCollisionStay2D(Collision2D collision) 
+    {
+
+        PlayerHealth playerhealth = collision.gameObject.GetComponent<PlayerHealth>();
+
+        if(playerhealth != null)
+        {
+            playerhealth.updatePlayerHealth(-100);
+        }
+
+
+
+    }
     
 }

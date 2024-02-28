@@ -7,12 +7,14 @@ public class OsirisSpawner : MonoBehaviour
 
     private GameObject player;
 
-    [SerializeField] private Transform spawnLocation;
+    private Transform spawnLocation;
     [SerializeField] private float healthThreshold;
-    [SerializeField] private GameObject enemyPrefabs;
+    [SerializeField] private float spawningCountdown;
+    [SerializeField] private GameObject osirisPrefab;
     // Start is called before the first frame update
     void Start()
     {
+        spawnLocation = gameObject.transform;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -20,6 +22,22 @@ public class OsirisSpawner : MonoBehaviour
     void Update()
     {
         PlayerHealth playerhealth = player.GetComponent<PlayerHealth>();
+<<<<<<< Updated upstream
+=======
+        if(playerhealth != null)
+        {
+            if(playerhealth.curHealth <= 33)
+            {
+                spawningCountdown -= Time.deltaTime;
+                if(spawningCountdown < 0)
+                {
+                    GameObject osiris = Instantiate(osirisPrefab, spawnLocation.position, spawnLocation.rotation);
+                }
+                spawningCountdown = 5.0f;
+
+            }
+        }
+>>>>>>> Stashed changes
         
     }
 }

@@ -8,7 +8,6 @@ public class OsirisAI : MonoBehaviour
     [SerializeField] private float damage;
     //[SerializeField] private Vector2 dir;
     [SerializeField] private float distance;
-    [SerializeField] private float gravity = 100f;
     [SerializeField] private float velocity = 1000f;
 
     private Rigidbody2D rb;
