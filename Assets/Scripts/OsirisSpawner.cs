@@ -19,7 +19,7 @@ public class OsirisSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerHealth playerhealth = collision.gameObject.GetComponent<PlayerHealth>();
+       // PlayerHealth playerhealth = collision.gameObject.GetComponent<PlayerHealth>();
         
     }
 }

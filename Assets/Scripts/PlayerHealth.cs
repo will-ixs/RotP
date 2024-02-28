@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public Image hud;
     public List<Sprite> portraitSprites;
     public List<Sprite> hudSprites;
+    private Animator anim;
 
     private float damage_color_cooldown;
 
@@ -25,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
         curHealth = maxHealth;
 
         canvasTransform = GameObject.Find("Canvas").transform;
+        anim = GetComponent<Animator>();
 }
 
     // Updates player health and UI by amount
@@ -79,6 +81,8 @@ public class PlayerHealth : MonoBehaviour
 
         hud.sprite = hudSprites[hud_index];
 
+        anim.SetInteger("State", hud_index);
+        Debug.Log(hud_index);
 
     }
 

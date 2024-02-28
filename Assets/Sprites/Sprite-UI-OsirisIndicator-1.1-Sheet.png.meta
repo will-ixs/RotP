@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 640
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,9 +106,421 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 721c9cd019876dc4498ed4cef4b9ceee
+      internalID: -340450639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84120fa1f8e885648b6c16aa10f84cea
+      internalID: 1825177958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1768
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94da2b709e4af5446996edd5ff993b10
+      internalID: 1211413389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 2408
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23911169a2c13924790f8d3c9b34a403
+      internalID: 1964876402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 3048
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b205ce9da2a25d4683d6c45b75f4068
+      internalID: 375480226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 3688
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c23bac8d65d0ec4e8646d6b4d3ed1d8
+      internalID: -1459675947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 4328
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30475489838099d4fb749b287d3c6cc9
+      internalID: -641703189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 4968
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b9aa8b4d7560304486b2044f3221d93
+      internalID: 325645180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 5608
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6d4e47048ffa8c488c4229cc098d1e8
+      internalID: -56017438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 6248
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b7f4f03dc291740bae68202ec8ab24
+      internalID: 1160952792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 6888
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc4df4078c07cd847b02308e78ac0351
+      internalID: -828865633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 7528
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd596dd76317c4a42bf340daecf8d8ca
+      internalID: -631427853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 8168
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82e0b9545e09dc84692106b2611e83c8
+      internalID: -856232955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 8808
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e0100cfb914b184dadadd48868547b5
+      internalID: -1117793371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 9448
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eff94fb867fdb84e9a563488e2926a2
+      internalID: -1009202819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 10088
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b07949433bbe7b4b987c0dfae50eac6
+      internalID: -1601722135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 10728
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5abba72e8a75aa44388f6684c3cab8e7
+      internalID: -1572000766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 11368
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70e14dbf645f4814aa418996a0a8c1c5
+      internalID: -1653453507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-UI-OsirisIndicator-1.1-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 12008
+        y: 2
+        width: 149
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48381e9f645e58740b267c3b517f141b
+      internalID: -1921091161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +531,26 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite-UI-OsirisIndicator-1.1-Sheet_0: -340450639
+      Sprite-UI-OsirisIndicator-1.1-Sheet_1: 1825177958
+      Sprite-UI-OsirisIndicator-1.1-Sheet_10: -828865633
+      Sprite-UI-OsirisIndicator-1.1-Sheet_11: -631427853
+      Sprite-UI-OsirisIndicator-1.1-Sheet_12: -856232955
+      Sprite-UI-OsirisIndicator-1.1-Sheet_13: -1117793371
+      Sprite-UI-OsirisIndicator-1.1-Sheet_14: -1009202819
+      Sprite-UI-OsirisIndicator-1.1-Sheet_15: -1601722135
+      Sprite-UI-OsirisIndicator-1.1-Sheet_16: -1572000766
+      Sprite-UI-OsirisIndicator-1.1-Sheet_17: -1653453507
+      Sprite-UI-OsirisIndicator-1.1-Sheet_18: -1921091161
+      Sprite-UI-OsirisIndicator-1.1-Sheet_2: 1211413389
+      Sprite-UI-OsirisIndicator-1.1-Sheet_3: 1964876402
+      Sprite-UI-OsirisIndicator-1.1-Sheet_4: 375480226
+      Sprite-UI-OsirisIndicator-1.1-Sheet_5: -1459675947
+      Sprite-UI-OsirisIndicator-1.1-Sheet_6: -641703189
+      Sprite-UI-OsirisIndicator-1.1-Sheet_7: 325645180
+      Sprite-UI-OsirisIndicator-1.1-Sheet_8: -56017438
+      Sprite-UI-OsirisIndicator-1.1-Sheet_9: 1160952792
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
