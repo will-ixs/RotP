@@ -534,6 +534,7 @@ MonoBehaviour:
   indicator: {fileID: 7272617064204375701, guid: c397973cd2a3563448174a9c7fe3c7be, type: 3}
   portrait: {fileID: 2109291339}
   hud: {fileID: 1134989035}
+  osirisIndicator: {fileID: 529738159}
   portraitSprites:
   - {fileID: 21300000, guid: 56982aed6dc5a0d4c93cd5cd5a243e7a, type: 3}
   - {fileID: 21300000, guid: 1e12da59e40c7644f81ee75c832412fc, type: 3}

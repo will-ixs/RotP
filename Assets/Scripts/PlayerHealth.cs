@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject indicator;
     public Image portrait;
     public Image hud;
+    public Image osirisIndicator;
     public List<Sprite> portraitSprites;
     public List<Sprite> hudSprites;
     private Animator anim;
@@ -26,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
         curHealth = maxHealth;
 
         canvasTransform = GameObject.Find("Canvas").transform;
-        anim = GetComponent<Animator>();
+        anim = osirisIndicator.GetComponent<Animator>();
 }
 
     // Updates player health and UI by amount
@@ -82,7 +83,7 @@ public class PlayerHealth : MonoBehaviour
         hud.sprite = hudSprites[hud_index];
 
         anim.SetInteger("State", hud_index);
-        Debug.Log(hud_index);
+        Debug.Log(anim.GetInteger("State"));
 
     }
 
