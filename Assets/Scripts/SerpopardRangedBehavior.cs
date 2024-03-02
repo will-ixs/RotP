@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
 
-public class SerpopardBehavior : MonoBehaviour
+public class SerpopardRangedBehavior : MonoBehaviour
 {
     private BossHealth bossHealth;
     private float stateChangeTimer;
@@ -49,16 +48,8 @@ public class SerpopardBehavior : MonoBehaviour
     }
     private void MoveAtPlayer()
     {
-        Vector2 vecToPlayer = player.transform.position - transform.position;
-        if (vecToPlayer.magnitude > 2.8f) {
-            _movement_controller.changeVelocity(moveSpeed * vecToPlayer.normalized);
-        }
-        else
-        {
-            stateChangeTimer = 1.5f;
-            state = SerpopardState.SwipeAttack;
-            ActivateNextState();
-        }
+        Vector3 vecFromPlayer = transform.position - player.transform.position;
+        _movement_controller.changeVelocity(moveSpeed * vecFromPlayer.normalized);
     }
     private void SwipeAttack()
     {

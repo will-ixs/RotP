@@ -7,23 +7,16 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float curhealth;
 
-    private float timeUntilMovementAvailable;
-
     private Animator anim;
-    [SerializeField] private Rigidbody2D rb;
-    private Vector2 input;
+    private MovementController _movement_controller;
+    private Vector2 movementDirection;
     private Vector2 velocity;
     public Vector2 dir;
 
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
-        timeUntilMovementAvailable = 0.0f;
-    }
-
-    public void DisableMovement(float duration)
-    {
-        timeUntilMovementAvailable = Mathf.Max(timeUntilMovementAvailable, duration);
+        _movement_controller = gameObject.GetComponent<MovementController>();
     }
 
     // Update is called once per frame
@@ -39,22 +32,22 @@ public class PlayerMovement : MonoBehaviour
         else
             moveSpeed = 3.0f;
 
-        timeUntilMovementAvailable -= Time.deltaTime;
-        if (timeUntilMovementAvailable <= 0.0f)
-        {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
-            rb.velocity = Vector2.SmoothDamp(rb.velocity, input.normalized * moveSpeed, ref velocity, 0.05f);
-        }
+        movementDirection.x = Input.GetAxisRaw("Horizontal");
+        movementDirection.y = Input.GetAxisRaw("Vertical");
+        movementDirection = movementDirection.normalized;
+        _movement_controller.changeVelocity(movementDirection * moveSpeed);
     }
 
     private void SetDirection()
     {
         //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHT
-        dir = rb.velocity;
-        dir.Normalize();
+        dir = movementDirection;
         Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
-
+        anim.SetFloat("Speed", mag.magnitude);
+        if(mag.magnitude > 0.1f)
+        {
+            anim.SetBool("Siphon", false);
+        }
         if (mag.y < mag.x)
         {
             //LookRight/Left

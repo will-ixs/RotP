@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     {
         if (Dead)
         {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             deathSpawnTimer -= Time.deltaTime;
             if(deathSpawnTimer <= 0.0f && !kaSpawned)
             {

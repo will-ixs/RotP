@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
     private float staggeredTime;
 
     private float distance;
-    private Rigidbody2D rb;
+    private MovementController _movement_controller;
 
     public int moveDirection;  // 0 -> right, 1 -> down, 2 -> left, 3 -> up
     private float moveDuration;
@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        rb = GetComponent<Rigidbody2D>();
+        _movement_controller = gameObject.GetComponent<MovementController>();
     }
     void ChooseRandomDestination()
     {
@@ -63,7 +63,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (enemy.Dead)
         {
-            rb.velocity = new Vector2(0.0f, 0.0f);
+            _movement_controller.disableMovement(1.0f);
+            _movement_controller.changeVelocity(new Vector2(0.0f, 0.0f));
         }
         else
         {
@@ -105,13 +106,11 @@ public class EnemyAI : MonoBehaviour
                 staggeredTime -= Time.deltaTime;
                 if (staggeredTime <= 0.0f)
                 {
-                    rb.velocity = Vector2.SmoothDamp(rb.velocity, speed * targetDirection, ref velocity, 0.05f);
-                    //rb.MovePosition(transform.position + (direction * speed * Time.deltaTime));
-                    //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+                    _movement_controller.changeVelocity(speed * targetDirection);
                 }
                 else
                 {
-                    rb.velocity = Vector2.SmoothDamp(rb.velocity, knockbackSpeed * knockbackDirection, ref velocity, 0.05f);
+                    _movement_controller.changeVelocity(knockbackSpeed * knockbackDirection);
                 }
             }
         }
