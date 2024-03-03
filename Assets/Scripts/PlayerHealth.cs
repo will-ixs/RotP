@@ -83,7 +83,7 @@ public class PlayerHealth : MonoBehaviour
         hud.sprite = hudSprites[hud_index];
 
         anim.SetInteger("State", hud_index);
-        Debug.Log(anim.GetInteger("State"));
+//        Debug.Log(anim.GetInteger("State"));
 
     }
 

@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     {
         kaSpawned = false;
         deathSpawnTimer = 0.9f;
-        spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>();
+        //spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>();
         player = GameObject.FindGameObjectWithTag("Player");
         maxHealth = health;
         Dead = false;
@@ -105,5 +105,9 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy(){
         spawner.activeEnemies.Remove(gameObject);
+    }
+    public void SetSpawnerForThis(EnemySpawner e)
+    {
+        spawner = e;
     }
 }

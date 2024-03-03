@@ -12,6 +12,7 @@ public class SerpopardBehavior : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private SerpopardSwipe serpSwipe;
     [SerializeField] private SerpopardSpit serpSpit;
+    private Rigidbody2D rb;
     private MovementController _movement_controller;
     public enum SerpopardState
     {
@@ -27,6 +28,7 @@ public class SerpopardBehavior : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         bossHealth = GetComponent<BossHealth>();
         _movement_controller = GetComponent<MovementController>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -45,15 +47,18 @@ public class SerpopardBehavior : MonoBehaviour
 
     private void ActIdle()
     {
-        _movement_controller.changeVelocity(Vector2.zero);
+        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
+        //_movement_controller.changeVelocity(Vector2.zero);
     }
     private void MoveAtPlayer()
     {
         Vector2 vecToPlayer = player.transform.position - transform.position;
-        if (vecToPlayer.magnitude > 2.8f) {
-            _movement_controller.changeVelocity(moveSpeed * vecToPlayer.normalized);
+        if (vecToPlayer.magnitude > 2.8f)
+        {
+            //_movement_controller.changeVelocity(moveSpeed * vecToPlayer.normalized);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         }
-        else
+        else if (stateChangeTimer < 3.0f)
         {
             stateChangeTimer = 1.5f;
             state = SerpopardState.SwipeAttack;
@@ -62,7 +67,8 @@ public class SerpopardBehavior : MonoBehaviour
     }
     private void SwipeAttack()
     {
-        _movement_controller.changeVelocity(Vector2.zero);
+        //_movement_controller.changeVelocity(Vector2.zero);
+        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
         serpSwipe.Enable();
         if(stateChangeTimer < 1.0f)
         {
@@ -72,7 +78,8 @@ public class SerpopardBehavior : MonoBehaviour
 
     private void SpitAttack()
     {
-        _movement_controller.changeVelocity(Vector2.zero);
+        //_movement_controller.changeVelocity(Vector2.zero);
+        rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, 1f * Time.deltaTime);
         serpSpit.Enable();
     }
 

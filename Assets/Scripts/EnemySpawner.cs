@@ -8,17 +8,21 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private float spawningCountdown;
+    [SerializeField] private float initialDelay;
+    private float useCountdown;
     [SerializeField] private int enemyCap;
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private List<float> enemySpawnWeights;
     private float spawnWeightTotal;
 
     public List<GameObject> activeEnemies;
-    private bool spawningEnabled = true;
+    private bool capped = false;
+    private bool disabled = false;
     public GameObject enemyHealthBar;
     private Transform canvasTransform;
     void Start()
     {
+        useCountdown = initialDelay;
         canvasTransform = GameObject.Find("Canvas").transform;
         spawnWeightTotal = 0.0f;
         for (int i = 0; i < enemySpawnWeights.Count; i++)
@@ -45,18 +49,18 @@ public class EnemySpawner : MonoBehaviour
     {
         if(activeEnemies.Count >= enemyCap)
         {
-            spawningEnabled = false;
+            capped = true;
         }
         else
         {
-            spawningEnabled = true; 
+            capped = false; 
         }
 
 
-        if (spawningEnabled)
+        if (!capped && !disabled)
         {
-            spawningCountdown -= Time.deltaTime;
-            if(spawningCountdown < 0)
+            useCountdown -= Time.deltaTime;
+            if(useCountdown < 0.0f)
             {
                 //Spawn Enemies
                 foreach (Transform spawnLocation in spawnLocations)
@@ -69,10 +73,11 @@ public class EnemySpawner : MonoBehaviour
                     
                     //save reference to gameObject in activeEnemies list
                     activeEnemies.Add(spawnedEnemy);
+                    spawnedEnemy.GetComponent<Enemy>().SetSpawnerForThis(this);
                 }
 
                 //Reset Timer
-                spawningCountdown = 10.0f;
+                useCountdown = spawningCountdown;
             }
         }
     }
@@ -80,11 +85,11 @@ public class EnemySpawner : MonoBehaviour
 
     public void EnableSpawning()
     {
-        spawningEnabled = true;
+        disabled = false;
     }
 
     public void DisableSpawning()
     {
-        spawningEnabled = false;
+        disabled = true;
     }
 }
