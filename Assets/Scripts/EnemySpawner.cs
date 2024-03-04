@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         useCountdown = initialDelay;
-        canvasTransform = GameObject.Find("Canvas").transform;
+        canvasTransform = GameObject.Find("Health Canvas").transform;
         spawnWeightTotal = 0.0f;
         for (int i = 0; i < enemySpawnWeights.Count; i++)
         {
