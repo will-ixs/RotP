@@ -43,8 +43,8 @@ public class OsirisSpawner : MonoBehaviour
                     {
                         Vector3 vToPlayer = player.transform.position - transform.position;
                         float distance = vToPlayer.magnitude;
-                        if(distance < 3)
-                            spawnLocation.x += 2;
+                        //if(distance < 3)
+                        //    spawnLocation.x += 2;
                         osiris = Instantiate(osirisPrefab, spawnLocation, spawnRotation);
                         spawned = true;
                         spawningCountdown = 5.0f;
@@ -82,6 +82,9 @@ public class OsirisSpawner : MonoBehaviour
 
     private void playerPathing()
     {
-        spawnLocation = player.transform.position;
+        if((player.transform.position - spawnLocation).magnitude > 2.0f)
+        {
+            spawnLocation = player.transform.position;
+        }       
     }
 }

@@ -20,6 +20,8 @@ public class CryptProgressionManager : MonoBehaviour
     [SerializeField] private AreaTrigger ChaosTrigger;
     [SerializeField] private AreaTrigger CalmTrigger;
     [SerializeField] private AreaTrigger BossTrigger;
+    [SerializeField] private int TombKillCount;
+    [SerializeField] private int HallwayKillCount;
 
     public CryptState currState;
 
@@ -34,6 +36,7 @@ public class CryptProgressionManager : MonoBehaviour
 
     void Update()
     {
+        CheckKillCount();
         CheckBossCompletion();
     }
 
@@ -47,6 +50,35 @@ public class CryptProgressionManager : MonoBehaviour
                 DisableSpawners();
                 //Open exit or automatically transition stage?
             }
+        }
+    }
+
+    private void CheckKillCount()
+    {
+        switch (currState)
+        {
+            case CryptState.Tomb:
+            TombKillCount = 0;
+                foreach(EnemySpawner e in tombSpawners){
+                    TombKillCount += e.Kills;
+                }
+                if(TombKillCount > 20){
+                    IncrementCryptState();
+                }
+                break;
+            case CryptState.HallwayChaos:
+                HallwayKillCount = 0;
+                foreach(EnemySpawner e in hallwaySpawners){
+                    HallwayKillCount += e.Kills;
+                }
+                if(HallwayKillCount > 20){
+                    IncrementCryptState();
+                }
+                break;
+            case CryptState.HallwayCalm:
+                break;
+            case CryptState.BossFight:
+                break;
         }
     }
 

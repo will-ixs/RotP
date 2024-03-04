@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private float spawnWeightTotal;
 
     public List<GameObject> activeEnemies;
+    public int Kills;
     private bool capped = false;
     private bool disabled = false;
     public GameObject enemyHealthBar;

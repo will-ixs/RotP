@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public List<Sprite> portraitSprites;
     public List<Sprite> hudSprites;
     private Animator anim;
+    public bool Dead;
 
     private float damage_color_cooldown;
 
@@ -23,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Dead = false;
         // Initialize default values
         curHealth = maxHealth;
 
@@ -33,13 +35,17 @@ public class PlayerHealth : MonoBehaviour
     // Updates player health and UI by amount
     public void updatePlayerHealth(float amount, bool popup = true)
     {
-        curHealth += amount;
-
+        if(curHealth + amount > 100){
+            curHealth = 100;
+        }else{
+            curHealth += amount;
+        }
         // Prevent negative health
         if (curHealth < 0)
         {
             curHealth = 0;
         }
+        
 
         if (popup)
         {
@@ -57,7 +63,6 @@ public class PlayerHealth : MonoBehaviour
             {
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                 damage_color_cooldown = 0.5f;
-
             }
 
             // Display text above player
@@ -112,6 +117,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Death() 
     {
+        Dead = true;
         LevelManager.instance.GameOver();
         gameObject.SetActive(false);
     }

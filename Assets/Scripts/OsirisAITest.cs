@@ -115,8 +115,6 @@ public class OsirisAITest : MonoBehaviour
             Debug.Log("8");
             PlayerHealth health = collision.gameObject.GetComponent<PlayerHealth>();
             if(health != null) {
-                Destroy(this.gameObject);
-                Destroy(player);
                 health.Death();
                 
             }

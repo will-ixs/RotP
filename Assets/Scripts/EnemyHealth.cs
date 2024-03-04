@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
         slider.value = health;
 
 
-        if (health <= 0)
+        if (target.GetComponent<Enemy>().Dead)
         {
             Destroy(gameObject);
         }

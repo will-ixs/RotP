@@ -72,38 +72,42 @@ public class Enemy : MonoBehaviour
 
     private void SetDirection()
     {
-        //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHT
-        dir = player.transform.position - transform.position;
-        dir.Normalize();
-        Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
+        if(player != null)
+        {    
+            //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHT
+            dir = player.transform.position - transform.position;
+            dir.Normalize();
+            Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
 
-        if (mag.y > mag.x)
-        {
-            //LookUp/Down
-            if(dir.y > 0.0f)
+            if (mag.y > mag.x)
             {
-                anim.SetInteger("Direction", 0);
+                //LookUp/Down
+                if(dir.y > 0.0f)
+                {
+                    anim.SetInteger("Direction", 0);
+                }
+                else
+                {
+                    anim.SetInteger("Direction", 2);
+                }
             }
             else
             {
-                anim.SetInteger("Direction", 2);
-            }
-        }
-        else
-        {
-            //LookRight/Left
-            if (dir.x < 0.0f)
-            {
-                anim.SetInteger("Direction", 1);
-            }
-            else
-            {
-                anim.SetInteger("Direction", 3);
+                //LookRight/Left
+                if (dir.x < 0.0f)
+                {
+                    anim.SetInteger("Direction", 1);
+                }
+                else
+                {
+                    anim.SetInteger("Direction", 3);
+                }
             }
         }
     }
 
     private void OnDestroy(){
+        spawner.Kills++;
         spawner.activeEnemies.Remove(gameObject);
     }
     public void SetSpawnerForThis(EnemySpawner e)
