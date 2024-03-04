@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class EnemyAI : MonoBehaviour
     public int dmg;
     public float dmgCD;
 
+    [SerializeField] private NavMeshAgent agent;
+
     private Vector3 knockbackDirection;
     private float knockbackSpeed;
     private float staggeredTime;
@@ -21,7 +24,7 @@ public class EnemyAI : MonoBehaviour
     private float distance;
     private MovementController _movement_controller;
 
-    public int moveDirection;  // 0 -> right, 1 -> down, 2 -> left, 3 -> up
+    private int moveDirection;  // 0 -> right, 1 -> down, 2 -> left, 3 -> up
     private float moveDuration;
 
     // Start is called before the first frame update
@@ -29,6 +32,12 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         _movement_controller = gameObject.GetComponent<MovementController>();
+
+        agent.updatePosition = false;
+        agent.speed = speed;
+        agent.angularSpeed = float.MaxValue;
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
     void ChooseRandomDestination()
     {
@@ -51,6 +60,7 @@ public class EnemyAI : MonoBehaviour
         if (enemy.Dead)
         {
             GetComponent<CircleCollider2D>().enabled = false;
+            agent.ResetPath();
             Destroy(gameObject, 1.0f);
         }
         //Move towards player
@@ -74,8 +84,9 @@ public class EnemyAI : MonoBehaviour
 
             float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
-            Vector2 targetDirection = directionToPlayer;
-            if (distance > detectionRadius)
+            Vector2 targetDirection;
+            bool wander = false;
+            if (wander && distance > detectionRadius)
             {
                 moveDuration -= Time.deltaTime;
                 if (moveDuration <= 0.0f)
@@ -103,6 +114,8 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
+                agent.destination = player.GetComponent<CircleCollider2D>().transform.position;
+                targetDirection = (agent.steeringTarget - transform.position).normalized;
                 staggeredTime -= Time.deltaTime;
                 if (staggeredTime <= 0.0f)
                 {
@@ -110,7 +123,7 @@ public class EnemyAI : MonoBehaviour
                 }
                 else
                 {
-                    _movement_controller.changeVelocity(knockbackSpeed * knockbackDirection);
+                    
                 }
             }
         }
