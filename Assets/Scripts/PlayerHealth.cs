@@ -109,4 +109,10 @@ public class PlayerHealth : MonoBehaviour
             //Dead = true;
         }
     }
+
+    public void Death() 
+    {
+        LevelManager.instance.GameOver();
+        gameObject.SetActive(false);
+    }
 }

@@ -7,7 +7,9 @@ public class OsirisSpawner : MonoBehaviour
 
     private GameObject player;
 
-    private Transform spawnLocation;
+    private Vector3 spawnLocation;
+    private  Quaternion spawnRotation;
+
     [SerializeField] private float healthThreshold;
     [SerializeField] private float spawningCountdown;
      [SerializeField] private float despawningCountdown;
@@ -18,14 +20,16 @@ public class OsirisSpawner : MonoBehaviour
     void Start()
     {
         spawned = false;
-        spawnLocation = gameObject.transform;
+        spawnLocation = gameObject.transform.position;
+        spawnRotation = gameObject.transform.rotation;
         player = GameObject.FindGameObjectWithTag("Player");
+        InvokeRepeating("playerPathing", 3f, 3f);
     }
 
     // Update is called once per frame
     void Update()
     {
-         PlayerHealth playerhealth = player.GetComponent<PlayerHealth>();
+        PlayerHealth playerhealth = player.GetComponent<PlayerHealth>();
         if(playerhealth != null)
         {
            
@@ -33,12 +37,15 @@ public class OsirisSpawner : MonoBehaviour
             {
                 if(playerhealth.curHealth <= healthThreshold)
                 {
-                    
                     spawningCountdown -= Time.deltaTime;
                     //Debug.Log(spawningCountdown);
                     if(spawningCountdown < 0)
                     {
-                        osiris = Instantiate(osirisPrefab, spawnLocation.position, spawnLocation.rotation);
+                        Vector3 vToPlayer = player.transform.position - transform.position;
+                        float distance = vToPlayer.magnitude;
+                        if(distance < 3)
+                            spawnLocation.x += 2;
+                        osiris = Instantiate(osirisPrefab, spawnLocation, spawnRotation);
                         spawned = true;
                         spawningCountdown = 5.0f;
                     }
@@ -70,5 +77,11 @@ public class OsirisSpawner : MonoBehaviour
         }
         
         
+    }
+
+
+    private void playerPathing()
+    {
+        spawnLocation = player.transform.position;
     }
 }
