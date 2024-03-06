@@ -47,31 +47,30 @@ public class PlayerMovement : MonoBehaviour
         if(mag.magnitude > 0.1f)
         {
             anim.SetBool("Siphon", false);
-        }
-        if (mag.y < mag.x)
-        {
-            //LookRight/Left
-            if (dir.x < 0.0f)
+            if (mag.y < mag.x)
             {
-                anim.SetInteger("Direction", 1);
+                //LookRight/Left
+                if (dir.x < 0.0f)
+                {
+                    anim.SetInteger("Direction", 1);
+                }
+                else
+                {
+                    anim.SetInteger("Direction", 3);
+                }
             }
             else
             {
-                anim.SetInteger("Direction", 3);
+                //LookUp/Down
+                if (dir.y < 0.0f)
+                {
+                    anim.SetInteger("Direction", 2);
+                }
+                else
+                {
+                    anim.SetInteger("Direction", 0);
+                }
             }
-        }
-        else
-        {
-            //LookUp/Down
-            if (dir.y < 0.0f)
-            {
-                anim.SetInteger("Direction", 2);
-            }
-            else
-            {
-                anim.SetInteger("Direction", 0);
-            }
-
         }
     }
 }

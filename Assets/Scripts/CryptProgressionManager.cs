@@ -25,11 +25,13 @@ public class CryptProgressionManager : MonoBehaviour
     [SerializeField] private int TombKillCount;
     [SerializeField] private int HallwayKillCount;
     private int currKills;
+    private bool switched;
 
     public CryptState currState;
 
     void Start()
     {
+        switched = false;
         currKills = 0;
         DisableSpawners();
         currState = CryptState.Tomb;
@@ -47,22 +49,26 @@ public class CryptProgressionManager : MonoBehaviour
 
     private void CheckBossCompletion()
     {
-        if (currState == CryptState.BossFight)
+        if (!switched)
         {
-            if (YellowSerpopard == null && PurpleSerpopard == null)
+            if (currState == CryptState.BossFight)
             {
-                bool dontMoveToNextStage = false;
-                DisableSpawners();
-                foreach(EnemySpawner e in bossSpawners)
+                if (YellowSerpopard == null && PurpleSerpopard == null)
                 {
-                    if(e.activeEnemies.Count > 0)
+                    bool dontMoveToNextStage = false;
+                    DisableSpawners();
+                    foreach (EnemySpawner e in bossSpawners)
                     {
-                        dontMoveToNextStage = true;
+                        if (e.activeEnemies.Count > 0)
+                        {
+                            dontMoveToNextStage = true;
+                        }
                     }
-                }
-                if (!dontMoveToNextStage)
-                {
-                    IncrementCryptState();
+                    if (!dontMoveToNextStage)
+                    {
+                        switched = true;
+                        IncrementCryptState();
+                    }
                 }
             }
         }

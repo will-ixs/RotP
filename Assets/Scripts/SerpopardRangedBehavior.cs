@@ -51,7 +51,7 @@ public class SerpopardRangedBehavior : MonoBehaviour
     }
     private void MoveAtPlayer()
     {
-        Vector3 offset = (transform.position - player.transform.position).normalized * 5;
+        Vector3 offset = (transform.position - player.transform.position).normalized * 2.5f;
         transform.position = Vector3.MoveTowards(transform.position, offset, moveSpeed * Time.deltaTime);
         // Vector3 vecFromPlayer = transform.position - player.transform.position;
         // _movement_controller.changeVelocity(moveSpeed * vecFromPlayer.normalized);

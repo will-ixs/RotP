@@ -15,6 +15,10 @@ public class AttackController : MonoBehaviour
     [SerializeField] private float normalStaggerTime;
     [SerializeField] private float bossStaggerTime;
 
+    [SerializeField] private string attackTrigger;
+    private Animator _anim;
+    private MovementController _mc;
+
     private GameObject _player;
 
     private Vector3 _attack_direction;
@@ -22,6 +26,7 @@ public class AttackController : MonoBehaviour
     private Transform _camera_transform;
 
     private ContactList _hitbox_contact_list;
+
 
     [SerializeField] private Timer _cooldown_timer;
 
@@ -31,6 +36,8 @@ public class AttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _mc = GetComponentInParent<MovementController>();
+        _anim = GetComponentInParent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _camera_transform = GameObject.FindObjectOfType<Camera>().GetComponent<Transform>();
@@ -70,7 +77,7 @@ public class AttackController : MonoBehaviour
         }
         else if (!_cooldown_timer.isReady())
         {
-            GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+            GetComponent<SpriteRenderer>().color = new Color(0.0f, 240.0f/255.0f, 255.0f, 0.2f);
         }
         else
         {
@@ -80,6 +87,8 @@ public class AttackController : MonoBehaviour
 
     private void performAttack()
     {
+        _mc.slowMovement(cooldown/2.0f);
+        _anim.SetTrigger(attackTrigger);
         PlayerHealth health = _player.GetComponent<PlayerHealth>();
         if (health != null)
         {

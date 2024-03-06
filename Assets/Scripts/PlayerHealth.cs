@@ -110,7 +110,7 @@ public class PlayerHealth : MonoBehaviour
 
         if(curHealth <= 0)
         {
-            Debug.Log(curHealth);
+            //Debug.Log(curHealth);
             //Dead = true;
         }
     }

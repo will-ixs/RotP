@@ -32,13 +32,12 @@ public class OsirisSpawner : MonoBehaviour
         PlayerHealth playerhealth = player.GetComponent<PlayerHealth>();
         if(playerhealth != null)
         {
-           
             if(!spawned)
             {
                 if(playerhealth.curHealth <= healthThreshold)
                 {
                     spawningCountdown -= Time.deltaTime;
-                    //Debug.Log(spawningCountdown);
+                    //Debug.Log(spawningCountdown + " " +  spawned);
                     if(spawningCountdown < 0)
                     {
                         Vector3 vToPlayer = player.transform.position - transform.position;
@@ -82,7 +81,7 @@ public class OsirisSpawner : MonoBehaviour
 
     private void playerPathing()
     {
-        if((player.transform.position - spawnLocation).magnitude > 2.0f)
+        if((player.transform.position - spawnLocation).magnitude > 3.0f)
         {
             spawnLocation = player.transform.position;
         }       

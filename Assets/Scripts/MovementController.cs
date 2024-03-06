@@ -7,6 +7,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float movementForce;
 
     private Timer _t;
+    private Timer _slowTimer;
 
     private Rigidbody2D _rb;
 
@@ -16,6 +17,7 @@ public class MovementController : MonoBehaviour
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _t = gameObject.AddComponent<Timer>();
+        _slowTimer = gameObject.AddComponent<Timer>();
         _target_velocity = new Vector2(0, 0);
     }
 
@@ -27,6 +29,10 @@ public class MovementController : MonoBehaviour
     public void disableMovement(float duration)
     {
         _t.begin(duration);
+    }
+    public void slowMovement(float duration)
+    {
+        _slowTimer.begin(duration);
     }
 
     public void changeVelocity(Vector2 target_velocity)
@@ -45,6 +51,10 @@ public class MovementController : MonoBehaviour
             if (new_speed > target_speed)
             {
                 _rb.velocity *= target_speed / new_speed;
+            }
+            if (!_slowTimer.isReady())
+            {
+                _rb.velocity *= 0.75f;
             }
         }
     }

@@ -170,10 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2485c3550317fd84f8b07a7121945db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 2.5
   detectionRadius: 10
   enemy: {fileID: 233687714835127910}
-  dmg: 5
+  dmg: 10
   dmgCD: 1
   agent: {fileID: 8974638228489065501}
 --- !u!50 &8066391551849377181

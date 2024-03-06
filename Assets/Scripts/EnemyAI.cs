@@ -135,14 +135,17 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision) 
     {
-
-        PlayerHealth playerhealth = collision.gameObject.GetComponent<PlayerHealth>();
-        if(dmgCD <= 0) {
-            if(playerhealth != null)
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerhealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (dmgCD <= 0)
             {
-                playerhealth.updatePlayerHealth(-dmg);
+                if (playerhealth != null)
+                {
+                    playerhealth.updatePlayerHealth(-dmg);
+                }
+                dmgCD = 1.0f;
             }
-            dmgCD = 1f;
         }
     }
 }
