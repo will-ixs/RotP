@@ -22,8 +22,8 @@ public class CryptProgressionManager : MonoBehaviour
     [SerializeField] private AreaTrigger BossTrigger;
     [SerializeField] private GameObject tombDoor;
     [SerializeField] private GameObject hallDoor;
-    [SerializeField] private int TombKillCount;
-    [SerializeField] private int HallwayKillCount;
+    [SerializeField] public int TombKillCount;
+    [SerializeField] public int HallwayKillCount;
     private int currKills;
     private bool switched;
 

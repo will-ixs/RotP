@@ -58,7 +58,8 @@ public class AttackController : MonoBehaviour
     private void updateHitbox()
     {
         Vector3 mousePos = Input.mousePosition;
-        Vector3 cameraPos = Camera.main.WorldToScreenPoint(_camera_transform.position);
+        Vector3 cameraPos = Camera.main.WorldToScreenPoint(_player.transform.position);//_camera_transform.position);
+        //cameraPos -= Camera.main.GetComponent<CameraFollow>().GetOffset();
         _attack_direction = (mousePos - cameraPos).normalized;
         float hitbox_angle = Mathf.Atan2(_attack_direction.y, _attack_direction.x);
 

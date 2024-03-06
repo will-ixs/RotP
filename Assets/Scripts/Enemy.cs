@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
                 kaFragment.initialAmount = maxHealth;
                 kaFragment.decayRate = 1.0f;
                 kaSpawned = true;
+                spawner.Kills++;
             }
         }
         else { 
@@ -107,7 +108,6 @@ public class Enemy : MonoBehaviour
     }
 
     private void OnDestroy(){
-        spawner.Kills++;
         spawner.activeEnemies.Remove(gameObject);
     }
     public void SetSpawnerForThis(EnemySpawner e)

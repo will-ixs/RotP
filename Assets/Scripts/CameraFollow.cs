@@ -14,6 +14,11 @@ public class CameraFollow : MonoBehaviour
         velocity = Vector3.zero;
     }
 
+    public Vector3 GetOffset()
+    {
+        return offset;
+    }
+
     private void FixedUpdate()
     {
         Vector3 nextPosition = targetLocation.position + offset;
