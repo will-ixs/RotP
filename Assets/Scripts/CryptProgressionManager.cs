@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CryptProgressionManager : MonoBehaviour
 {
@@ -15,18 +16,21 @@ public class CryptProgressionManager : MonoBehaviour
     public List<EnemySpawner> tombSpawners = new List<EnemySpawner>();
     public List<EnemySpawner> hallwaySpawners = new List<EnemySpawner>();
     public List<EnemySpawner> bossSpawners = new List<EnemySpawner>();
+    [SerializeField] private GameObject killMeter;
     [SerializeField] private GameObject YellowSerpopard;
     [SerializeField] private GameObject PurpleSerpopard;
-    [SerializeField] private AreaTrigger ChaosTrigger;
-    [SerializeField] private AreaTrigger CalmTrigger;
     [SerializeField] private AreaTrigger BossTrigger;
+    [SerializeField] private GameObject tombDoor;
+    [SerializeField] private GameObject hallDoor;
     [SerializeField] private int TombKillCount;
     [SerializeField] private int HallwayKillCount;
+    private int currKills;
 
     public CryptState currState;
 
     void Start()
     {
+        currKills = 0;
         DisableSpawners();
         currState = CryptState.Tomb;
         YellowSerpopard.SetActive(false);
@@ -45,10 +49,21 @@ public class CryptProgressionManager : MonoBehaviour
     {
         if (currState == CryptState.BossFight)
         {
-            if (YellowSerpopard.GetComponent<BossHealth>().Dead && PurpleSerpopard.GetComponent<BossHealth>().Dead)
+            if (YellowSerpopard == null && PurpleSerpopard == null)
             {
+                bool dontMoveToNextStage = false;
                 DisableSpawners();
-                //Open exit or automatically transition stage?
+                foreach(EnemySpawner e in bossSpawners)
+                {
+                    if(e.activeEnemies.Count > 0)
+                    {
+                        dontMoveToNextStage = true;
+                    }
+                }
+                if (!dontMoveToNextStage)
+                {
+                    IncrementCryptState();
+                }
             }
         }
     }
@@ -65,6 +80,7 @@ public class CryptProgressionManager : MonoBehaviour
                 if(TombKillCount > 20){
                     IncrementCryptState();
                 }
+                currKills = TombKillCount;
                 break;
             case CryptState.HallwayChaos:
                 HallwayKillCount = 0;
@@ -74,12 +90,23 @@ public class CryptProgressionManager : MonoBehaviour
                 if(HallwayKillCount > 20){
                     IncrementCryptState();
                 }
+                currKills = HallwayKillCount;
                 break;
             case CryptState.HallwayCalm:
+                currKills = 0;
                 break;
             case CryptState.BossFight:
+                if(PurpleSerpopard == null && YellowSerpopard == null)
+                {
+                    currKills = 20;
+                }else if(PurpleSerpopard == null || YellowSerpopard == null)
+                {
+                    currKills = 10;
+                }
                 break;
         }
+
+        killMeter.GetComponent<Image>().fillAmount = currKills / 20.0f;
     }
 
     private void ActivateTombSpawners(){
@@ -135,10 +162,12 @@ public class CryptProgressionManager : MonoBehaviour
         switch (currState)
         {
             case CryptState.Tomb:
+                tombDoor.SetActive(false);
                 currState = CryptState.HallwayChaos;
                 ActivateHallwaySpawners();
                 break;
             case CryptState.HallwayChaos:
+                hallDoor.SetActive(false);
                 currState= CryptState.HallwayCalm;
                 DisableSpawners();
                 break;
@@ -149,8 +178,13 @@ public class CryptProgressionManager : MonoBehaviour
                 ActivateBossSpawners();
                 break;
             case CryptState.BossFight:
-                //level transition
+                Invoke("LoadPalace", 3.0f);
                 break;
         }
+    }
+    
+    private void LoadPalace()
+    {
+        GetComponent<StateManager>().ChangeSceneByName("Palace");
     }
 }

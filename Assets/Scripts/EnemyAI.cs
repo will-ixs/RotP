@@ -71,6 +71,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
         if (enemy.Dead)
         {
             _movement_controller.disableMovement(1.0f);
@@ -78,52 +79,55 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            Vector3 vToPlayer = player.transform.position - transform.position;
-            distance = vToPlayer.magnitude;
-            Vector3 directionToPlayer = vToPlayer.normalized;
-
-            float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-
-            Vector2 targetDirection;
-            bool wander = false;
-            if (wander && distance > detectionRadius)
+            if (player != null)
             {
-                moveDuration -= Time.deltaTime;
-                if (moveDuration <= 0.0f)
+                Vector3 vToPlayer = player.transform.position - transform.position;
+                distance = vToPlayer.magnitude;
+                Vector3 directionToPlayer = vToPlayer.normalized;
+
+                float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+
+                Vector2 targetDirection;
+                bool wander = false;
+                if (wander && distance > detectionRadius)
                 {
-                    ChooseRandomDestination();
-                }
-                switch (moveDirection)
-                {
-                    case 0:
-                        targetDirection = new Vector2(1.0f, 0.0f);
-                        break;
-                    case 1:
-                        targetDirection = new Vector2(0.0f, 1.0f);
-                        break;
-                    case 2:
-                        targetDirection = new Vector2(-1.0f, 0.0f);
-                        break;
-                    case 3:
-                        targetDirection = new Vector2(0.0f, -1.0f);
-                        break;
-                    default:
-                        targetDirection = new Vector2(0.0f, 0.0f);
-                        break;
-                }
-            }
-            else
-            {
-                agent.destination = player.GetComponent<CircleCollider2D>().transform.position;
-                targetDirection = (agent.steeringTarget - transform.position).normalized;
-                staggeredTime -= Time.deltaTime;
-                if (staggeredTime <= 0.0f)
-                {
-                    _movement_controller.changeVelocity(speed * targetDirection);
+                    moveDuration -= Time.deltaTime;
+                    if (moveDuration <= 0.0f)
+                    {
+                        ChooseRandomDestination();
+                    }
+                    switch (moveDirection)
+                    {
+                        case 0:
+                            targetDirection = new Vector2(1.0f, 0.0f);
+                            break;
+                        case 1:
+                            targetDirection = new Vector2(0.0f, 1.0f);
+                            break;
+                        case 2:
+                            targetDirection = new Vector2(-1.0f, 0.0f);
+                            break;
+                        case 3:
+                            targetDirection = new Vector2(0.0f, -1.0f);
+                            break;
+                        default:
+                            targetDirection = new Vector2(0.0f, 0.0f);
+                            break;
+                    }
                 }
                 else
                 {
-                    
+                    agent.destination = player.GetComponent<CircleCollider2D>().transform.position;
+                    targetDirection = (agent.steeringTarget - transform.position).normalized;
+                    staggeredTime -= Time.deltaTime;
+                    if (staggeredTime <= 0.0f)
+                    {
+                        _movement_controller.changeVelocity(speed * targetDirection);
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
         }
@@ -138,9 +142,7 @@ public class EnemyAI : MonoBehaviour
             {
                 playerhealth.updatePlayerHealth(-dmg);
             }
+            dmgCD = 1f;
         }
-        dmgCD = 1f;
-
-
     }
 }
