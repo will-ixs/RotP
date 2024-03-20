@@ -16,6 +16,7 @@ public class OsirisSpawner : MonoBehaviour
     [SerializeField] private GameObject osirisPrefab;
     private GameObject osiris;
     private bool spawned;
+    private Animator osirisIndicator;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,7 @@ public class OsirisSpawner : MonoBehaviour
         spawnRotation = gameObject.transform.rotation;
         player = GameObject.FindGameObjectWithTag("Player");
         InvokeRepeating("playerPathing", 3f, 3f);
+        osirisIndicator = GameObject.Find("Osiris Indicator").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,6 +46,7 @@ public class OsirisSpawner : MonoBehaviour
                         float distance = vToPlayer.magnitude;
                         //if(distance < 3)
                         //    spawnLocation.x += 2;
+                        osirisIndicator.SetBool("OsirisSpawn", true);
                         osiris = Instantiate(osirisPrefab, spawnLocation, spawnRotation);
                         spawned = true;
                         spawningCountdown = 5.0f;
@@ -65,6 +68,7 @@ public class OsirisSpawner : MonoBehaviour
                     {
                         Destroy(osiris);
                         spawned = false;
+                        osirisIndicator.SetBool("OsirisSpawn", false);
                         despawningCountdown = 5.0f;
                     }
                 }
