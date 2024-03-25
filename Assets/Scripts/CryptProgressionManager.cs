@@ -8,8 +8,10 @@ public class CryptProgressionManager : MonoBehaviour
 {
     public enum CryptState
     {
-        Tomb,
-        HallwayChaos,
+        TombOpen,
+        TombLocked,
+        HallwayChaosOpen,
+        HallwayChaosLocked,
         HallwayCalm,
         BossFight
     }
@@ -34,10 +36,9 @@ public class CryptProgressionManager : MonoBehaviour
         switched = false;
         currKills = 0;
         DisableSpawners();
-        currState = CryptState.Tomb;
+        currState = CryptState.TombOpen;
         YellowSerpopard.SetActive(false);
         PurpleSerpopard.SetActive(false);
-        ActivateTombSpawners();
     }
 
     void Update()
@@ -78,7 +79,7 @@ public class CryptProgressionManager : MonoBehaviour
     {
         switch (currState)
         {
-            case CryptState.Tomb:
+            case CryptState.TombLocked:
             TombKillCount = 0;
                 foreach(EnemySpawner e in tombSpawners){
                     TombKillCount += e.Kills;
@@ -88,7 +89,7 @@ public class CryptProgressionManager : MonoBehaviour
                 }
                 currKills = TombKillCount;
                 break;
-            case CryptState.HallwayChaos:
+            case CryptState.HallwayChaosLocked:
                 HallwayKillCount = 0;
                 foreach(EnemySpawner e in hallwaySpawners){
                     HallwayKillCount += e.Kills;
@@ -167,14 +168,24 @@ public class CryptProgressionManager : MonoBehaviour
     {
         switch (currState)
         {
-            case CryptState.Tomb:
-                tombDoor.SetActive(false);
-                currState = CryptState.HallwayChaos;
+            case CryptState.TombOpen:
+                tombDoor.SetActive(true);
+                currState = CryptState.TombLocked;
+                ActivateTombSpawners();
+                break;
+            case CryptState.TombLocked:
+                tombDoor.SetActive(false); //anim trigger once sprite in
+                currState = CryptState.HallwayChaosOpen;
+                DisableSpawners();
+                break;
+            case CryptState.HallwayChaosOpen:
+                hallDoor.SetActive(true);
+                currState= CryptState.HallwayChaosLocked;
                 ActivateHallwaySpawners();
                 break;
-            case CryptState.HallwayChaos:
+            case CryptState.HallwayChaosLocked:
                 hallDoor.SetActive(false);
-                currState= CryptState.HallwayCalm;
+                currState = CryptState.HallwayCalm;
                 DisableSpawners();
                 break;
             case CryptState.HallwayCalm:
