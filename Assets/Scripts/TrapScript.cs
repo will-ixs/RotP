@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrapScript : MonoBehaviour
 {
     [SerializeField] private float damage;
+    [SerializeField] private int EnemyDamage;
 
     [Header("Trap Timers")]
     [SerializeField] private float activationDelay;
@@ -40,6 +41,26 @@ public class TrapScript : MonoBehaviour
                 if (playerhealth != null)
                 {
                     playerhealth.updatePlayerHealth(-damage);
+                }
+                dmgCD = false;
+
+            }
+        }
+
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            if(!triggered)
+            {
+                StartCoroutine(ActivateTrap());
+            }
+
+            if(active && dmgCD)
+            {
+                Enemy hp = collision.gameObject.GetComponent<Enemy>();
+                if (hp != null)
+                {
+                    
+                    hp.TakeDamage(EnemyDamage);
                 }
                 dmgCD = false;
 

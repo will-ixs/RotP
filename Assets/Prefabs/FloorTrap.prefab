@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  EnemyDamage: 5
   activationDelay: 0.7
   activeTime: 0.7
 --- !u!95 &5076347901638913574
