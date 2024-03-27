@@ -18,11 +18,11 @@ public class DoorAnimator : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    /*private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             anim.SetTrigger("Collapse");
         }
-    }
+    }*/
 }

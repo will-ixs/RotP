@@ -118,7 +118,13 @@ public class AttackController : MonoBehaviour
                 movementController.disableMovement(staggerTime);
             }
         }
-        GetComponentInChildren<Animator>().SetTrigger("Play");
+        //temp until heavy animation
+        Animator a = GetComponentInChildren<Animator>();
+
+        if (a != null)
+        {
+            a.SetTrigger("Play");
+        }
         _cooldown_timer.begin(cooldown);
     }
 
