@@ -71,6 +71,19 @@ public class AttackController : MonoBehaviour
 
         transform.position = hitbox_position;
         transform.rotation = Quaternion.Euler(0, 0, hitbox_rotation);
+
+        if (cooldown - _cooldown_timer.getTimeRemaining() < 0.1f)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+        }
+        else if (!_cooldown_timer.isReady())
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0.0f, 240.0f/255.0f, 255.0f, 0.2f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        }
     }
 
     private void performAttack()
@@ -118,7 +131,6 @@ public class AttackController : MonoBehaviour
                 movementController.disableMovement(staggerTime);
             }
         }
-        GetComponentInChildren<Animator>().SetTrigger("Play");
         _cooldown_timer.begin(cooldown);
     }
 
