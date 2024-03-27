@@ -10,11 +10,13 @@ public class PlayerHealth : MonoBehaviour
     public float curHealth;
     public GameObject indicator;
     public Image portrait;
+    public Image portrait_border;
     public Image hud;
     public Image osirisIndicator;
     public List<Sprite> portraitSprites;
     public List<Sprite> hudSprites;
     private Animator anim;
+    public Animator portrait_anim;
     public bool Dead;
 
     private float damage_color_cooldown;
@@ -62,7 +64,10 @@ public class PlayerHealth : MonoBehaviour
             else
             {
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                portrait.color = Color.red;
+                portrait_border.color = Color.red;
                 damage_color_cooldown = 0.5f;
+                portrait_anim.SetBool("takingDamage", true);
             }
 
             // Display text above player
@@ -99,6 +104,9 @@ public class PlayerHealth : MonoBehaviour
         if (damage_color_cooldown <= 0.0f)
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(179, 245, 227);
+            portrait.color = new Color(179, 245, 227);
+            portrait_border.color = new Color(179, 245, 227);
+            portrait_anim.SetBool("takingDamage", false);
         }
         updatePlayerHealth(-Time.deltaTime, false);
         

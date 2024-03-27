@@ -32,6 +32,7 @@ public class OsirisSpawner : MonoBehaviour
     void Update()
     {
         PlayerHealth playerhealth = player.GetComponent<PlayerHealth>();
+        Debug.Log("playerhealth != null: " + (playerhealth != null).ToString() + " !spawned: " + (!spawned).ToString() + " playerhealth.curhealth: " + (playerhealth.curHealth <= healthThreshold).ToString() + " playerhealth: " + playerhealth.curHealth.ToString());
         if(playerhealth != null)
         {
             if(!spawned)
