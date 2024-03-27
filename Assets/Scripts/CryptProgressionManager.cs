@@ -84,8 +84,9 @@ public class CryptProgressionManager : MonoBehaviour
                 foreach(EnemySpawner e in tombSpawners){
                     TombKillCount += e.Kills;
                 }
-                if(TombKillCount > 20){
-                    IncrementCryptState();
+                if(TombKillCount > 20)
+                {
+                    tombDoor.GetComponentInChildren<Animator>().SetTrigger("Collapse");
                 }
                 currKills = TombKillCount;
                 break;
@@ -95,7 +96,7 @@ public class CryptProgressionManager : MonoBehaviour
                     HallwayKillCount += e.Kills;
                 }
                 if(HallwayKillCount > 20){
-                    IncrementCryptState();
+                    hallDoor.GetComponentInChildren<Animator>().SetTrigger("Collapse");
                 }
                 currKills = HallwayKillCount;
                 break;
@@ -170,6 +171,7 @@ public class CryptProgressionManager : MonoBehaviour
         {
             case CryptState.TombOpen:
                 tombDoor.SetActive(true);
+                tombDoor.GetComponentInChildren<Animator>().SetTrigger("Rise");
                 currState = CryptState.TombLocked;
                 ActivateTombSpawners();
                 break;
@@ -180,7 +182,8 @@ public class CryptProgressionManager : MonoBehaviour
                 break;
             case CryptState.HallwayChaosOpen:
                 hallDoor.SetActive(true);
-                currState= CryptState.HallwayChaosLocked;
+                hallDoor.GetComponentInChildren<Animator>().SetTrigger("Rise");
+                currState = CryptState.HallwayChaosLocked;
                 ActivateHallwaySpawners();
                 break;
             case CryptState.HallwayChaosLocked:
