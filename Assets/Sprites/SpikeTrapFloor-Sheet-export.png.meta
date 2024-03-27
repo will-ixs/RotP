@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -81,33 +81,20 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -145,6 +132,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -157,14 +157,14 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cc5980124048524ea0aca80400cfa34
-      internalID: -1432874325
+      spriteID: 322817d41d259ea4d9bd0efc73050041
+      internalID: -399287920
       vertices: []
       indices: 
       edges: []
@@ -178,14 +178,14 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c305221082cb89c4b814a7e9f0560035
-      internalID: 1728135516
+      spriteID: f2b6dd3192c7b3a41a82ca39ca091cee
+      internalID: -2003103573
       vertices: []
       indices: 
       edges: []
@@ -199,14 +199,14 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9ee789cd975f6c4cb2aa95e8e738603
-      internalID: 386004709
+      spriteID: 9682edf67169f0f42a78517550446a9d
+      internalID: 1684449565
       vertices: []
       indices: 
       edges: []
@@ -220,14 +220,14 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1372f7e7ed848b14e8a1c421dadfc2f3
-      internalID: -148125672
+      spriteID: 8892c802b60ad704b8381026b32cc6d4
+      internalID: -1803032185
       vertices: []
       indices: 
       edges: []
@@ -241,14 +241,14 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b9b7efe7d751fd4c89fad769eb5b84e
-      internalID: 1408849589
+      spriteID: 6e560bc425efb7d40bf8f44fc7fc4710
+      internalID: 759123248
       vertices: []
       indices: 
       edges: []
@@ -262,14 +262,14 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb5da8d9577c21b44884e9f3d9ab0652
-      internalID: 461314847
+      spriteID: 103965e81512cba4b8045ac0d332b618
+      internalID: -1504053306
       vertices: []
       indices: 
       edges: []
@@ -285,12 +285,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SpikeTrapFloor-Sheet-export_0: -1432874325
-      SpikeTrapFloor-Sheet-export_1: 1728135516
-      SpikeTrapFloor-Sheet-export_2: 386004709
-      SpikeTrapFloor-Sheet-export_3: -148125672
-      SpikeTrapFloor-Sheet-export_4: 1408849589
-      SpikeTrapFloor-Sheet-export_5: 461314847
+      SpikeTrapFloor-Sheet-export_0: -399287920
+      SpikeTrapFloor-Sheet-export_1: -2003103573
+      SpikeTrapFloor-Sheet-export_2: 1684449565
+      SpikeTrapFloor-Sheet-export_3: -1803032185
+      SpikeTrapFloor-Sheet-export_4: 759123248
+      SpikeTrapFloor-Sheet-export_5: -1504053306
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
