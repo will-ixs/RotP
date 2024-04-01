@@ -24,6 +24,7 @@ public class CryptProgressionManager : MonoBehaviour
     [SerializeField] private AreaTrigger BossTrigger;
     [SerializeField] private GameObject tombDoor;
     [SerializeField] private GameObject hallDoor;
+    [SerializeField] private GameObject bossDoor;
     [SerializeField] public int TombKillCount;
     [SerializeField] public int HallwayKillCount;
     private int currKills;
@@ -196,6 +197,8 @@ public class CryptProgressionManager : MonoBehaviour
                 YellowSerpopard.SetActive(true);
                 PurpleSerpopard.SetActive(true);
                 ActivateBossSpawners();
+                bossDoor.SetActive(true);
+                bossDoor.GetComponentInChildren<Animator>().SetTrigger("Rise");
                 break;
             case CryptState.BossFight:
                 Invoke("LoadPalace", 3.0f);

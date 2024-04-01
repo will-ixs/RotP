@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour {
 
     void Play()
     {
-        SceneManager.LoadScene("Crypt");
+        SceneManager.LoadScene(1);//underworld
     }
 
     void Levels()
