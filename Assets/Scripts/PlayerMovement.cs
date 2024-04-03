@@ -40,36 +40,38 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetDirection()
     {
-        //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHT
-        dir = movementDirection;
+        //0 = UP, 1 = LEFT, 2 = DOWN, 3 = RIGHTVector3 mousePos = Input.mousePosition;
+        dir = movementDirection.normalized;
         Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
+        
         anim.SetFloat("Speed", mag.magnitude);
-        if(mag.magnitude > 0.1f)
+        anim.SetBool("Siphon", false);
+
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 cameraPos = Camera.main.WorldToScreenPoint(transform.position);//_camera_transform.position);
+        Vector3 facingDir = (mousePos - cameraPos).normalized;
+        if (Mathf.Abs(facingDir.y) < Mathf.Abs(facingDir.x))
         {
-            anim.SetBool("Siphon", false);
-            if (mag.y < mag.x)
+            //LookRight/Left
+            if (facingDir.x < 0.0f)
             {
-                //LookRight/Left
-                if (dir.x < 0.0f)
-                {
-                    anim.SetInteger("Direction", 1);
-                }
-                else
-                {
-                    anim.SetInteger("Direction", 3);
-                }
+                anim.SetInteger("Direction", 1);
             }
             else
             {
-                //LookUp/Down
-                if (dir.y < 0.0f)
-                {
-                    anim.SetInteger("Direction", 2);
-                }
-                else
-                {
-                    anim.SetInteger("Direction", 0);
-                }
+                anim.SetInteger("Direction", 3);
+            }
+        }
+        else
+        {
+            //LookUp/Down
+            if (facingDir.y < 0.0f)
+            {
+                anim.SetInteger("Direction", 2);
+            }
+            else
+            {
+                anim.SetInteger("Direction", 0);
             }
         }
     }
