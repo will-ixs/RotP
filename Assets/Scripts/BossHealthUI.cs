@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BossHealthUI : MonoBehaviour
 {
     public GameObject target;
-    public Transform scrollContentTransform;
+    public Transform healthCanvasTransform;
     private Slider slider;
     private float health;
     public Text text;
@@ -15,8 +15,8 @@ public class BossHealthUI : MonoBehaviour
     {
         slider = gameObject.GetComponent<Slider>();
 
-        scrollContentTransform = GameObject.Find("Boss Health Content").transform;
-        gameObject.transform.SetParent(scrollContentTransform);
+        healthCanvasTransform = GameObject.Find("Health Canvas").transform;
+        gameObject.transform.SetParent(healthCanvasTransform);
 
         health = target.GetComponent<BossHealth>().health;
         slider.maxValue = health;
@@ -27,6 +27,9 @@ public class BossHealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 cameraPos = Camera.main.WorldToScreenPoint(target.transform.position);
+        gameObject.transform.position = new Vector3(cameraPos.x-100, cameraPos.y + 350, cameraPos.z);
+
         health = target.GetComponent<BossHealth>().health;
         slider.value = health;
         if (health <= 0)
