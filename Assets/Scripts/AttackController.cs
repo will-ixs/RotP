@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     [SerializeField] private KeyCode keyCode;
+    [SerializeField] private float windupDelay;
     [SerializeField] private float cooldown;
 
     [SerializeField] private int damage;
@@ -29,6 +30,8 @@ public class AttackController : MonoBehaviour
 
 
     [SerializeField] private Timer _cooldown_timer;
+    [SerializeField] private Timer _windup_timer;
+    private bool _winding_up;
 
     private float _base_hitbox_distance;
     private float _base_hitbox_rotation;
@@ -47,6 +50,10 @@ public class AttackController : MonoBehaviour
         if (_cooldown_timer == null)
         {
             _cooldown_timer = gameObject.AddComponent<Timer>();
+        }
+        if (_windup_timer == null)
+        {
+            _windup_timer = gameObject.AddComponent<Timer>();
         }
 
         _base_hitbox_distance = (transform.position - _player.transform.position).magnitude;
@@ -118,13 +125,6 @@ public class AttackController : MonoBehaviour
                 movementController.disableMovement(staggerTime);
             }
         }
-        //temp until heavy animation
-        Animator a = GetComponentInChildren<Animator>();
-
-        if (a != null)
-        {
-            a.SetTrigger("Play");
-        }
         _cooldown_timer.begin(cooldown);
     }
 
@@ -132,8 +132,21 @@ public class AttackController : MonoBehaviour
     void Update()
     {
         updateHitbox();
-        if (Input.GetKeyDown(keyCode) && _cooldown_timer.isReady())
+        if (Input.GetKeyDown(keyCode) && _cooldown_timer.isReady() && _windup_timer.isReady())
         {
+            _winding_up = true;
+            _windup_timer.begin(windupDelay + 0.5f);
+            //temp until heavy animation
+            Animator a = GetComponentInChildren<Animator>();
+
+            if (a != null)
+            {
+                a.SetTrigger("Play");
+            }
+        }
+        if (_winding_up && _windup_timer.isReady())
+        {
+            _winding_up = false;
             performAttack();
         }
     }
