@@ -9,10 +9,13 @@ public class MainMenu : MonoBehaviour {
     public Button levels;
     public Button options;
     public Button exit;
+    private AudioManager audioManager;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         play.onClick.AddListener(Play);
         levels.onClick.AddListener(Levels);
         options.onClick.AddListener(Options);
@@ -21,21 +24,25 @@ public class MainMenu : MonoBehaviour {
 
     void Play()
     {
+        audioManager.playSFX(audioManager.BossHit);
         SceneManager.LoadScene(1);//underworld
     }
 
     void Levels()
     {
+        audioManager.playSFX(audioManager.BossHit);
 
     }
 
     void Options()
     {
+        audioManager.playSFX(audioManager.BossHit);
 
     }
 
     void Exit()
     {
+        audioManager.playSFX(audioManager.BossHit);
         Application.Quit();
     }
 

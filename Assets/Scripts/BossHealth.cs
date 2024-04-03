@@ -9,15 +9,19 @@ public class BossHealth : MonoBehaviour
     public bool Dead;
 
     public GameObject BossHealthBar;
+    private AudioManager audioManager;
 
     private void Start()
     {
         BossHealthBar = Instantiate(BossHealthBar);
         BossHealthBar.GetComponent<BossHealthUI>().target = gameObject;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         Dead = false;
     }
     public void TakeDamage(int damage)
     {
+        audioManager.playSFX(audioManager.BossHit);
         health -= damage;
         if (health <= 0)
         {

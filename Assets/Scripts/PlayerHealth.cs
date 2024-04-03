@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     private float damage_color_cooldown;
 
     private Transform canvasTransform;
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
 
         canvasTransform = GameObject.Find("Canvas").transform;
         anim = osirisIndicator.GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 }
 
     // Updates player health and UI by amount
@@ -41,6 +43,8 @@ public class PlayerHealth : MonoBehaviour
             curHealth = 100;
         }else{
             curHealth += amount;
+            if(amount <= -10)
+                audioManager.playSFX(audioManager.Hit);
         }
         // Prevent negative health
         if (curHealth < 0)

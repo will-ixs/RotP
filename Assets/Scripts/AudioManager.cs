@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public bool isLevel;
     [Header("----- Audio Source -----")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
@@ -12,7 +13,7 @@ public class AudioManager : MonoBehaviour
     [Header("----- Audio Clip -----")]
     public AudioClip background;
     public AudioClip bossBackground; 
-    public AudioClip death;
+    public AudioClip winSound;
     public AudioClip attack;
     public AudioClip heavyAttack;
     public AudioClip soulSteal;
@@ -26,9 +27,12 @@ public class AudioManager : MonoBehaviour
     private void Start() 
     {
         musicSource.clip = background;
-        osirisSource.clip = OsirisMusic;
-        osirisSource.loop = true;
         musicSource.Play();
+        if(isLevel)
+        {
+            osirisSource.clip = OsirisMusic;
+            osirisSource.loop = true;
+        }
     }
 
 
@@ -36,5 +40,11 @@ public class AudioManager : MonoBehaviour
     public void playSFX(AudioClip clip) 
     {
         SFXSource.PlayOneShot(clip);
+    }
+
+    public void newBGM(AudioClip clip) 
+    {
+        musicSource.clip = clip;
+        musicSource.Play();
     }
 }

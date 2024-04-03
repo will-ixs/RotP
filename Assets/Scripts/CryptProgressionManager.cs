@@ -70,6 +70,7 @@ public class CryptProgressionManager : MonoBehaviour
                     }
                     if (!dontMoveToNextStage)
                     {
+                        audioManager.playSFX(audioManager.winSound);
                         switched = true;
                         IncrementCryptState();
                     }
@@ -197,6 +198,7 @@ public class CryptProgressionManager : MonoBehaviour
                 DisableSpawners();
                 break;
             case CryptState.HallwayCalm:
+                audioManager.newBGM(audioManager.bossBackground);
                 currState = CryptState.BossFight;
                 YellowSerpopard.SetActive(true);
                 PurpleSerpopard.SetActive(true);
