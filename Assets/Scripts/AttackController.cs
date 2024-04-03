@@ -143,7 +143,7 @@ public class AttackController : MonoBehaviour
         if (Input.GetKeyDown(keyCode) && _cooldown_timer.isReady() && _windup_timer.isReady())
         {
             _winding_up = true;
-            _windup_timer.begin(windupDelay + 0.5f);
+            _windup_timer.begin(windupDelay);
             //temp until heavy animation
             Animator a = GetComponentInChildren<Animator>();
 
@@ -156,6 +156,7 @@ public class AttackController : MonoBehaviour
         {
             _winding_up = false;
             performAttack();
+            _windup_timer.begin(0.3f);
         }
     }
 }
