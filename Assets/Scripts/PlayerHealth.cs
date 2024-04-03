@@ -94,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
         if (hud_index < 0) { hud_index = 0; }
         if (hud_index >= hudSprites.Count) { hud_index = hudSprites.Count - 1; }
 
-        hud.sprite = hudSprites[hud_index];
+        hud.sprite = hudSprites[hudSprites.Count - hud_index - 1];
 
         anim.SetInteger("State", hud_index);
 //        Debug.Log(anim.GetInteger("State"));
