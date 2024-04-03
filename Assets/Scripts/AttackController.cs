@@ -32,10 +32,12 @@ public class AttackController : MonoBehaviour
 
     private float _base_hitbox_distance;
     private float _base_hitbox_rotation;
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         _mc = GetComponentInParent<MovementController>();
         _anim = GetComponentInParent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -77,6 +79,11 @@ public class AttackController : MonoBehaviour
     {
         _mc.slowMovement(cooldown/2.0f);
         _anim.SetTrigger(attackTrigger);
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+            audioManager.playSFX(audioManager.heavyAttack);
+        else
+            audioManager.playSFX(audioManager.attack);
+
         PlayerHealth health = _player.GetComponent<PlayerHealth>();
         if (health != null)
         {
@@ -96,6 +103,7 @@ public class AttackController : MonoBehaviour
             float staggerTime;
             if (target.CompareTag("Boss"))
             {
+                
                 BossHealth hp = target.GetComponent<BossHealth>();
                 hp.TakeDamage(damage);
                 staggerTime = bossStaggerTime;

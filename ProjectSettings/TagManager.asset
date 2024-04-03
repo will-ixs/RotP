@@ -9,6 +9,7 @@ TagManager:
   - KaFragment
   - Spawner
   - Tutorial
+  - Audio
   layers:
   - Default
   - TransparentFX

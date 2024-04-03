@@ -29,6 +29,7 @@ public class CryptProgressionManager : MonoBehaviour
     [SerializeField] public int HallwayKillCount;
     private int currKills;
     private bool switched;
+    private AudioManager audioManager;
 
     public CryptState currState;
 
@@ -40,6 +41,7 @@ public class CryptProgressionManager : MonoBehaviour
         currState = CryptState.TombOpen;
         YellowSerpopard.SetActive(false);
         PurpleSerpopard.SetActive(false);
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -177,6 +179,7 @@ public class CryptProgressionManager : MonoBehaviour
                 ActivateTombSpawners();
                 break;
             case CryptState.TombLocked:
+                audioManager.playSFX(audioManager.Gates);
                 tombDoor.SetActive(false); //anim trigger once sprite in
                 currState = CryptState.HallwayChaosOpen;
                 DisableSpawners();
@@ -188,6 +191,7 @@ public class CryptProgressionManager : MonoBehaviour
                 ActivateHallwaySpawners();
                 break;
             case CryptState.HallwayChaosLocked:
+                audioManager.playSFX(audioManager.Gates);
                 hallDoor.SetActive(false);
                 currState = CryptState.HallwayCalm;
                 DisableSpawners();

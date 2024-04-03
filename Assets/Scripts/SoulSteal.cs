@@ -9,6 +9,7 @@ public class SoulSteal : MonoBehaviour
     private bool siphoning;
     private float siphonCountdown = 0.5f;
     private float useCountdown = 0.0f;
+    private AudioManager audioManager;
 
     public List<GameObject> nearby_ka_fragments = new List<GameObject>();
     void OnTriggerEnter2D(Collider2D col)
@@ -25,6 +26,7 @@ public class SoulSteal : MonoBehaviour
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         anim = GetComponent<Animator>();
     }
 
@@ -46,6 +48,7 @@ public class SoulSteal : MonoBehaviour
             {
                 anim.SetBool("Siphon", true);
                 siphoning = true;
+                audioManager.playSFX(audioManager.soulSteal);
                 for (int i = 0; i < nearby_ka_fragments.Count; i++)
                 {
                     gameObject.GetComponent<PlayerHealth>().updatePlayerHealth(nearby_ka_fragments[i].GetComponent<KaFragment>().amount);
