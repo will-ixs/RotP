@@ -42,7 +42,7 @@ public class SoulSteal : MonoBehaviour
                 siphoning = false;
             }
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if(nearby_ka_fragments.Count > 0)
             {
