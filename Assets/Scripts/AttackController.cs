@@ -82,6 +82,23 @@ public class AttackController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, hitbox_rotation);
     }
 
+    private bool canAffordAttack()
+    {
+        PlayerHealth health = _player.GetComponent<PlayerHealth>();
+        if (health != null)
+        {
+            if (health.curHealth < cost)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return true;
+    }
+
     private void performAttack()
     {
         _mc.slowMovement(cooldown/2.0f);
@@ -91,18 +108,7 @@ public class AttackController : MonoBehaviour
         else
             audioManager.playSFX(audioManager.attack);
 
-        PlayerHealth health = _player.GetComponent<PlayerHealth>();
-        if (health != null)
-        {
-            if (health.curHealth < cost)
-            {
-                return;
-            }
-            else
-            {
-                health.TakeDamage(cost);
-            }
-        }
+        _player.GetComponent<PlayerHealth>().TakeDamage(cost);
         for (int i = _hitbox_contact_list.contactList.Count - 1; i >= 0; i--)
         {
             GameObject target = _hitbox_contact_list.contactList[i];
@@ -140,7 +146,7 @@ public class AttackController : MonoBehaviour
     void Update()
     {
         updateHitbox();
-        if (Input.GetKeyDown(keyCode) && _cooldown_timer.isReady() && _windup_timer.isReady())
+        if (Input.GetKeyDown(keyCode) && _cooldown_timer.isReady() && _windup_timer.isReady() && canAffordAttack())
         {
             _winding_up = true;
             _windup_timer.begin(windupDelay);
