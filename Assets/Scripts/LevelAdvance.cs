@@ -21,7 +21,7 @@ public class LevelAdvance : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
             }
         }
     }

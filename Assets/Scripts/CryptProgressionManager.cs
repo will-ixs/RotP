@@ -13,7 +13,8 @@ public class CryptProgressionManager : MonoBehaviour
         HallwayChaosOpen,
         HallwayChaosLocked,
         HallwayCalm,
-        BossFight
+        BossFight,
+        Waiting
     }
     public List<EnemySpawner> tombSpawners = new List<EnemySpawner>();
     public List<EnemySpawner> hallwaySpawners = new List<EnemySpawner>();
@@ -25,6 +26,9 @@ public class CryptProgressionManager : MonoBehaviour
     [SerializeField] private GameObject tombDoor;
     [SerializeField] private GameObject hallDoor;
     [SerializeField] private GameObject bossDoor;
+    [SerializeField] private GameObject afterBossDoor;
+    [SerializeField] private AreaTrigger levelAdvanceTrigger;
+    [SerializeField] private GameObject titleCard;
     [SerializeField] public int TombKillCount;
     [SerializeField] public int HallwayKillCount;
     private int currKills;
@@ -59,21 +63,14 @@ public class CryptProgressionManager : MonoBehaviour
             {
                 if (YellowSerpopard == null && PurpleSerpopard == null)
                 {
-                    bool dontMoveToNextStage = false;
                     DisableSpawners();
                     foreach (EnemySpawner e in bossSpawners)
                     {
-                        if (e.activeEnemies.Count > 0)
-                        {
-                            dontMoveToNextStage = true;
-                        }
+                        e.ClearAllEnemies();
                     }
-                    if (!dontMoveToNextStage)
-                    {
-                        audioManager.playSFX(audioManager.winSound);
-                        switched = true;
-                        IncrementCryptState();
-                    }
+                    audioManager.playSFX(audioManager.winSound);
+                    switched = true;
+                    afterBossDoor.GetComponentInChildren<Animator>().SetTrigger("Collapse");
                 }
             }
         }
@@ -204,10 +201,16 @@ public class CryptProgressionManager : MonoBehaviour
                 PurpleSerpopard.SetActive(true);
                 ActivateBossSpawners();
                 bossDoor.SetActive(true);
+                afterBossDoor.GetComponentInChildren<Animator>().SetTrigger("Rise");
                 bossDoor.GetComponentInChildren<Animator>().SetTrigger("Rise");
+                titleCard.SetActive(true);
                 break;
             case CryptState.BossFight:
-                Invoke("LoadPalace", 3.0f);
+                currState = CryptState.Waiting;
+                afterBossDoor.SetActive(false);
+                break;
+            case CryptState.Waiting:
+                Invoke("LoadPalace", 1.0f);
                 break;
         }
     }

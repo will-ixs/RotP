@@ -93,4 +93,12 @@ public class EnemySpawner : MonoBehaviour
     {
         disabled = true;
     }
+
+    public void ClearAllEnemies()
+    {
+        foreach (GameObject e in activeEnemies)
+        {
+            e.GetComponent<Enemy>().TakeDamage((int)e.GetComponent<Enemy>().health+1);
+        }
+    }
 }

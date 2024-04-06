@@ -26,6 +26,7 @@ public class ScrollTutorial : MonoBehaviour
                 if (!scrollActive)
                 {
                     bigScroll.SetActive(true);
+                    bigScrollText.gameObject.SetActive(false);
                     bigScrollText.text = scrollText;
                 }
                 else
