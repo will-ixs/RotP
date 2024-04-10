@@ -10,6 +10,7 @@ TagManager:
   - Spawner
   - Tutorial
   - Audio
+  - Pharaoh
   layers:
   - Default
   - TransparentFX
