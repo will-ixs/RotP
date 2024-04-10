@@ -28,7 +28,8 @@ public class BossHealthUI : MonoBehaviour
     void Update()
     {
         Vector3 cameraPos = Camera.main.WorldToScreenPoint(target.transform.position);
-        gameObject.transform.position = new Vector3(cameraPos.x-100, cameraPos.y + 350, cameraPos.z);
+        Vector3 uiOffset = target.GetComponent<BossHealth>().uiOffset;
+        gameObject.transform.position = new Vector3(cameraPos.x + uiOffset.x, cameraPos.y + uiOffset.y, cameraPos.z + uiOffset.z);
 
         health = target.GetComponent<BossHealth>().health;
         slider.value = health;

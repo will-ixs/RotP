@@ -24667,6 +24667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   Dead: 0
+  uiOffset: {x: -145, y: 240, z: 0}
   BossHealthBar: {fileID: 4723231845487129409, guid: 9be6dec5d530de04693a8cf7fdce6934, type: 3}
 --- !u!61 &1295220322
 BoxCollider2D:

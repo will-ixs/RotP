@@ -7,6 +7,7 @@ public class BossHealth : MonoBehaviour
 {
     public int health;
     public bool Dead;
+    public Vector3 uiOffset;
 
     public GameObject BossHealthBar;
     private AudioManager audioManager;
