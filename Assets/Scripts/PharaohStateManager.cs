@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PharaohStateManager : MonoBehaviour
 {
@@ -10,10 +10,13 @@ public class PharaohStateManager : MonoBehaviour
     private BossHealth bossHealth;
     private GameObject player;
     private Animator anim;
-    private Rigidbody2D rb;
 
+    [SerializeField] private Vector3 WaitingRoom1;
+    [SerializeField] private Vector3 WaitingRoom2;
 
+    [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject swordPrefab;
+    [SerializeField] private GameObject slashPrefab;
     [SerializeField] private float moveSpeed;
     public enum PharaohPhase
     {
@@ -38,7 +41,6 @@ public class PharaohStateManager : MonoBehaviour
         stateChangeTimer = 0.0f;
         player = GameObject.FindGameObjectWithTag("Player");
         bossHealth = GetComponent<BossHealth>();
-        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
@@ -46,6 +48,25 @@ public class PharaohStateManager : MonoBehaviour
     void Update()
     {
         stateChangeTimer -= Time.deltaTime;
+
+        //move to next waiting area if necessary
+        if(state == PharaohState.Waiting)
+        {
+            stateChangeTimer = 5.0f;
+            anim.SetTrigger("Walk");
+
+            Vector3 destination = Vector3.zero;
+            if (phase == PharaohPhase.Phase2)
+            {
+                destination = WaitingRoom1;
+            }
+            if(phase == PharaohPhase.Phase3)
+            {
+                destination = WaitingRoom2;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+        }
+
         if (bossHealth.Dead)
         {
             if(phase == PharaohPhase.Phase3)
@@ -67,7 +88,7 @@ public class PharaohStateManager : MonoBehaviour
     private void ChooseNextState()
     {
         //If attack timer still going skip.
-        if (stateChangeTimer <= 0.0f)
+        if (stateChangeTimer <= 0.0f && state != PharaohState.Waiting)
         {
             //Disable active Attacks
             switch (state)
@@ -78,6 +99,12 @@ public class PharaohStateManager : MonoBehaviour
                     anim.SetTrigger("Idle");
                     break;
                 case PharaohState.Throw:
+                    anim.SetTrigger("Idle");
+                    break;
+                case PharaohState.Slash:
+                    anim.SetTrigger("Idle");
+                    break;
+                case PharaohState.Beam:
                     anim.SetTrigger("Idle");
                     break;
             }
@@ -91,13 +118,12 @@ public class PharaohStateManager : MonoBehaviour
             {
                 maxRange = 6;
             }
-            maxRange = 4;
 
             //Choose new state that is not the same as the current state
             PharaohState currState = state;
             while (currState == state)
             {
-                int selection = Random.Range(1, maxRange); //[1,4)
+                int selection = Random.Range(2, maxRange); //[1,4)
                 switch (selection)
                 {
                     case 1:
@@ -111,6 +137,14 @@ public class PharaohStateManager : MonoBehaviour
                     case 3:
                         state = PharaohState.Throw;
                         stateChangeTimer = 3.0f;
+                        break;
+                    case 4:
+                        state = PharaohState.Slash;
+                        stateChangeTimer = 2.0f;
+                        break;
+                    case 5:
+                        state = PharaohState.Beam;
+                        stateChangeTimer = 5.0f;
                         break;
                 }
             }
@@ -150,17 +184,20 @@ public class PharaohStateManager : MonoBehaviour
     {
         if(phase == PharaohPhase.Phase1)
         {
+            anim.SetTrigger("Idle");
             //Make Pharaoh Move to next room where it waits to be activated.
             phase = PharaohPhase.Phase2;
             state = PharaohState.Waiting;
+            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 75;
             bossHealth.health = 75;
             bossHealth.Dead = false;
-        }
-        if(phase == PharaohPhase.Phase2)
+        }else if(phase == PharaohPhase.Phase2)
         {
+            anim.SetTrigger("Idle");
             //Make Pharaoh Move to next room where it waits to be activated.
             phase = PharaohPhase.Phase3;
             state = PharaohState.Waiting;
+            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 100;
             bossHealth.health = 100;
             bossHealth.Dead = false;
         }
@@ -168,29 +205,60 @@ public class PharaohStateManager : MonoBehaviour
     private void Die()
     {
         state = PharaohState.Idle;
-        anim.SetTrigger("Dead");
+        anim.SetTrigger("Die");
         //Death animation / fade to white & screen shake or something
         Destroy(gameObject, 1.5f);
     }
     private void Walk()
     {
         Vector2 vecToPlayer = player.transform.position - transform.position;
-        if (vecToPlayer.magnitude > 2.8f)
+        if (vecToPlayer.magnitude > 2.5f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position - new Vector3(0.0f, 0.5f, 0.0f), moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position + new Vector3(0.0f, 1.5f, 0.0f), moveSpeed * Time.deltaTime);
+        }
+        else if(stateChangeTimer < 3.0f && phase != PharaohPhase.Phase1)
+        {
+            state = PharaohState.Slash;
+            stateChangeTimer = 2.0f;
+            ActivateState();
         }
     }
-
     public void SpawnSword()
     {
         Instantiate(swordPrefab);
     }
+    public void SpawnSlash()
+    {
+        GameObject slash = Instantiate(slashPrefab);
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x);
 
+        Vector3 hitbox_position = transform.position;
+        hitbox_position.x += Mathf.Cos(angle);
+        hitbox_position.y += Mathf.Sin(angle);
+
+        float hitbox_rotation = angle * Mathf.Rad2Deg + 90.0f;
+
+        slash.transform.position = hitbox_position;
+        slash.transform.rotation = Quaternion.Euler(0, 0, hitbox_rotation);
+        Destroy(slash, 2.0f);
+    }
+    public void SpawnBeam()
+    {
+        GameObject beams = Instantiate(beamPrefab);
+        beams.transform.position = transform.position;
+        Destroy(beams, 4.01f);
+    }
     public void ShortIdle() //call at end of each animation to give .5s idle buffer
     {
         stateChangeTimer = 0.5f;
         anim.SetTrigger("Idle");
         state = PharaohState.Idle;
-        ActivateState();
     }
+    public void StopWaiting()
+    {
+        anim.SetTrigger("Idle");
+        state = PharaohState.Idle;
+        stateChangeTimer = 0.5f;
+    } //call from room triggers for phase 2 and 3
 }

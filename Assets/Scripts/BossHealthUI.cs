@@ -7,7 +7,7 @@ public class BossHealthUI : MonoBehaviour
 {
     public GameObject target;
     public Transform healthCanvasTransform;
-    private Slider slider;
+    public Slider slider;
     private float health;
     public Text text;
     // Start is called before the first frame update
