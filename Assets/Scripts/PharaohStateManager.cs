@@ -26,9 +26,9 @@ public class PharaohStateManager : MonoBehaviour
     {
         Idle,
         Walk,
-        Sword,
+        Throw,
         Beam,
-        Hand,
+        Slash,
         Waiting
     }
     public PharaohState state;
@@ -72,8 +72,13 @@ public class PharaohStateManager : MonoBehaviour
             //Disable active Attacks
             switch (state)
             {
+                case PharaohState.Idle:
+                    break;
                 case PharaohState.Walk:
-                    anim.SetTrigger("ReturnIdle");
+                    anim.SetTrigger("Idle");
+                    break;
+                case PharaohState.Throw:
+                    anim.SetTrigger("Idle");
                     break;
             }
 
@@ -86,6 +91,7 @@ public class PharaohStateManager : MonoBehaviour
             {
                 maxRange = 6;
             }
+            maxRange = 4;
 
             //Choose new state that is not the same as the current state
             PharaohState currState = state;
@@ -100,18 +106,10 @@ public class PharaohStateManager : MonoBehaviour
                         break;
                     case 2:
                         state = PharaohState.Walk;
-                        stateChangeTimer = 1.5f;
+                        stateChangeTimer = 3.75f;
                         break;
                     case 3:
-                        state = PharaohState.Sword;
-                        stateChangeTimer = 4.0f;
-                        break;
-                    case 4:
-                        state = PharaohState.Beam;
-                        stateChangeTimer = 5.0f;
-                        break;
-                    case 5:
-                        state = PharaohState.Hand;
+                        state = PharaohState.Throw;
                         stateChangeTimer = 3.0f;
                         break;
                 }
@@ -124,26 +122,27 @@ public class PharaohStateManager : MonoBehaviour
         //Activate new state.
         /*Idle,0
         Walk,1
-        Sword,2
+        Throw,2
         Beam,3
-        Hand,4
+        Slash,4
         Waiting5*/
         switch (state)
         {
             case PharaohState.Idle:
+                anim.SetTrigger("Idle");
                 break;
             case PharaohState.Walk:
                 anim.SetTrigger("Walk");
                 Walk();
                 break;
-            case PharaohState.Sword:
-                anim.SetTrigger("Sword");
+            case PharaohState.Slash:
+                anim.SetTrigger("Slash");
                 break;
             case PharaohState.Beam:
                 anim.SetTrigger("Beam");
                 break;
-            case PharaohState.Hand:
-                anim.SetTrigger("Hand");
+            case PharaohState.Throw:
+                anim.SetTrigger("Throw");
                 break;
         }
     }
@@ -173,19 +172,25 @@ public class PharaohStateManager : MonoBehaviour
         //Death animation / fade to white & screen shake or something
         Destroy(gameObject, 1.5f);
     }
-
     private void Walk()
     {
         Vector2 vecToPlayer = player.transform.position - transform.position;
         if (vecToPlayer.magnitude > 2.8f)
         {
-            //_movement_controller.changeVelocity(moveSpeed * vecToPlayer.normalized);
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position - new Vector3(0.0f, 0.5f, 0.0f), moveSpeed * Time.deltaTime);
         }
     }
 
     public void SpawnSword()
     {
         Instantiate(swordPrefab);
+    }
+
+    public void ShortIdle() //call at end of each animation to give .5s idle buffer
+    {
+        stateChangeTimer = 0.5f;
+        anim.SetTrigger("Idle");
+        state = PharaohState.Idle;
+        ActivateState();
     }
 }

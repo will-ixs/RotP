@@ -11,7 +11,7 @@ public class PharaohSwordController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        pharaoh = GameObject.FindGameObjectWithTag("Pharaoh");
+        pharaoh = GameObject.FindGameObjectWithTag("Boss");
         Setup();
     }
 
