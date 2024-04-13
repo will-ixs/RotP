@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class DoorCall : MonoBehaviour
@@ -16,8 +17,9 @@ public class DoorCall : MonoBehaviour
         
     }
 
-    public void increment()
+    public void increment(string test)
     {
+        UnityEngine.Debug.Log(test);
         GameObject.Find("CryptStateManager").GetComponent<CryptProgressionManager>().IncrementCryptState();
     }
 }
