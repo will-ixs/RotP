@@ -9,6 +9,14 @@ public class MainMenu : MonoBehaviour {
     public Button levels;
     public Button options;
     public Button exit;
+    public Button underworld;
+    public Button crypt;
+    public Button palace;
+    public Button back;
+
+    public GameObject start;
+    public GameObject levelSelect;
+
     private AudioManager audioManager;
     
 
@@ -20,6 +28,10 @@ public class MainMenu : MonoBehaviour {
         levels.onClick.AddListener(Levels);
         options.onClick.AddListener(Options);
         exit.onClick.AddListener(Exit);
+        underworld.onClick.AddListener(Underworld);
+        crypt.onClick.AddListener(Crypt);  
+        palace.onClick.AddListener(Palace);
+        back.onClick.AddListener(Back);
     }
 
     void Play()
@@ -31,7 +43,8 @@ public class MainMenu : MonoBehaviour {
     void Levels()
     {
         audioManager.playSFX(audioManager.BossHit);
-
+        start.SetActive(false);
+        levelSelect.SetActive(true);
     }
 
     void Options()
@@ -44,6 +57,27 @@ public class MainMenu : MonoBehaviour {
     {
         audioManager.playSFX(audioManager.BossHit);
         Application.Quit();
+    }
+
+    void Underworld()
+    {
+        audioManager.playSFX(audioManager.BossHit);
+        SceneManager.LoadScene(1);//underworld
+    }
+    void Crypt()
+    {
+        audioManager.playSFX(audioManager.BossHit);
+        SceneManager.LoadScene(2);//crypt
+    }
+    void Palace()
+    {
+        audioManager.playSFX(audioManager.BossHit);
+        SceneManager.LoadScene(3);//palace
+    }
+    void Back()
+    {
+        levelSelect.SetActive(false);
+        start.SetActive(true);
     }
 
     // Update is called once per frame
