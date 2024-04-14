@@ -87,7 +87,6 @@ public class UnderworldProgressionManager : MonoBehaviour
                 if(room1KillCount > 20)
                 {
                     room1Door.GetComponentInChildren<Animator>().SetTrigger("Collapse");
-                    IncrementCryptState();
                 }
                 currKills = room1KillCount;
                 break;
@@ -99,7 +98,6 @@ public class UnderworldProgressionManager : MonoBehaviour
                 }
                 if(room2KillCount > 20){
                     room2Door.GetComponentInChildren<Animator>().SetTrigger("Collapse");
-                    IncrementCryptState();
                 }
                 currKills = room2KillCount;
                 break;
