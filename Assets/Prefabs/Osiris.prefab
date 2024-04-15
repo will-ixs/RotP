@@ -196,6 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   speed: 2.6
+  anim: {fileID: 607826636283676228}
+  spawned: 0
 --- !u!82 &-8880384146920944798
 AudioSource:
   m_ObjectHideFlags: 0

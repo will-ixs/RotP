@@ -51,7 +51,9 @@ public class OsirisSpawner : MonoBehaviour
                         osiris = Instantiate(osirisPrefab, spawnLocation, spawnRotation);
                         OsirisAITest osirisAI = osiris.GetComponent<OsirisAITest>();
                         osirisAI.Spawn();
+                        //osirisAI.Spawn();
                         spawned = true;
+                        
                         spawningCountdown = 5.0f;
                     }
 
@@ -69,7 +71,9 @@ public class OsirisSpawner : MonoBehaviour
                     despawningCountdown -= Time.deltaTime;
                     if(despawningCountdown < 0)
                     {
-                        Destroy(osiris);
+                        OsirisAITest osirisDespawn = osiris.GetComponent<OsirisAITest>();
+                        osirisDespawn.Despawn();
+                        Destroy(osiris, 1.5f);
                         spawned = false;
                         osirisIndicator.SetBool("OsirisSpawn", false);
                         despawningCountdown = 5.0f;
