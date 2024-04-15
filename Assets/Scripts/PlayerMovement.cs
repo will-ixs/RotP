@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float curhealth;
 
-    private Animator anim;
     private MovementController _movement_controller;
     private Vector2 movementDirection;
     private Vector2 velocity;
@@ -15,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
         _movement_controller = gameObject.GetComponent<MovementController>();
     }
 
@@ -44,35 +42,26 @@ public class PlayerMovement : MonoBehaviour
         dir = movementDirection.normalized;
         Vector2 mag = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
         
-        anim.SetFloat("Speed", mag.magnitude);
-        anim.SetBool("Siphon", false);
 
         Vector3 mousePos = Input.mousePosition;
         Vector3 cameraPos = Camera.main.WorldToScreenPoint(transform.position);//_camera_transform.position);
         Vector3 facingDir = (mousePos - cameraPos).normalized;
-        if (Mathf.Abs(facingDir.y) < Mathf.Abs(facingDir.x))
-        {
-            //LookRight/Left
-            if (facingDir.x < 0.0f)
-            {
-                anim.SetInteger("Direction", 1);
-            }
-            else
-            {
-                anim.SetInteger("Direction", 3);
-            }
-        }
-        else
-        {
-            //LookUp/Down
-            if (facingDir.y < 0.0f)
-            {
-                anim.SetInteger("Direction", 2);
-            }
-            else
-            {
-                anim.SetInteger("Direction", 0);
-            }
-        }
+
+        PlayerAnimationManager p = GetComponent<PlayerAnimationManager>();
+        p.speed = mag.magnitude;
+        p.facingDirection = (
+            (Mathf.Abs(facingDir.y) < Mathf.Abs(facingDir.x) ? (
+                (facingDir.x < 0.0f) ? (
+                    WalkDirection.Left
+                ) : (
+                    WalkDirection.Right
+                )
+            ) : (facingDir.y < 0.0f) ? (
+                    WalkDirection.Down
+                ) : (
+                    WalkDirection.Up
+                )
+            )
+        );
     }
 }
