@@ -49,6 +49,8 @@ public class OsirisSpawner : MonoBehaviour
                         //    spawnLocation.x += 2;
                         osirisIndicator.SetBool("OsirisSpawn", true);
                         osiris = Instantiate(osirisPrefab, spawnLocation, spawnRotation);
+                        OsirisAITest osirisAI = osiris.GetComponent<OsirisAITest>();
+                        osirisAI.Spawn();
                         spawned = true;
                         spawningCountdown = 5.0f;
                     }

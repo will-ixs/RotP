@@ -14,6 +14,7 @@ public class OsirisAITest : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator anim;
+    private float timer;
     
     
 
@@ -28,6 +29,7 @@ public class OsirisAITest : MonoBehaviour
         playerPos.Add(player.transform.position);
         InvokeRepeating("playerPathing", 1f, 1f);
         anim = GetComponent<Animator>();
+        timer = 2;
         //rb.velocity = Vector2.zero;
         
 
@@ -37,6 +39,7 @@ public class OsirisAITest : MonoBehaviour
     void Update()
     {
         SetDirection();
+        timer -= Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -45,9 +48,10 @@ public class OsirisAITest : MonoBehaviour
         Vector3 vToPlayer = playerPos[0] - transform.position;
         distance = vToPlayer.magnitude;
 
-        if(distance < 1)
+        if(distance < 1 || timer <= 0)
         {
             playerPos.RemoveAt(0);
+            timer = 2f;
             if (playerPos.Count < 1)
             {
                 playerPos.Add(player.transform.position);
@@ -66,7 +70,14 @@ public class OsirisAITest : MonoBehaviour
 
         rb.velocity = Vector2.SmoothDamp(rb.velocity, speed * targetDirection, ref velocity, 0.05f);
 
+        
+
            
+    }
+    public void Spawn()
+    {
+        anim.SetTrigger("Despawn");
+        Debug.Log("HIII");
     }
 
     private void SetDirection()
