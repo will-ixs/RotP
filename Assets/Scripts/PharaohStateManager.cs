@@ -14,10 +14,14 @@ public class PharaohStateManager : MonoBehaviour
     [SerializeField] private Vector3 WaitingRoom1;
     [SerializeField] private Vector3 WaitingRoom2;
 
+
+    [SerializeField] private GameObject kaFragmentPrefab;
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private GameObject slashPrefab;
     [SerializeField] private float moveSpeed;
+
+    public bool waiting;
     public enum PharaohPhase
     {
        Phase1,
@@ -32,16 +36,24 @@ public class PharaohStateManager : MonoBehaviour
         Throw,
         Beam,
         Slash,
-        Waiting
     }
     public PharaohState state;
 
     void Start()
     {
+        waiting = false;
         stateChangeTimer = 0.0f;
         player = GameObject.FindGameObjectWithTag("Player");
         bossHealth = GetComponent<BossHealth>();
         anim = GetComponent<Animator>();
+    }
+
+    private void FixedUpdate()
+    {
+        if(state == PharaohState.Walk)
+        {
+            Walk();
+        }
     }
 
     // Update is called once per frame
@@ -50,7 +62,7 @@ public class PharaohStateManager : MonoBehaviour
         stateChangeTimer -= Time.deltaTime;
 
         //move to next waiting area if necessary
-        if(state == PharaohState.Waiting)
+        if(waiting)
         {
             stateChangeTimer = 5.0f;
             anim.SetTrigger("Walk");
@@ -88,7 +100,7 @@ public class PharaohStateManager : MonoBehaviour
     private void ChooseNextState()
     {
         //If attack timer still going skip.
-        if (stateChangeTimer <= 0.0f && state != PharaohState.Waiting)
+        if (stateChangeTimer <= 0.0f && !waiting)
         {
             //Disable active Attacks
             switch (state)
@@ -158,26 +170,27 @@ public class PharaohStateManager : MonoBehaviour
         Walk,1
         Throw,2
         Beam,3
-        Slash,4
-        Waiting5*/
-        switch (state)
+        Slash,4*/
+        if (!waiting)
         {
-            case PharaohState.Idle:
-                anim.SetTrigger("Idle");
-                break;
-            case PharaohState.Walk:
-                anim.SetTrigger("Walk");
-                Walk();
-                break;
-            case PharaohState.Slash:
-                anim.SetTrigger("Slash");
-                break;
-            case PharaohState.Beam:
-                anim.SetTrigger("Beam");
-                break;
-            case PharaohState.Throw:
-                anim.SetTrigger("Throw");
-                break;
+            switch (state)
+            {
+                case PharaohState.Idle:
+                    anim.SetTrigger("Idle");
+                    break;
+                case PharaohState.Walk:
+                    anim.SetTrigger("Walk");
+                    break;
+                case PharaohState.Slash:
+                    anim.SetTrigger("Slash");
+                    break;
+                case PharaohState.Beam:
+                    anim.SetTrigger("Beam");
+                    break;
+                case PharaohState.Throw:
+                    anim.SetTrigger("Throw");
+                    break;
+            }
         }
     }
     private void AdvancePhase()
@@ -186,20 +199,29 @@ public class PharaohStateManager : MonoBehaviour
         {
             anim.SetTrigger("Idle");
             //Make Pharaoh Move to next room where it waits to be activated.
+            state = PharaohState.Idle;
             phase = PharaohPhase.Phase2;
-            state = PharaohState.Waiting;
-            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 75;
-            bossHealth.health = 75;
-            bossHealth.Dead = false;
-        }else if(phase == PharaohPhase.Phase2)
+            waiting = true;
+            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 150;
+            bossHealth.health = 150;
+            bossHealth.Dead = false; 
+            KaFragment kaFragment = Instantiate(kaFragmentPrefab, gameObject.transform.position, Quaternion.identity).GetComponent<KaFragment>();
+            kaFragment.initialAmount = 50;
+            kaFragment.decayRate = 1.0f;
+        }
+        else if(phase == PharaohPhase.Phase2)
         {
+            state = PharaohState.Idle;
             anim.SetTrigger("Idle");
             //Make Pharaoh Move to next room where it waits to be activated.
             phase = PharaohPhase.Phase3;
-            state = PharaohState.Waiting;
-            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 100;
-            bossHealth.health = 100;
-            bossHealth.Dead = false;
+            waiting = true;
+            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 250;
+            bossHealth.health = 250;
+            bossHealth.Dead = false; 
+            KaFragment kaFragment = Instantiate(kaFragmentPrefab, gameObject.transform.position, Quaternion.identity).GetComponent<KaFragment>();
+            kaFragment.initialAmount = 150;
+            kaFragment.decayRate = 1.0f;
         }
     }
     private void Die()
@@ -220,6 +242,7 @@ public class PharaohStateManager : MonoBehaviour
         {
             state = PharaohState.Slash;
             stateChangeTimer = 2.0f;
+            anim.SetTrigger("Idle");
             ActivateState();
         }
     }
@@ -257,6 +280,7 @@ public class PharaohStateManager : MonoBehaviour
     }
     public void StopWaiting()
     {
+        waiting = false;
         anim.SetTrigger("Idle");
         state = PharaohState.Idle;
         stateChangeTimer = 0.5f;

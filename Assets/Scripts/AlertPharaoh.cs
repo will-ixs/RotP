@@ -15,7 +15,7 @@ public class AlertPharaoh : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PharaohStateManager p = pharaoh.GetComponent<PharaohStateManager>();
-            if(p.state == PharaohStateManager.PharaohState.Waiting)
+            if(p.waiting)
             {
                 p.StopWaiting();
             }
