@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject start;
     public GameObject levelSelect;
+    public GameObject optionsMenu;
 
     private AudioManager audioManager;
     
@@ -45,11 +46,15 @@ public class MainMenu : MonoBehaviour {
         audioManager.playSFX(audioManager.BossHit);
         start.SetActive(false);
         levelSelect.SetActive(true);
+        back.gameObject.SetActive(true);
     }
 
     void Options()
     {
         audioManager.playSFX(audioManager.BossHit);
+        start.SetActive(false);
+        optionsMenu.SetActive(true);
+        back.gameObject.SetActive(true);
 
     }
 
@@ -77,7 +82,9 @@ public class MainMenu : MonoBehaviour {
     void Back()
     {
         levelSelect.SetActive(false);
+        optionsMenu.SetActive(false);
         start.SetActive(true);
+        back.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
