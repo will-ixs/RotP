@@ -171,6 +171,7 @@ public class CryptProgressionManager : MonoBehaviour
         switch (currState)
         {
             case CryptState.TombOpen:
+                audioManager.playSFX(audioManager.GatesUp);
                 tombDoor.SetActive(true);
                 tombDoor.GetComponentInChildren<Animator>().SetTrigger("Rise");
                 currState = CryptState.TombLocked;
@@ -183,6 +184,7 @@ public class CryptProgressionManager : MonoBehaviour
                 DisableSpawners();
                 break;
             case CryptState.HallwayChaosOpen:
+                audioManager.playSFX(audioManager.GatesUp);
                 hallDoor.SetActive(true);
                 hallDoor.GetComponentInChildren<Animator>().SetTrigger("Rise");
                 currState = CryptState.HallwayChaosLocked;

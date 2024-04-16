@@ -17,6 +17,7 @@ public class OsirisSpawner : MonoBehaviour
     private GameObject osiris;
     private bool spawned;
     private Animator osirisIndicator;
+    private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class OsirisSpawner : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         InvokeRepeating("playerPathing", 3f, 3f);
         osirisIndicator = GameObject.Find("Osiris Indicator").GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -51,7 +53,8 @@ public class OsirisSpawner : MonoBehaviour
                         osiris = Instantiate(osirisPrefab, spawnLocation, spawnRotation);
                         OsirisAITest osirisAI = osiris.GetComponent<OsirisAITest>();
                         osirisAI.Spawn();
-                        //osirisAI.Spawn();
+                        audioManager.playSFX(audioManager.OsirisSpawn);
+                        
                         spawned = true;
                         
                         spawningCountdown = 5.0f;

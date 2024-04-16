@@ -151,11 +151,6 @@ public class OsirisAITest : MonoBehaviour
                 
             }
         }
-        else if (collision.gameObject.CompareTag("Boss"))
-            {
-                BossHealth hp = collision.gameObject.GetComponent<BossHealth>();
-                hp.TakeDamage(20);
-            }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             Enemy hp = collision.gameObject.GetComponent<Enemy>();

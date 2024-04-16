@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip BossHit;
     public AudioClip Hit;
     public AudioClip Gates;
+    public AudioClip GatesUp;
     public AudioClip OsirisSpawn;
     public AudioClip OsirisMusic;
 
