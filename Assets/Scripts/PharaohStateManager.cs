@@ -292,7 +292,7 @@ public class PharaohStateManager : MonoBehaviour
 
     public void SpawnHat()
     {
-        GameObject hat = Instantiate(hatPrefab);
+        GameObject hat = Instantiate(hatPrefab, progressionManager.transform);
         hat.transform.position = transform.position;
     }
 }
