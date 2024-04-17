@@ -32,6 +32,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] private Timer _cooldown_timer;
     [SerializeField] private Timer _windup_timer;
     private bool _winding_up;
+    private bool _update;
 
     private float _base_hitbox_distance;
     private float _base_hitbox_rotation;
@@ -40,6 +41,7 @@ public class AttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _update = true;
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         _mc = GetComponentInParent<MovementController>();
         _anim = GetComponentInParent<Animator>();
@@ -145,7 +147,10 @@ public class AttackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateHitbox();
+        if(_update)
+        {
+            updateHitbox();
+        }
         if (Input.GetKeyDown(keyCode) && _cooldown_timer.isReady() && _windup_timer.isReady() && canAffordAttack())
         {
             _winding_up = true;
@@ -160,9 +165,16 @@ public class AttackController : MonoBehaviour
         }
         if (_winding_up && _windup_timer.isReady())
         {
+            _update = false;
+            Invoke("ReenableUpdate", cooldown);
             _winding_up = false;
             performAttack();
             _windup_timer.begin(0.3f);
         }
+    }
+
+    private void ReenableUpdate()
+    {
+        _update = true;
     }
 }

@@ -43,7 +43,10 @@ public class AudioManager : MonoBehaviour
 
     public void playSFX(AudioClip clip) 
     {
-        SFXSource.PlayOneShot(clip);
+        if(clip != null)
+        {
+            SFXSource.PlayOneShot(clip);
+        }
     }
 
     public void newBGM(AudioClip clip) 

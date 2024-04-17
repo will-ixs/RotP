@@ -18,6 +18,7 @@ public class PharaohStateManager : MonoBehaviour
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private GameObject slashPrefab;
+    [SerializeField] private GameObject hatPrefab;
     [SerializeField] private float moveSpeed;
 
     public bool waiting;
@@ -76,7 +77,7 @@ public class PharaohStateManager : MonoBehaviour
             {
                 destination = WaitingRoom2;
             }
-            transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destination, 3 * moveSpeed * Time.deltaTime);
         }
 
         if (bossHealth.Dead)
@@ -202,8 +203,8 @@ public class PharaohStateManager : MonoBehaviour
             state = PharaohState.Idle;
             phase = PharaohPhase.Phase2;
             waiting = true;
-            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 400;
-            bossHealth.health = 400;
+            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 200;
+            bossHealth.health = 200;
             bossHealth.Dead = false; 
             progressionManager.GetComponent<PalaceProgressionManager>().LowerP2Barrier(); //increment when boss completed
             
@@ -228,6 +229,9 @@ public class PharaohStateManager : MonoBehaviour
     {
         state = PharaohState.Idle;
         anim.SetTrigger("Die");
+        progressionManager.GetComponent<PalaceProgressionManager>().IncrementState();
+
+
         //Death animation / fade to white & screen shake or something
         Destroy(gameObject, 1.5f);
     }
@@ -238,7 +242,7 @@ public class PharaohStateManager : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position + new Vector3(0.0f, 1.5f, 0.0f), moveSpeed * Time.deltaTime);
         }
-        else if(stateChangeTimer < 3.0f && phase != PharaohPhase.Phase1)
+        else if(stateChangeTimer < 3.0f)
         {
             state = PharaohState.Slash;
             stateChangeTimer = 2.0f;
@@ -285,4 +289,10 @@ public class PharaohStateManager : MonoBehaviour
         state = PharaohState.Idle;
         stateChangeTimer = 0.5f;
     } //call from room triggers for phase 2 and 3
+
+    public void SpawnHat()
+    {
+        GameObject hat = Instantiate(hatPrefab);
+        hat.transform.position = transform.position;
+    }
 }

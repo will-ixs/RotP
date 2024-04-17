@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class AlertPharaoh : MonoBehaviour
 {
-    private GameObject pharaoh;
-    void Start()
-    {
-        pharaoh = GameObject.FindGameObjectWithTag("Boss");
-    }
+    [SerializeField] private GameObject pharaoh;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

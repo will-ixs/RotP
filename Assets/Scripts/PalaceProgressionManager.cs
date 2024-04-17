@@ -34,6 +34,8 @@ public class PalaceProgressionManager : MonoBehaviour
 
     [SerializeField] private GameObject killMeter;
     [SerializeField] private GameObject Pharaoh;
+    [SerializeField] private GameObject Ammit;
+    [SerializeField] private GameObject Serpopard;
 
     //may need multiple doors for alternate routes
     [SerializeField] private GameObject startingDoor;
@@ -54,6 +56,7 @@ public class PalaceProgressionManager : MonoBehaviour
 
     private bool canAdvance;
     private int currKills;
+    private float killsNeeded;
     private AudioManager audioManager;
 
     public PalaceState currState;
@@ -66,6 +69,11 @@ public class PalaceProgressionManager : MonoBehaviour
         Pharaoh.SetActive(false);
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         canAdvance = true;
+
+        pharaoh1Door.SetActive(false);
+        pharaoh2Door.SetActive(false);
+        pharaoh3Door.SetActive(false);
+        pharaoh2Barrier.SetActive(false);
     }
 
     void Update()
@@ -78,10 +86,11 @@ public class PalaceProgressionManager : MonoBehaviour
         {
             case PalaceState.StartingRoomLocked:
             startCount = 0;
+            killsNeeded = 5.0f;
                 foreach(EnemySpawner e in startingRoomSpawners){
                     startCount += e.Kills;
                 }
-                if(startCount > 2 && canAdvance)
+                if(startCount >= killsNeeded && canAdvance)
                 {
                     startingDoor.GetComponent<PalaceGateController>().LowerSegments();
                     canAdvance = false;
@@ -90,11 +99,17 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.FirstHallLocked:
                 hall1Count = 0;
+                killsNeeded = 20.0f;
                 foreach (EnemySpawner e in hall1Spawners)
                 {
                     hall1Count += e.Kills;
                 }
-                if (hall1Count > 2 && canAdvance)
+
+                if(Ammit == null)
+                {
+                }
+
+                if (hall1Count >= killsNeeded && canAdvance)
                 {
                     hall1Door.GetComponent<PalaceGateController>().LowerSegments();
                     canAdvance = false;
@@ -103,11 +118,12 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.SecondHallLocked:
                 hall2Count = 0;
+                killsNeeded = 20.0f;
                 foreach (EnemySpawner e in hall2Spawners)
                 {
                     hall2Count += e.Kills;
                 }
-                if (hall2Count > 2 && canAdvance)
+                if (hall2Count >= killsNeeded && canAdvance && Ammit == null)
                 {
                     hall2Door.GetComponent<PalaceGateController>().LowerSegments();
                     canAdvance = false;
@@ -116,11 +132,12 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.ThirdHallLocked:
                 hall3Count = 0;
+                killsNeeded = 30.0f;
                 foreach (EnemySpawner e in hall3Spawners)
                 {
                     hall3Count += e.Kills;
                 }
-                if (hall3Count > 2 && canAdvance)
+                if (hall3Count >= killsNeeded && canAdvance && Serpopard == null)
                 {
                     hall3Door.GetComponent<PalaceGateController>().LowerSegments();
                     canAdvance = false;
@@ -128,16 +145,19 @@ public class PalaceProgressionManager : MonoBehaviour
                 currKills = hall3Count;
                 break;
             case PalaceState.SecondPharaohPre:
-                currKills = 20;
+                currKills = 1;
+                killsNeeded = 1;
                 break;
             case PalaceState.FinalPharaohPre:
-                currKills = 20;
+                currKills = 1;
+                killsNeeded = 1;
                 break;
             case PalaceState.BossDefeated:
-                currKills = 20;
+                currKills = 1;
+                killsNeeded = 1;
                 break;
         }
-        killMeter.GetComponent<Image>().fillAmount = currKills / 20.0f;
+        killMeter.GetComponent<Image>().fillAmount = currKills / killsNeeded;
     }
 
     /*all spawners
@@ -287,7 +307,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.SecondHall:
                 currState = PalaceState.SecondHallLocked;
-                //Instantiate(AMMIT);
+                Ammit.SetActive(true);
                 hall2Door.SetActive(true);
                 hall2Door.GetComponent<PalaceGateController>().RaiseSegments();
                 ActivateH2Spawners();
@@ -301,7 +321,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.ThirdHall:
                 currState = PalaceState.ThirdHallLocked;
-                //Instantiate(SERPOPARD)
+                Serpopard.SetActive(true);
                 hall3Door.SetActive(true);
                 hall3Door.GetComponent<PalaceGateController>().RaiseSegments();
                 ActivateH3Spawners();
@@ -315,6 +335,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.FirstPharaohPre:
                 currState = PalaceState.FirstPharaoh;
+                ClearAllHallSpawners();
                 Pharaoh.SetActive(true);
                 pharaoh1Door.SetActive(true);
                 pharaoh1Door.GetComponent<PalaceGateController>().RaiseSegments();
@@ -362,6 +383,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 canAdvance = true;
                 currState = PalaceState.BossDefeated;
                 audioManager.playSFX(audioManager.winSound);
+                audioManager.newBGM(audioManager.background);
                 DisableSpawners();
                 foreach (EnemySpawner e in pharaoh3Spawners)
                 {
@@ -371,6 +393,26 @@ public class PalaceProgressionManager : MonoBehaviour
             case PalaceState.BossDefeated:
                 //Play win animation
                 break;
+        }
+    }
+
+    private void ClearAllHallSpawners()
+    {
+        foreach(EnemySpawner e in startingRoomSpawners)
+        {
+            e.ClearAllEnemies();
+        }
+        foreach(EnemySpawner e in hall1Spawners)
+        {
+            e.ClearAllEnemies();
+        }
+        foreach(EnemySpawner e in hall2Spawners)
+        {
+            e.ClearAllEnemies();
+        }
+        foreach(EnemySpawner e in hall3Spawners)
+        {
+            e.ClearAllEnemies();
         }
     }
 
