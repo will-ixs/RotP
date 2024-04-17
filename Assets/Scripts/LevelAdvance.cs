@@ -8,9 +8,11 @@ public class LevelAdvance : MonoBehaviour
 {
     public GameObject readText;
     private bool inRange;
+    private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         
     }
 
@@ -32,6 +34,7 @@ public class LevelAdvance : MonoBehaviour
         {
             readText.SetActive(true);
             readText.GetComponent<Text>().text = "Press E to advance stage.";
+            audioManager.playSFX(audioManager.Progress);
             inRange = true;
         }
     }

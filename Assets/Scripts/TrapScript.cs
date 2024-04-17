@@ -16,12 +16,14 @@ public class TrapScript : MonoBehaviour
      private bool triggered;
      private bool active;
      private bool dmgCD;
+     private AudioManager audioManager;
     // Start is called before the first frame update
     void Awake()
     {
         anim = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
         dmgCD = true;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         
     }
 
@@ -78,6 +80,7 @@ public class TrapScript : MonoBehaviour
         yield return new WaitForSeconds(activationDelay);
         //spriteRend.color = Color.white;
         active = true;
+        audioManager.playSFX(audioManager.TrapSounds);
         
 
         yield return new WaitForSeconds(activeTime);

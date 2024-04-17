@@ -797,11 +797,15 @@ MonoBehaviour:
   attack: {fileID: 0}
   heavyAttack: {fileID: 0}
   soulSteal: {fileID: 0}
-  BossHit: {fileID: 8300000, guid: c9ef3df72b3d08f449a981cdf09c5c4b, type: 3}
+  BossHit: {fileID: 8300000, guid: 0f477d4cec2c7af4cbba51ec4501721a, type: 3}
   Hit: {fileID: 0}
   Gates: {fileID: 0}
+  GatesUp: {fileID: 0}
   OsirisSpawn: {fileID: 0}
   OsirisMusic: {fileID: 0}
+  TrapSounds: {fileID: 0}
+  Progress: {fileID: 0}
+  Extra: {fileID: 0}
 --- !u!114 &310266952
 MonoBehaviour:
   m_ObjectHideFlags: 0

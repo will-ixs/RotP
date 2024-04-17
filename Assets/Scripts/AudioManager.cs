@@ -23,6 +23,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip GatesUp;
     public AudioClip OsirisSpawn;
     public AudioClip OsirisMusic;
+    public AudioClip TrapSounds;
+    public AudioClip Progress;
+    public AudioClip Extra;
 
 
     private void Start() 
