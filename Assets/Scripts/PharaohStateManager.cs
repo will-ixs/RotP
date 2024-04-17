@@ -13,7 +13,7 @@ public class PharaohStateManager : MonoBehaviour
     [SerializeField] private Vector3 WaitingRoom1;
     [SerializeField] private Vector3 WaitingRoom2;
 
-
+    [SerializeField] private GameObject progressionManager;
     [SerializeField] private GameObject kaFragmentPrefab;
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject swordPrefab;
@@ -42,6 +42,7 @@ public class PharaohStateManager : MonoBehaviour
     {
         waiting = false;
         stateChangeTimer = 0.0f;
+        
         player = GameObject.FindGameObjectWithTag("Player");
         bossHealth = GetComponent<BossHealth>();
         anim = GetComponent<Animator>();
@@ -146,12 +147,12 @@ public class PharaohStateManager : MonoBehaviour
                         stateChangeTimer = 3.75f;
                         break;
                     case 3:
-                        state = PharaohState.Throw;
-                        stateChangeTimer = 3.0f;
-                        break;
-                    case 4:
                         state = PharaohState.Slash;
                         stateChangeTimer = 2.0f;
+                        break;
+                    case 4:
+                        state = PharaohState.Throw;
+                        stateChangeTimer = 3.0f;
                         break;
                     case 5:
                         state = PharaohState.Beam;
@@ -201,12 +202,11 @@ public class PharaohStateManager : MonoBehaviour
             state = PharaohState.Idle;
             phase = PharaohPhase.Phase2;
             waiting = true;
-            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 150;
-            bossHealth.health = 150;
+            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 400;
+            bossHealth.health = 400;
             bossHealth.Dead = false; 
-            KaFragment kaFragment = Instantiate(kaFragmentPrefab, gameObject.transform.position, Quaternion.identity).GetComponent<KaFragment>();
-            kaFragment.initialAmount = 50;
-            kaFragment.decayRate = 1.0f;
+            progressionManager.GetComponent<PalaceProgressionManager>().LowerP2Barrier(); //increment when boss completed
+            
         }
         else if(phase == PharaohPhase.Phase2)
         {
@@ -215,12 +215,13 @@ public class PharaohStateManager : MonoBehaviour
             //Make Pharaoh Move to next room where it waits to be activated.
             phase = PharaohPhase.Phase3;
             waiting = true;
-            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 250;
-            bossHealth.health = 250;
+            bossHealth.BossHealthBar.GetComponent<BossHealthUI>().slider.maxValue = 600;
+            bossHealth.health = 600;
             bossHealth.Dead = false; 
             KaFragment kaFragment = Instantiate(kaFragmentPrefab, gameObject.transform.position, Quaternion.identity).GetComponent<KaFragment>();
             kaFragment.initialAmount = 150;
             kaFragment.decayRate = 1.0f;
+            progressionManager.GetComponent<PalaceProgressionManager>().LowerP2Door(); //increment when boss completed
         }
     }
     private void Die()
