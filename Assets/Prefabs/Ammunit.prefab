@@ -456,7 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   Dead: 0
-  uiOffset: {x: 0, y: 0, z: 0}
+  uiOffset: {x: -125, y: 125, z: 0}
   BossHealthBar: {fileID: 4723231845487129409, guid: 9be6dec5d530de04693a8cf7fdce6934, type: 3}
 --- !u!114 &1374838985363450423
 MonoBehaviour:
