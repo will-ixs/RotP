@@ -53,7 +53,7 @@ public class AmmunitBehavior : MonoBehaviour
     private void MoveAtPlayer()
     {
         Vector2 vecToPlayer = player.transform.position - transform.position;
-        if (vecToPlayer.magnitude > 2f)
+        if (vecToPlayer.magnitude > 2.5f)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         }
