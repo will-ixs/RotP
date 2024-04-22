@@ -6,7 +6,7 @@ public class PalaceGateController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Animator[] anims;
-    void Start()
+    void Awake()
     {
         anims = GetComponentsInChildren<Animator>();
     }

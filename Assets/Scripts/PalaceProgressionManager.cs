@@ -39,9 +39,9 @@ public class PalaceProgressionManager : MonoBehaviour
 
     //may need multiple doors for alternate routes
     [SerializeField] private GameObject startingDoor;
-    [SerializeField] private GameObject hall1Door;
-    [SerializeField] private GameObject hall2Door;
-    [SerializeField] private GameObject hall3Door;
+    [SerializeField] public GameObject hall1Door;
+    [SerializeField] public GameObject hall2Door;
+    [SerializeField] public GameObject hall3Door;
 
     [SerializeField] private GameObject pharaoh1Door;
     [SerializeField] private GameObject pharaoh2Door;
@@ -58,6 +58,7 @@ public class PalaceProgressionManager : MonoBehaviour
     private int currKills;
     private float killsNeeded;
     private AudioManager audioManager;
+    private GameObject checkpointManager;
 
     public PalaceState currState;
 
@@ -65,9 +66,11 @@ public class PalaceProgressionManager : MonoBehaviour
     {
         DisableSpawners();
         currKills = 0;
+        killsNeeded = 1.0f;
         currState = PalaceState.StartingRoom;
         Pharaoh.SetActive(false);
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        checkpointManager = GameObject.FindGameObjectWithTag("Checkpoint");
         canAdvance = true;
 
         pharaoh1Door.SetActive(false);
@@ -86,7 +89,7 @@ public class PalaceProgressionManager : MonoBehaviour
         {
             case PalaceState.StartingRoomLocked:
             startCount = 0;
-            killsNeeded = 5.0f;
+            killsNeeded = 2.0f; //5.0
                 foreach(EnemySpawner e in startingRoomSpawners){
                     startCount += e.Kills;
                 }
@@ -99,7 +102,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.FirstHallLocked:
                 hall1Count = 0;
-                killsNeeded = 20.0f;
+                killsNeeded = 2.0f; //20.0f
                 foreach (EnemySpawner e in hall1Spawners)
                 {
                     hall1Count += e.Kills;
@@ -118,7 +121,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.SecondHallLocked:
                 hall2Count = 0;
-                killsNeeded = 20.0f;
+                killsNeeded = 2.0f; //20.0f
                 foreach (EnemySpawner e in hall2Spawners)
                 {
                     hall2Count += e.Kills;
@@ -132,7 +135,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.ThirdHallLocked:
                 hall3Count = 0;
-                killsNeeded = 30.0f;
+                killsNeeded = 5.0f; //30.0f
                 foreach (EnemySpawner e in hall3Spawners)
                 {
                     hall3Count += e.Kills;
@@ -306,6 +309,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 DisableSpawners();
                 break;
             case PalaceState.SecondHall:
+                checkpointManager.GetComponent<CheckpointManager>().SetCheckpoint1();
                 currState = PalaceState.SecondHallLocked;
                 Ammit.SetActive(true);
                 hall2Door.SetActive(true);
@@ -320,6 +324,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 DisableSpawners();
                 break;
             case PalaceState.ThirdHall:
+                checkpointManager.GetComponent<CheckpointManager>().SetCheckpoint2();
                 currState = PalaceState.ThirdHallLocked;
                 Serpopard.SetActive(true);
                 hall3Door.SetActive(true);
@@ -334,6 +339,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 DisableSpawners();
                 break;
             case PalaceState.FirstPharaohPre:
+                checkpointManager.GetComponent<CheckpointManager>().SetCheckpoint3();
                 currState = PalaceState.FirstPharaoh;
                 ClearAllHallSpawners();
                 Pharaoh.SetActive(true);

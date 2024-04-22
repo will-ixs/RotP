@@ -10,6 +10,7 @@ TagManager:
   - Spawner
   - Tutorial
   - Audio
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

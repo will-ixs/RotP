@@ -9,6 +9,12 @@ public class StateManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void ReloadPalace()
+    {
+        GameObject.FindGameObjectWithTag("Checkpoint").GetComponent<CheckpointManager>().loaded = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void ChangeSceneByName(string name) {
         if(name != null)
             SceneManager.LoadScene(name);
