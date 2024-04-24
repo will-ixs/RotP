@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour {
     public Button crypt;
     public Button palace;
     public Button back;
+    public Button credits;
 
     public GameObject start;
     public GameObject levelSelect;
@@ -33,6 +34,7 @@ public class MainMenu : MonoBehaviour {
         crypt.onClick.AddListener(Crypt);  
         palace.onClick.AddListener(Palace);
         back.onClick.AddListener(Back);
+        credits.onClick.AddListener(Credits);
     }
 
     void Play()
@@ -85,6 +87,12 @@ public class MainMenu : MonoBehaviour {
         optionsMenu.SetActive(false);
         start.SetActive(true);
         back.gameObject.SetActive(false);
+    }
+
+    void Credits()
+    {
+        audioManager.playSFX(audioManager.BossHit);
+        SceneManager.LoadScene(4);//underworld
     }
 
     // Update is called once per frame
