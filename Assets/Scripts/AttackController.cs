@@ -105,11 +105,6 @@ public class AttackController : MonoBehaviour
     {
         _mc.slowMovement(cooldown/2.0f);
         _anim.SetTrigger(attackTrigger);
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-            audioManager.playSFX(audioManager.heavyAttack);
-        else
-            audioManager.playSFX(audioManager.attack);
-
         _player.GetComponent<PlayerHealth>().TakeDamage(cost);
         for (int i = _hitbox_contact_list.contactList.Count - 1; i >= 0; i--)
         {
@@ -147,6 +142,7 @@ public class AttackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(_update)
         {
             updateHitbox();
@@ -155,6 +151,10 @@ public class AttackController : MonoBehaviour
         {
             _winding_up = true;
             _windup_timer.begin(windupDelay);
+            if (attackTrigger == "HeavyAttack")
+                audioManager.playSFX(audioManager.heavyAttack);
+            else if (attackTrigger == "LightAttack")
+                audioManager.playSFX(audioManager.attack);
             //temp until heavy animation
             Animator a = GetComponentInChildren<Animator>();
 
@@ -168,6 +168,7 @@ public class AttackController : MonoBehaviour
             _update = false;
             Invoke("ReenableUpdate", cooldown);
             _winding_up = false;
+            
             performAttack();
             _windup_timer.begin(0.3f);
         }
