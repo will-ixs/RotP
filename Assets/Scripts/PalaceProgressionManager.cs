@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class PalaceProgressionManager : MonoBehaviour
@@ -22,7 +23,8 @@ public class PalaceProgressionManager : MonoBehaviour
         SecondPharaoh,
         FinalPharaohPre,
         FinalPharaoh,
-        BossDefeated
+        BossDefeated,
+        CrownDropped,
     }
     public List<EnemySpawner> startingRoomSpawners = new List<EnemySpawner>();
     public List<EnemySpawner> hall1Spawners = new List<EnemySpawner>();
@@ -47,6 +49,8 @@ public class PalaceProgressionManager : MonoBehaviour
     [SerializeField] private GameObject pharaoh2Door;
     [SerializeField] private GameObject pharaoh2Barrier;
     [SerializeField] private GameObject pharaoh3Door;
+
+    [SerializeField] private PlayableDirector WinCutscene;
 
     [SerializeField] private GameObject titleCard;
     [SerializeField] public int startCount;
@@ -397,7 +401,11 @@ public class PalaceProgressionManager : MonoBehaviour
                 }
                 break;
             case PalaceState.BossDefeated:
+                currState = PalaceState.CrownDropped;
+                break;
+            case PalaceState.CrownDropped:
                 //Play win animation
+                WinCutscene.Play();
                 break;
         }
     }
