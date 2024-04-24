@@ -89,7 +89,7 @@ public class PalaceProgressionManager : MonoBehaviour
         {
             case PalaceState.StartingRoomLocked:
             startCount = 0;
-            killsNeeded = 2.0f; //5.0
+            killsNeeded = 5.0f; //5.0
                 foreach(EnemySpawner e in startingRoomSpawners){
                     startCount += e.Kills;
                 }
@@ -102,7 +102,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.FirstHallLocked:
                 hall1Count = 0;
-                killsNeeded = 2.0f; //20.0f
+                killsNeeded = 20.0f; //20.0f
                 foreach (EnemySpawner e in hall1Spawners)
                 {
                     hall1Count += e.Kills;
@@ -121,7 +121,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.SecondHallLocked:
                 hall2Count = 0;
-                killsNeeded = 2.0f; //20.0f
+                killsNeeded = 20.0f; //20.0f
                 foreach (EnemySpawner e in hall2Spawners)
                 {
                     hall2Count += e.Kills;
@@ -135,7 +135,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.ThirdHallLocked:
                 hall3Count = 0;
-                killsNeeded = 5.0f; //30.0f
+                killsNeeded = 30.0f; //30.0f
                 foreach (EnemySpawner e in hall3Spawners)
                 {
                     hall3Count += e.Kills;
