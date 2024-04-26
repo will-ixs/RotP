@@ -22,6 +22,7 @@ public class PharaohStateManager : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     public bool waiting;
+    private bool dead;
     public enum PharaohPhase
     {
        Phase1,
@@ -42,6 +43,7 @@ public class PharaohStateManager : MonoBehaviour
     void Start()
     {
         waiting = false;
+        dead = false;
         stateChangeTimer = 0.0f;
         
         player = GameObject.FindGameObjectWithTag("Player");
@@ -227,13 +229,17 @@ public class PharaohStateManager : MonoBehaviour
     }
     private void Die()
     {
-        state = PharaohState.Idle;
-        anim.SetTrigger("Die");
-        progressionManager.GetComponent<PalaceProgressionManager>().IncrementState();
+        if (!dead)
+        {
+            state = PharaohState.Idle;
+            anim.SetTrigger("Die");
+            progressionManager.GetComponent<PalaceProgressionManager>().IncrementState();
+            dead = true;
 
+            //Death animation / fade to white & screen shake or something
+            Destroy(gameObject, 1.5f);
+        }
 
-        //Death animation / fade to white & screen shake or something
-        Destroy(gameObject, 1.5f);
     }
     private void Walk()
     {

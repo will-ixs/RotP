@@ -24,7 +24,6 @@ public class PalaceProgressionManager : MonoBehaviour
         FinalPharaohPre,
         FinalPharaoh,
         BossDefeated,
-        CrownDropped,
     }
     public List<EnemySpawner> startingRoomSpawners = new List<EnemySpawner>();
     public List<EnemySpawner> hall1Spawners = new List<EnemySpawner>();
@@ -401,10 +400,6 @@ public class PalaceProgressionManager : MonoBehaviour
                 }
                 break;
             case PalaceState.BossDefeated:
-                currState = PalaceState.CrownDropped;
-                break;
-            case PalaceState.CrownDropped:
-                //Play win animation
                 WinCutscene.Play();
                 break;
         }
