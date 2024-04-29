@@ -286,6 +286,7 @@ public class PalaceProgressionManager : MonoBehaviour
         switch (currState)
         {
             case PalaceState.StartingRoom:
+                audioManager.playSFX(audioManager.GatesUp);
                 currState = PalaceState.StartingRoomLocked;
                 startingDoor.SetActive(true);
                 startingDoor.GetComponent<PalaceGateController>().RaiseSegments();
@@ -299,6 +300,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 DisableSpawners();
                 break;
             case PalaceState.FirstHall:
+                audioManager.playSFX(audioManager.GatesUp);
                 currState = PalaceState.FirstHallLocked;
                 hall1Door.SetActive(true);
                 hall1Door.GetComponent<PalaceGateController>().RaiseSegments();
@@ -313,6 +315,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.SecondHall:
                 checkpointManager.GetComponent<CheckpointManager>().SetCheckpoint1();
+                audioManager.playSFX(audioManager.GatesUp);
                 currState = PalaceState.SecondHallLocked;
                 Ammit.SetActive(true);
                 hall2Door.SetActive(true);
@@ -328,6 +331,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 break;
             case PalaceState.ThirdHall:
                 checkpointManager.GetComponent<CheckpointManager>().SetCheckpoint2();
+                audioManager.playSFX(audioManager.GatesUp);
                 currState = PalaceState.ThirdHallLocked;
                 Serpopard.SetActive(true);
                 hall3Door.SetActive(true);
@@ -360,6 +364,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 {
                     e.ClearAllEnemies();
                 }
+                audioManager.playSFX(audioManager.Gates);
                 DisableSpawners();
                 break;
             case PalaceState.SecondPharaohPre:
@@ -378,6 +383,7 @@ public class PalaceProgressionManager : MonoBehaviour
                 {
                     e.ClearAllEnemies();
                 }
+                audioManager.playSFX(audioManager.Gates);
                 DisableSpawners();
                 break;
             case PalaceState.FinalPharaohPre:
@@ -391,8 +397,8 @@ public class PalaceProgressionManager : MonoBehaviour
             case PalaceState.FinalPharaoh:
                 canAdvance = true;
                 currState = PalaceState.BossDefeated;
+                audioManager.stopBGM();
                 audioManager.playSFX(audioManager.winSound);
-                audioManager.newBGM(audioManager.background);
                 DisableSpawners();
                 foreach (EnemySpawner e in pharaoh3Spawners)
                 {
@@ -400,7 +406,9 @@ public class PalaceProgressionManager : MonoBehaviour
                 }
                 break;
             case PalaceState.BossDefeated:
+                audioManager.playSFX(audioManager.Extra2);
                 WinCutscene.Play();
+                StartCoroutine(osirisDeath());
                 break;
         }
     }
@@ -433,5 +441,13 @@ public class PalaceProgressionManager : MonoBehaviour
     public void LowerP2Door()
     {
         pharaoh2Door.GetComponent<PalaceGateController>().LowerSegments();
+    }
+
+    private IEnumerator osirisDeath()
+    {
+        
+        yield return new WaitForSeconds(5.1f);
+        audioManager.playSFX(audioManager.Extra3);
+        
     }
 }

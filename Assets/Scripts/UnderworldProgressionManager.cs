@@ -66,6 +66,7 @@ public class UnderworldProgressionManager : MonoBehaviour
                     {
                         e.ClearAllEnemies();
                     }
+                    audioManager.stopBGM();
                     audioManager.playSFX(audioManager.winSound);
                     switched = true;
                     afterBossDoor.GetComponentInChildren<Animator>().SetTrigger("Collapse");
@@ -168,6 +169,7 @@ public class UnderworldProgressionManager : MonoBehaviour
         switch (currState)
         {
             case CryptState.TombOpen:
+                audioManager.playSFX(audioManager.GatesUp);
                 room1Door.SetActive(true);
                 room1Door.GetComponentInChildren<Animator>().SetTrigger("Rise");
                 currState = CryptState.TombLocked;
@@ -180,6 +182,7 @@ public class UnderworldProgressionManager : MonoBehaviour
                 DisableSpawners();
                 break;
             case CryptState.HallwayChaosOpen:
+                audioManager.playSFX(audioManager.GatesUp);
                 room2Door.SetActive(true);
                 room2Door.GetComponentInChildren<Animator>().SetTrigger("Rise");
                 currState = CryptState.HallwayChaosLocked;

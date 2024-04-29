@@ -12,8 +12,11 @@ public class CheckpointManager : MonoBehaviour
     public Animator checkpoint3;
     public int checkpoint = 0;
 
+    private AudioManager audioManager;
+
     void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Checkpoint");
         if (objs.Length > 1)
         {
@@ -35,16 +38,19 @@ public class CheckpointManager : MonoBehaviour
     {
         checkpoint = 1;
         checkpoint1.SetTrigger("Active");
+        audioManager.playSFX(audioManager.Progress);
     }
     public void SetCheckpoint2()
     {
         checkpoint = 2;
         checkpoint2.SetTrigger("Active");
+        audioManager.playSFX(audioManager.Progress);
     }
     public void SetCheckpoint3()
     {
         checkpoint = 3;
         checkpoint3.SetTrigger("Active");
+        audioManager.playSFX(audioManager.Progress);
     }
 
     public void LoadCheckpoint()

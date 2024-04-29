@@ -68,6 +68,7 @@ public class CryptProgressionManager : MonoBehaviour
                     {
                         e.ClearAllEnemies();
                     }
+                    audioManager.stopBGM();
                     audioManager.playSFX(audioManager.winSound);
                     switched = true;
                     afterBossDoor.GetComponentInChildren<Animator>().SetTrigger("Collapse");

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 687684103817823629}
   - component: {fileID: 6997576957342055581}
   - component: {fileID: 3361661206141370298}
-  - component: {fileID: 6720287958926781802}
+  - component: {fileID: -7097761922647070912}
   - component: {fileID: 1347587377278125015}
   m_Layer: 0
   m_Name: YellowFlame
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5625, y: 1.0625}
   m_EdgeRadius: 0
---- !u!114 &6720287958926781802
+--- !u!114 &-7097761922647070912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,10 +141,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6721393885378073792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25a982123f8ba6f45a480e35392f6b76, type: 3}
+  m_Script: {fileID: 11500000, guid: fbf36278af295ed4c89158fc5a9e73af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 5
   EnemyDamage: 3
   activationDelay: 0.35
   activeTime: 0.7

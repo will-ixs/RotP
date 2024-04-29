@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip TrapSounds;
     public AudioClip Progress;
     public AudioClip Extra;
+    public AudioClip Extra2;
+    public AudioClip Extra3;
 
 
     private void Start() 
@@ -53,5 +55,10 @@ public class AudioManager : MonoBehaviour
     {
         musicSource.clip = clip;
         musicSource.Play();
+    }
+
+    public void stopBGM() 
+    {
+        musicSource.Stop();
     }
 }

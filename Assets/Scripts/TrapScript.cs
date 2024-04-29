@@ -34,7 +34,8 @@ public class TrapScript : MonoBehaviour
         {
             if(!triggered)
             {
-                StartCoroutine(ActivateTrap());
+                StartCoroutine(ActivateTrap(true));
+                
             }
 
             if(active && dmgCD)
@@ -53,7 +54,7 @@ public class TrapScript : MonoBehaviour
         {
             if(!triggered)
             {
-                StartCoroutine(ActivateTrap());
+                StartCoroutine(ActivateTrap(false));
             }
 
             if(active && dmgCD)
@@ -73,14 +74,15 @@ public class TrapScript : MonoBehaviour
         
     }
 
-    private IEnumerator ActivateTrap()
+    private IEnumerator ActivateTrap(bool isPlayer)
     {
         triggered = true;
         anim.SetBool("activated", true);
         yield return new WaitForSeconds(activationDelay);
-        //spriteRend.color = Color.white;
+        if(isPlayer)
+            audioManager.playSFX(audioManager.TrapSounds);//spriteRend.color = Color.white;
         active = true;
-        audioManager.playSFX(audioManager.TrapSounds);
+        
         
 
         yield return new WaitForSeconds(activeTime);
