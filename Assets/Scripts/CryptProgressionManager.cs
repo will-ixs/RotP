@@ -28,6 +28,7 @@ public class CryptProgressionManager : MonoBehaviour
     [SerializeField] private GameObject bossDoor;
     [SerializeField] private GameObject afterBossDoor;
     [SerializeField] private AreaTrigger levelAdvanceTrigger;
+    [SerializeField] private GameObject exitCutsceneTrigger;
     [SerializeField] private GameObject titleCard;
     [SerializeField] public int TombKillCount;
     [SerializeField] public int HallwayKillCount;
@@ -45,6 +46,7 @@ public class CryptProgressionManager : MonoBehaviour
         currState = CryptState.TombOpen;
         YellowSerpopard.SetActive(false);
         PurpleSerpopard.SetActive(false);
+        exitCutsceneTrigger.SetActive(false);
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
@@ -211,6 +213,7 @@ public class CryptProgressionManager : MonoBehaviour
             case CryptState.BossFight:
                 currState = CryptState.Waiting;
                 afterBossDoor.SetActive(false);
+                exitCutsceneTrigger.SetActive(true);
                 break;
             case CryptState.Waiting:
                 Invoke("LoadPalace", 1.0f);
