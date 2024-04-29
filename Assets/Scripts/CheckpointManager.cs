@@ -38,19 +38,19 @@ public class CheckpointManager : MonoBehaviour
     {
         checkpoint = 1;
         checkpoint1.SetTrigger("Active");
-        audioManager.playSFX(audioManager.Progress);
+     //   audioManager.playSFX(audioManager.Progress);
     }
     public void SetCheckpoint2()
     {
         checkpoint = 2;
         checkpoint2.SetTrigger("Active");
-        audioManager.playSFX(audioManager.Progress);
+     //   audioManager.playSFX(audioManager.Progress);
     }
     public void SetCheckpoint3()
     {
         checkpoint = 3;
         checkpoint3.SetTrigger("Active");
-        audioManager.playSFX(audioManager.Progress);
+    //    audioManager.playSFX(audioManager.Progress);
     }
 
     public void LoadCheckpoint()
